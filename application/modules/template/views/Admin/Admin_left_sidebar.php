@@ -13,7 +13,7 @@
             </a>
         </li>
         <li class="site-menu-item has-sub">
-            <a href="javascript:void(0)">
+          <a href="<?php echo base_url('admin/student/summary'); ?>">
                 <!-- <i class="site-menu-icon icon wb-list-numbered" aria-hidden="true"></i> -->
                 <i class="site-menu-icon icon wb-indent-increase" aria-hidden="true" ></i>
                 <span class="site-menu-title">Student Profile</span>

@@ -16,7 +16,7 @@
                 <div class="row row-lg">
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h4 class="example-title">Select enquiry agent</h4>
-                        <select class="form-control round">
+                        <select class="form-control ">
                             <option>1</option>
                             <option>1</option>
                             <option>1</option>
@@ -24,20 +24,105 @@
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h4 class="example-title">Select enquiry date</h4>
-                        <select class="form-control round">
-                            <option>1</option>
-                            <option>1</option>
-                            <option>1</option>
-                        </select>
+                        <input type="text" name="enquiery_date" class="form-control datepicker">
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4">
                         <h4 class="example-title">Select Source</h4>
-                        <select class="form-control round">
-                            <option>1</option>
-                            <option>1</option>
-                            <option>1</option>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="site-menu-icon icon wb-star-half" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4 mt-20">
+                        <h4 class="example-title">Type of lead</h4>
+                        <select class="form-control ">
+                            <option value="1">Hot</option>
+                            <option value="2">Cold</option>
                         </select>
                     </div>
+                </div>
+
+                <h3 class="example-title mt-30">Personal Details</h3>
+                <div class="row ">
+                    <div class="col-sm-12 col-md-12 mt-20">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label for="Degree Name" class="form-control-label col-sm-3 col-xl-1" style="text-align: left;">First name</label>
+                            <div class="col-md-4 col-lg-4 col-sm-3  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                            <label for="Degree Name" class="form-control-label col-sm-3 col-xl-1" style="text-align: left;">Last name</label>
+                            <div class="col-md-4 col-lg-4 col-sm-3  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mt-20">
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Email Id</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Phone number</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-20">
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Residing State</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <select class="form-control ">
+                                    <option value="1">Hot</option>
+                                    <option value="2">Cold</option>
+                                </select>
+                            </div>
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Residing City</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <select class="form-control ">
+                                    <option value="1">Hot</option>
+                                    <option value="2">Cold</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3 class="example-title mt-30">Professional Details</h3>
+                                                <div class="form-group row">
+                            <label for="Degree Name" class="form-control-label col-sm-3 col-xl-1" style="text-align: left;">Intro</label>
+                            <div class="col-md-4 col-lg-4 col-sm-3  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                            <label for="Degree Name" class="form-control-label col-sm-3 col-xl-1" style="text-align: left;">Total Experience</label>
+                            <div class="col-md-4 col-lg-4 col-sm-3  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                        </div>
+
+                        <div class="form-group row mt-20">
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Email Id</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Phone number</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <input type="text" name="enquiery_date" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-20">
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Residing State</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <select class="form-control ">
+                                    <option value="1">Hot</option>
+                                    <option value="2">Cold</option>
+                                </select>
+                            </div>
+                            <label for="Degree Name" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Residing City</label>
+                            <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <select class="form-control ">
+                                    <option value="1">Hot</option>
+                                    <option value="2">Cold</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

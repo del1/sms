@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 20, 2017 at 04:35 AM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.20
+-- Host: 127.0.0.1
+-- Generation Time: Dec 18, 2017 at 12:56 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -149,10 +151,7 @@ CREATE TABLE `ref_colleges` (
 --
 
 INSERT INTO `ref_colleges` (`college_id`, `college_name`, `university_id`, `added_by`, `last_updated`, `college_type_id`, `is_active`) VALUES
-(1, 'PG college 1', 4, 1, '2017-11-19 12:19:27', 2, 'true'),
-(3, 'UG College1', 4, 1, '2017-11-19 12:23:45', 1, 'true'),
-(4, 'UG College2', 4, 1, '2017-11-19 12:24:00', 1, 'true'),
-(5, 'PG College2', 4, 1, '2017-11-19 12:20:23', 2, 'true');
+(1, 'first college', 4, 1, '2017-11-13 11:33:25', 2, 'true');
 
 -- --------------------------------------------------------
 
@@ -307,12 +306,12 @@ INSERT INTO `ref_countries` (`country_id`, `country_code`, `country_name`, `is_a
 (112, 'KZ', 'Kazakhstan', 'true'),
 (113, 'KE', 'Kenya', 'true'),
 (114, 'KI', 'Kiribati', 'true'),
-(115, 'KP', 'Korea, Democratic People''s Republic of', 'true'),
+(115, 'KP', 'Korea, Democratic People\'s Republic of', 'true'),
 (116, 'KR', 'Korea, Republic of', 'true'),
 (117, 'XK', 'Kosovo', 'true'),
 (118, 'KW', 'Kuwait', 'true'),
 (119, 'KG', 'Kyrgyzstan', 'true'),
-(120, 'LA', 'Lao People''s Democratic Republic', 'true'),
+(120, 'LA', 'Lao People\'s Democratic Republic', 'true'),
 (121, 'LV', 'Latvia', 'true'),
 (122, 'LB', 'Lebanon', 'true'),
 (123, 'LS', 'Lesotho', 'true'),
@@ -451,16 +450,8 @@ CREATE TABLE `ref_degrees` (
   `added_by` int(11) NOT NULL,
   `last_updated` datetime NOT NULL,
   `degree_type_id` int(11) NOT NULL,
-  `is_active` enum('true','false') NOT NULL DEFAULT 'true'
+  `is_active` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ref_degrees`
---
-
-INSERT INTO `ref_degrees` (`degree_id`, `degree_name`, `added_by`, `last_updated`, `degree_type_id`, `is_active`) VALUES
-(2, 'UG Degree1', 1, '2017-11-19 18:23:38', 1, 'true'),
-(3, 'PG Degree1', 1, '2017-11-19 18:24:13', 2, 'true');
 
 -- --------------------------------------------------------
 
@@ -470,18 +461,9 @@ INSERT INTO `ref_degrees` (`degree_id`, `degree_name`, `added_by`, `last_updated
 
 CREATE TABLE `ref_degree_types` (
   `degree_type_id` int(11) NOT NULL,
-  `short_desc` varchar(50) NOT NULL,
   `degree_type_name` varchar(128) NOT NULL,
-  `is_active` enum('true','false') NOT NULL
+  `is_active` enum('1','0') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ref_degree_types`
---
-
-INSERT INTO `ref_degree_types` (`degree_type_id`, `short_desc`, `degree_type_name`, `is_active`) VALUES
-(1, 'UG', 'Under Graduate', 'true'),
-(2, 'PG', 'Post Graduate', 'true');
 
 -- --------------------------------------------------------
 
@@ -591,13 +573,6 @@ CREATE TABLE `ref_packages` (
   `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `ref_packages`
---
-
-INSERT INTO `ref_packages` (`package_id`, `package_name`, `added_by`, `last_updated`, `is_active`) VALUES
-(1, 'pckg1', 1, '2017-11-19 18:25:25', 'true');
-
 -- --------------------------------------------------------
 
 --
@@ -651,8 +626,7 @@ CREATE TABLE `ref_sources` (
 --
 
 INSERT INTO `ref_sources` (`source_id`, `source_name`, `added_by`, `last_updated`, `is_active`) VALUES
-(2, 'ms', 1, '2017-11-13 02:35:52', '1'),
-(3, 'BS', 1, '2017-11-19 18:24:39', '1');
+(2, 'ms', 1, '2017-11-13 02:35:52', '1');
 
 -- --------------------------------------------------------
 
@@ -824,7 +798,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-11-19 18:18:47', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-18 11:12:24', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (4, 'asdasd', 'asdasd@gmail.com', 'asdasd', '2017-11-10 12:18:20', 1, NULL, 2, NULL, NULL, '2017-11-10 12:18:20', 'false'),
 (5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 2, NULL, NULL, '2017-11-13 12:29:15', 'false');
@@ -1117,7 +1091,7 @@ ALTER TABLE `ref_cities`
 -- AUTO_INCREMENT for table `ref_colleges`
 --
 ALTER TABLE `ref_colleges`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `ref_college_types`
 --
@@ -1132,12 +1106,12 @@ ALTER TABLE `ref_countries`
 -- AUTO_INCREMENT for table `ref_degrees`
 --
 ALTER TABLE `ref_degrees`
-  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ref_degree_types`
 --
 ALTER TABLE `ref_degree_types`
-  MODIFY `degree_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `degree_type_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ref_employer`
 --
@@ -1177,7 +1151,7 @@ ALTER TABLE `ref_lead_types`
 -- AUTO_INCREMENT for table `ref_packages`
 --
 ALTER TABLE `ref_packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ref_permissions`
 --
@@ -1192,7 +1166,7 @@ ALTER TABLE `ref_programs`
 -- AUTO_INCREMENT for table `ref_sources`
 --
 ALTER TABLE `ref_sources`
-  MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ref_universities`
 --
@@ -1378,6 +1352,7 @@ ALTER TABLE `tbl_users`
   ADD CONSTRAINT `tbl_users_ibfk_1` FOREIGN KEY (`userlevel_id`) REFERENCES `ref_userlevels` (`userlevel_id`),
   ADD CONSTRAINT `tbl_users_ibfk_2` FOREIGN KEY (`gender_id`) REFERENCES `ref_genders` (`gender_id`),
   ADD CONSTRAINT `tbl_users_ibfk_3` FOREIGN KEY (`added_by`) REFERENCES `tbl_users` (`user_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

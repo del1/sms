@@ -27,4 +27,12 @@ class Student extends Del {
 		echo Modules::run('template/admin_template', $view, $data);	
 	}
 
+	public function edit()
+	{
+		$data['section']='student';
+		$data['page']='Edit student Details';
+		$view = 'admin/student/edit_student_view';
+		echo Modules::run('template/admin_template', $view, $data);	
+	}
+
 }

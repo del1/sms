@@ -13,7 +13,7 @@
     <div class="page-content">
         <div class="panel">
             <div class="panel-body container-fluid">
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="post" action="<?php echo base_url('admin/student/create'); ?>">
                     <div class="row row-lg">
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
                             <h4 class="example-title">Select enquiry agent</h4>

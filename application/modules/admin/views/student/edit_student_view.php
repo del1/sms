@@ -5,9 +5,13 @@
     .btnright{
         margin-right: 28px;
     }
-.m-0{
+.m-lr-0{
     margin-left: 0px !important;
     margin-right: 0px !important;
+}
+.m-tb-0{
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
 }
 
 #integration-list {
@@ -33,7 +37,6 @@
     background: #efefef;
 }
 .expand {
-    display: block;
     text-decoration: none;
     color: #555;
     cursor: pointer;
@@ -122,7 +125,7 @@ span {
                                 <a class="expand">
                                     <div class="right-arrow">+</div>
                                     <div>
-                                        <h2>Personal Details</h2>
+                                        <h2 class="m-tb-0">Personal Details</h2>
                                     </div>
                                 </a>
                                 <div class="detail row row-lg">
@@ -184,7 +187,7 @@ span {
                             <li>
                                 <a class="expand">
                                     <div class="right-arrow">+</div>
-                                    <h2>Professional Details</h2>
+                                    <h2 class="m-tb-0">Professional Details</h2>
                                 </a>
 
                                 <div class="detail row row-lg">
@@ -347,9 +350,8 @@ span {
                             <li>
                                 <a class="expand">
                                     <div class="right-arrow">+</div>
-                                    <h2>Application Details</h2>
+                                    <h2 class="m-tb-0">Application Details</h2>
                                 </a>
-
                                 <div class="detail row row-lg">
                                     <div class="col-sm-12 col-md-12 mt-20">
                                         <div class="form-group row" >

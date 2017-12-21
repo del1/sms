@@ -18,6 +18,28 @@ class Admin extends Del {
 		echo Modules::run('template/admin_template', $view, $data);	
 	}
 
+	public function subadmin(){
+		$data['page']='Sub Admin list';
+		$data['consultant_list']=$this->users->get_many_by('userlevel_id',4);
+		$view = 'admin/subadmin_management';
+		echo Modules::run('template/admin_template', $view, $data);
+	}
+
+	public function manage_subadmin($user_id=''){
+		if($user_id){
+
+		}
+	}
+
+	public function getsubadmin_rightslist()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		if(isset($this->input->post('store_id')) && isset($this->input->post('is_secure_request')) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
+		{
+			print_r($posted_data);
+		}
+	}
+
 
 	/*Genral Function section begins*/
 

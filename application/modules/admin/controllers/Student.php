@@ -23,6 +23,7 @@ class Student extends Del {
 	{
 		$data['section']='student';
 		$data['page']='Add student';
+		$data['agent_list']=$this->users->select('user_id,user_name')->get_many_by('userlevel_id',4);
 		$view = 'admin/student/add_student_view';
 		echo Modules::run('template/admin_template', $view, $data);	
 	}

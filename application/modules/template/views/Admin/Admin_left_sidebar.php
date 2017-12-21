@@ -1,13 +1,13 @@
 <div class="site-menubar">
     <ul class="site-menu">
         <li class="site-menu-item has-sub">
-            <a href="javascript:void(0)">
+            <a href="<?php echo base_url('admin'); ?>">
                 <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
                 <span class="site-menu-title">Dashboard</span>
             </a>
         </li>
         <li class="site-menu-item has-sub">
-            <a href="javascript:void(0)">
+            <a href="<?php echo base_url('admin/subadmin'); ?>">
                 <i class="site-menu-icon icon wb-unlock" aria-hidden="true"></i>
                 <span class="site-menu-title">Super Admin Controls</span>
             </a>

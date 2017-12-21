@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2017 at 12:56 PM
+-- Generation Time: Dec 21, 2017 at 02:33 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -68,8 +68,8 @@ CREATE TABLE `lnk_user_to_permission` (
   `utp_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
-  `edit` enum('1','0') NOT NULL,
-  `view` enum('1','0') NOT NULL
+  `edit` enum('true','false') NOT NULL DEFAULT 'false',
+  `view` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -582,7 +582,7 @@ CREATE TABLE `ref_packages` (
 CREATE TABLE `ref_permissions` (
   `permission_id` int(11) NOT NULL,
   `permission` varchar(128) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -669,7 +669,8 @@ CREATE TABLE `ref_userlevels` (
 INSERT INTO `ref_userlevels` (`userlevel_id`, `userlevel`, `is_active`) VALUES
 (1, 'Admin', '1'),
 (2, 'consultant', '1'),
-(3, 'student', '1');
+(3, 'student', '1'),
+(4, 'Agents', '1');
 
 -- --------------------------------------------------------
 
@@ -798,10 +799,10 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-18 11:12:24', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-21 16:30:01', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (4, 'asdasd', 'asdasd@gmail.com', 'asdasd', '2017-11-10 12:18:20', 1, NULL, 2, NULL, NULL, '2017-11-10 12:18:20', 'false'),
-(5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 2, NULL, NULL, '2017-11-13 12:29:15', 'false');
+(5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'false');
 
 --
 -- Indexes for dumped tables
@@ -1176,7 +1177,7 @@ ALTER TABLE `ref_universities`
 -- AUTO_INCREMENT for table `ref_userlevels`
 --
 ALTER TABLE `ref_userlevels`
-  MODIFY `userlevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userlevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_enquiries`
 --

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2017 at 02:33 PM
+-- Generation Time: Dec 22, 2017 at 02:12 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -581,9 +581,33 @@ CREATE TABLE `ref_packages` (
 
 CREATE TABLE `ref_permissions` (
   `permission_id` int(11) NOT NULL,
+  `section_id` int(11) NOT NULL,
   `permission` varchar(128) NOT NULL,
   `is_active` enum('true','false') DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_permissions`
+--
+
+INSERT INTO `ref_permissions` (`permission_id`, `section_id`, `permission`, `is_active`) VALUES
+(1, 1, 'Student_profile', 'true'),
+(2, 1, 'Student details', 'true'),
+(3, 1, 'Follow up updates', 'true'),
+(4, 2, 'UG Colleges', 'true'),
+(5, 2, 'UG degree', 'true'),
+(6, 2, 'PG college', 'true'),
+(7, 2, 'PG degree', 'true'),
+(8, 2, 'Sources', 'true'),
+(9, 2, 'Packages', 'true'),
+(10, 2, 'Consultants', 'true'),
+(11, 2, 'Programs', 'true'),
+(12, 2, 'Universities', 'true'),
+(13, 2, 'Applied Programs', 'true'),
+(14, 2, 'Applied rounds', 'true'),
+(15, 3, 'Lead report', 'true'),
+(16, 3, 'Student report', 'true'),
+(17, 3, 'Success report', 'true');
 
 -- --------------------------------------------------------
 
@@ -799,7 +823,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-21 16:30:01', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-22 15:51:15', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (4, 'asdasd', 'asdasd@gmail.com', 'asdasd', '2017-11-10 12:18:20', 1, NULL, 2, NULL, NULL, '2017-11-10 12:18:20', 'false'),
 (5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'false');
@@ -1157,7 +1181,7 @@ ALTER TABLE `ref_packages`
 -- AUTO_INCREMENT for table `ref_permissions`
 --
 ALTER TABLE `ref_permissions`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `ref_programs`
 --

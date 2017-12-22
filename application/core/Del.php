@@ -13,6 +13,8 @@ class Del extends MX_Controller
 		$this->load->library(array('form_validation','session'));
 		$this->load->helper(array('url','html','form'));		
 
+		$this->load->model('db/lnk/Lnk_user_to_permission_model','lnk_user_to_permission');
+
 
 		$this->load->model('db/ref/Ref_universities_model','ref_universities');
 		$this->load->model('db/ref/Ref_country_model','ref_county');
@@ -24,6 +26,7 @@ class Del extends MX_Controller
 		$this->load->model('db/ref/Ref_college_types_model','ref_college_types');
 		$this->load->model('db/ref/Ref_degree_model','ref_degree');
 		$this->load->model('db/ref/Ref_degree_types_model','ref_degree_type');
+		$this->load->model('db/ref/Ref_permission_model','ref_permission');
 
 
 		

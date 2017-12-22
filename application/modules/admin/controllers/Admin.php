@@ -32,12 +32,21 @@ class Admin extends Del {
 	}
 
 	public function getsubadmin_rightslist()
-	{
+	{ 
 		$posted_data=$this->security->xss_clean($this->input->post());
-		if(isset($this->input->post('store_id')) && isset($this->input->post('is_secure_request')) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
+		if(isset($posted_data['userid']) && isset($posted_data['is_secure_request']) && $posted_data['is_secure_request']=='uKrt)6')
 		{
-			print_r($posted_data);
+			$data['permission_list']=$this->ref_permission->get_many_by('is_active',true);
+			$data['access_permission']=$this->lnk_user_to_permission->get_many_by('user_id',$posted_data['userid']);
+			$data['userid']=$posted_data['userid'];
+			$view = 'admin/ajax/ajax_subadmin_management_view';
+			$this->load->view($view,$data);
 		}
+	}
+
+	public function agent_update_permissions()
+	{
+		print_r($_POST);
 	}
 
 
@@ -88,6 +97,7 @@ class Admin extends Del {
 			$data['details']=$this->ref_universities->get($university_id);
 		}
 		$data['county_list']=$this->ref_county->get_all();
+
 		$view = 'admin/masterlist/universities/manage_university_view';
 		echo Modules::run('template/admin_template', $view, $data);	
 	}

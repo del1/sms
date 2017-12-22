@@ -1,33 +1,28 @@
-<table id="product_list" class="table table-hover dataTable table-striped w-full table-bordered table-responsive" >
-<thead>
-  <tr>
-    <th>Style Number/Name</th>
-    <th>Likes</th>
-    <th>Collection</th>
-    <th>Brand</th>
-    <th>Season</th>
-  </tr>
-</thead>
+
+<?php 
+$section[1]="Permission to manage section";
+$section[2]="Master management";
+$section[3]="Report";
+
+
+foreach ($permission_list as $key => $value) {
+    $permission_array[$value->section_id][$value->permission_id]=$value->permission;
+} ?>
+
+<?php foreach ($section as $key => $value) { ?>
+<h5><?php echo $value; ?></h5>
+<input type="hidden" name="userid" value="<?php echo $userid; ?>">
+<table id="product_list<?php echo $key; ?>" class="table table-hover dataTable  w-full table-responsive" >
 <tbody>
-    <?php if(!empty($fav)){
-    foreach ($product_list as $product) { ?>
+    <?php if(!empty($value)){
+    foreach ($permission_array[$key] as $id => $permission) { ?>
         <tr>
-            <td><?php echo $product->product_name; ?></td>
-            <td><?php echo $product_likes[$product->product_id] ; ?></td>
-            <td><?php echo $product->collection_name; ?></td>
-            <td><?php echo $product->brand_name; ?> </td>
-            <td><?php echo $product->season; ?> </td>
+            <td><?php echo $permission; ?></td>
+            <td><input type="radio" name="<?php echo $id; ?>" value="1">Edit</td>
+            <td><input type="radio" name="<?php echo $id; ?>" value="0">View</td>
         </tr>
     <?php } } ?>
 </tbody>
 </table>
-<script type="text/javascript">
-    jQuery(document).ready(function($) {
-        var table=$("#product_list").DataTable( {
-            "order": [[ 0, "asc" ]],
-            stateSave: true,
-            'info': false,
-            responsive: true,
-        })
-    });
-</script>
+
+<?php } ?>

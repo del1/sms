@@ -23,7 +23,7 @@
     </div>
     <div class="page-content container-fluid">
         <div class="panel-body">
-            <a href="<?php echo base_url('admin/manage_consultant'); ?>" id="add_university" class="btn btn-success btnadd">Add New</a>
+            <a href="<?php echo base_url('admin/manage_subadmin'); ?>" id="add_university" class="btn btn-success btnadd">Add New</a>
             <table id="university_list" class="table table-hover dataTable table-striped w-full table-bordered table-responsive">
                 <thead>
                     <tr>
@@ -57,17 +57,19 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container">
+                <?php $arr=array('class'=>"form-horizontal");
+                            echo form_open('admin/agent_update_permissions',$arr); ?>
                 <div class="modal-header">
-                    <h3><span id="username"></span> Assign Access Rights</h3>
+                    <h4>Assign Access Rights</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row row-centered" id="targetBody">
-
-                    </div>
+                    <div class="row row-centered" id="targetBody"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-primary">Save changes</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
+                 <?php echo form_close(); ?>
             </div>
         </div>
     </div>
@@ -148,7 +150,7 @@
             data={[csrfName]:csrfHash,userid:$(this).data('id'),is_secure_request:'uKrt)6'};
                 $.post("<?php echo base_url('admin/getsubadmin_rightslist') ?>", data, 
                     function(data, textStatus, xhr) {
-                       console.log(data);
+                        $("#targetBody").html(data);
                     });
         });
     });

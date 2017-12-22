@@ -46,7 +46,26 @@ class Admin extends Del {
 
 	public function agent_update_permissions()
 	{
-		print_r($_POST);
+		$posted_data=$this->security->xss_clean($this->input->post());
+		if (isset($posted_data['userid'])) {
+			$user_id=$posted_data['userid'];
+			unset($posted_data['userid']);
+			foreach ($posted_data as $key => $value) {
+				$input['user_id']=$user_id;
+				$input['permission_id']=$key;
+				if($value==1){
+					$input['edit']='true';
+					$input['view']='false';
+				}else{
+					$input['edit']='false';
+					$input['view']='true';
+				}
+				$row[]=$input;
+			}
+			$this->lnk_user_to_permission->delete_by('user_id',$user_id);
+			$this->lnk_user_to_permission->insert_many($row,FALSE);
+		}
+		redirect('admin/subadmin');
 	}
 
 

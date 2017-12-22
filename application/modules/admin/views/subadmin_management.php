@@ -61,12 +61,14 @@
                             echo form_open('admin/agent_update_permissions',$arr); ?>
                 <div class="modal-header">
                     <h4>Assign Access Rights</h4>
+                    <p><span><b>Note</b>: if Edit Permission is granted then View permission is default granted</span></p>
+                    
                 </div>
                 <div class="modal-body">
                     <div class="row row-centered" id="targetBody"></div>
                 </div>
                 <div class="modal-footer">
-                     <button type="submit" class="btn btn-primary">Save changes</button>
+                     <button type="submit" class="btn btn-primary save_permission">Save changes</button>
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
                  <?php echo form_close(); ?>
@@ -149,6 +151,17 @@
             var row = table.row($(this).parents('tr'));
             data={[csrfName]:csrfHash,userid:$(this).data('id'),is_secure_request:'uKrt)6'};
                 $.post("<?php echo base_url('admin/getsubadmin_rightslist') ?>", data, 
+                    function(data, textStatus, xhr) {
+                        $("#targetBody").html(data);
+                    });
+        });
+        $(document).on('click', '.save_permission1', function(event) {
+            event.preventDefault();
+            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+            csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+            var row = table.row($(this).parents('tr'));
+            data={[csrfName]:csrfHash,userid:$(this).data('id'),is_secure_request:'uKrt)6'};
+                $.post("<?php echo base_url('admin/agent_update_permissions') ?>", data, 
                     function(data, textStatus, xhr) {
                         $("#targetBody").html(data);
                     });

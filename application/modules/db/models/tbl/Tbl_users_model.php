@@ -20,4 +20,20 @@ class Tbl_users_model extends MY_Model
             $query = $this->db->get()->result();
             return $query;
 	}
+
+	public function getExclusiveUsername($userDetails)
+	{
+		$this->db->select('tbl_users.*');
+        $this->db->where('user_name', $userDetails['user_name']);
+        $this->db->where('user_id!=', $userDetails['user_id']);
+        return $this->db->get('tbl_users')->result();
+	}
+
+	public function getExclusiveEmail($userDetails)
+	{
+		$this->db->select('tbl_users.*');
+        $this->db->where('email_id', $userDetails['email_id']);
+        $this->db->where('user_id!=', $userDetails['user_id']);
+        return $this->db->get('tbl_users')->result();
+	}
 }

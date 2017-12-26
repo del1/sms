@@ -42,7 +42,7 @@ class Auth extends Del
 					if(isset($login['error']))
 					{
 						$this->session->set_flashdata('error','<p class="alert alert-danger">'.$login['error'].'</p>');	
-						 redirect('auth/');
+					 	redirect('auth/');
 					}
 				}
             }else{
@@ -122,6 +122,74 @@ class Auth extends Del
         {
             return TRUE;
         }
+    }
+
+    public function isExist()
+    {
+    	$posted_data=$this->security->xss_clean($this->input->post());
+		$required_array = elements(array('key', 'table', 'value'), $posted_data);
+		$data=$this->$required_array['table']->get_by($required_array['key'],$required_array['value']);
+    	if(!empty($data))
+    	{
+    		echo json_encode($data);
+    	}else{    		
+    		echo "not_found";
+    	}
+    }
+
+    public function check_username()
+    { //called by ajax from manage_subadmin_view.php and normal process from admin
+    	$posted_data=$this->security->xss_clean($this->input->post());
+		$required_array = elements(array('user_id', 'user_name'), $posted_data);
+		if(isset($required_array['user_id']) && strlen(trim($required_array['user_id'])))
+		{
+			$data=$this->users->getExclusiveUsername($required_array);
+
+		}else{
+			$data=$this->users->get_by('user_name',$required_array['user_name']);
+		}
+		if(!empty($data))
+    	{
+    		if (!$this->input->is_ajax_request()) {
+    			return $data;
+    		}else{
+    			echo json_encode($data);
+    		}
+    		
+    	}else{  
+    		if (!$this->input->is_ajax_request()) {
+    			return false;
+    		}else{
+    			echo "not_found";
+    		}  	
+    	}
+    }
+
+    public function check_email()
+    {//called by ajax from manage_subadmin_view.php and normal process from admin
+    	$posted_data=$this->security->xss_clean($this->input->post());
+		$required_array = elements(array('user_id', 'email_id'), $posted_data);
+		if(isset($required_array['user_id']) && strlen(trim($required_array['user_id'])))
+		{
+			$data=$this->users->getExclusiveEmail($required_array);
+
+		}else{
+			$data=$this->users->get_by('email_id',$required_array['email_id']);
+		}
+		if(!empty($data))
+    	{
+    		if (!$this->input->is_ajax_request()) {
+    			return $data;
+    		}else{
+    			echo json_encode($data);
+    		}
+    	}else{    		
+    		if (!$this->input->is_ajax_request()) {
+    			return false;
+    		}else{
+    			echo "not_found";
+    		}  
+    	}
     }
 
 

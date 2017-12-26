@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2017 at 02:12 PM
+-- Generation Time: Dec 26, 2017 at 03:32 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -71,6 +71,23 @@ CREATE TABLE `lnk_user_to_permission` (
   `edit` enum('true','false') NOT NULL DEFAULT 'false',
   `view` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lnk_user_to_permission`
+--
+
+INSERT INTO `lnk_user_to_permission` (`utp_id`, `user_id`, `permission_id`, `edit`, `view`) VALUES
+(29, 5, 1, 'false', 'true'),
+(30, 5, 2, 'false', 'true'),
+(31, 5, 3, 'true', 'false'),
+(32, 5, 4, 'true', 'false'),
+(33, 5, 6, 'false', 'true'),
+(34, 5, 8, 'true', 'false'),
+(35, 5, 9, 'true', 'false'),
+(36, 5, 10, 'true', 'false'),
+(37, 5, 15, 'true', 'false'),
+(38, 5, 16, 'true', 'false'),
+(39, 5, 17, 'true', 'false');
 
 -- --------------------------------------------------------
 
@@ -823,10 +840,12 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-22 15:51:15', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-26 12:02:33', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (4, 'asdasd', 'asdasd@gmail.com', 'asdasd', '2017-11-10 12:18:20', 1, NULL, 2, NULL, NULL, '2017-11-10 12:18:20', 'false'),
-(5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'false');
+(5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'false'),
+(6, 'saurabh', 'saurabh@gmail.com', 'asdasd', '2017-12-26 20:00:48', 1, '1231231231231', 4, 1, NULL, '2017-12-26 20:00:48', 'false'),
+(7, 'abcedfe', 'abajksbd@asdak.com', 'asdasd', '2017-12-26 20:01:59', 1, '123123123123', 4, 1, NULL, '2017-12-26 20:01:59', 'false');
 
 --
 -- Indexes for dumped tables
@@ -1091,7 +1110,7 @@ ALTER TABLE `lnk_student_to_packages`
 -- AUTO_INCREMENT for table `lnk_user_to_permission`
 --
 ALTER TABLE `lnk_user_to_permission`
-  MODIFY `utp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `utp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `ref_admit_status`
 --
@@ -1236,7 +1255,7 @@ ALTER TABLE `tbl_student_to_taken_exams`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --

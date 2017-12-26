@@ -21,14 +21,74 @@ class Admin extends Del {
 	public function subadmin(){
 		$data['page']='Sub Admin list';
 		$data['consultant_list']=$this->users->get_many_by('userlevel_id',4);
-		$view = 'admin/subadmin_management';
+		$view = 'admin/subadmin/subadmin_list_view';
 		echo Modules::run('template/admin_template', $view, $data);
 	}
 
 	public function manage_subadmin($user_id=''){
+		$data['user_details']=array();
 		if($user_id){
-
+			$data['user_details']=$this->users->get($user_id);
 		}
+		$view = 'admin/subadmin/manage_subadmin_view';
+		echo Modules::run('template/admin_template', $view, $data);
+	}
+
+	public function add_update_subadmin()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		//step1-formvalidation
+		$this->form_validation->set_rules('user_name', 'Username', 'trim|required|min_length[6]');
+		$this->form_validation->set_rules('email_id', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('gender_id', 'Gender', 'required' );
+		$this->form_validation->set_rules('phonenumber', 'Phone Number', 'min_length[10]' );
+		if($this->form_validation->run() !== false){
+			//step2- data validation-checking if data is already exist
+	        if (isset($posted_data['user_id']) && strlen(trim($posted_data['user_id']))) 
+	        {
+	        	$data['username']=Modules::run('auth/check_username');
+	        	if(empty($data['username']))//optimisation
+	        	{
+	        		$data['email_id']=Modules::run('auth/check_email');
+	        	}
+	        }else{
+	        	$data['username']=$this->users->get_by('user_name',$posted_data['user_name']);
+	        	if(empty($data['username'])){
+        			$data['email_id']=$this->users->get_by('email_id',$posted_data['email_id']);
+	        	}
+	        }
+	        //step3- proceedfurthur
+	        if(empty($data['email_id']) && empty($data['username']))
+	        {
+	        	//proceed further
+	        	$required_array = elements(array('user_name','email_id','phonenumber','userlevel_id','gender_id'), $posted_data);
+	        	$required_array['added_by']=$this->session->User_Id;
+	        	$required_array['last_updated']=date('Y-m-d H:i:s');
+	        	if(isset($posted_data['user_id']) && strlen(trim($posted_data['user_id'])))
+	        	{//update
+	        		$this->users->update($posted_data['user_id'],$required_array);
+	        	}else{//insert
+	        		$required_array['password']='asdasd';//setit and email
+	        		$required_array['signup_date']=date('Y-m-d H:i:s');
+	        		$this->users->insert($required_array);
+	        	}
+	        	$this->session->set_flashdata('error','<p class="alert alert-success">User Added successfully</p>');
+	        	redirect('admin/subadmin');
+	        }else{
+	        	if(!empty($data['username']))
+	        	{
+	        		$this->session->set_flashdata('error','<p class="alert alert-danger">Username is already exists</p>');
+	        	}
+	        	if(!empty($data['email_id']))
+	        	{
+	        		$this->session->set_flashdata('error','<p class="alert alert-danger">Email Address is already exists</p>');
+	        	}
+        	 	redirect('admin/manage_subadmin');
+	        }
+	    }else{
+                $this->session->set_flashdata('error',  validation_errors('<p class="alert alert-danger">', '</p>'));
+                redirect('admin/manage_subadmin');
+        }
 	}
 
 	public function getsubadmin_rightslist()

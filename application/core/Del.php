@@ -53,6 +53,11 @@ class Del extends MX_Controller
 		flush();
 		die;
 	}
+	public function sprint($variable)
+	{
+		echo '<PRE>'.htmlspecialchars(print_r($variable, true)).'</PRE>';
+		flush();
+	}
 
 	public function adminCheckLogin(){
 		$UserId=@$this->userId;

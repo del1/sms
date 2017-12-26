@@ -6,9 +6,9 @@ class Student extends Del {
 	public function __construct() 
 	{
 		parent::__construct();
-		/*if (!$this->session->User_Type_Id || $this->session->User_Type_Id!=1 ) {
+		if (!$this->session->User_Type_Id || $this->session->User_Type_Id!=1 ) {
 			redirect(base_url());	
-		}	*/
+		}
 	}
 
 	public function summary()

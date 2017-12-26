@@ -158,25 +158,6 @@ class Auth_model extends MY_Model {
 		}
 
 
-		public function getUserLevel($userid)
-		{
-			//get level of user by userid
-			$this->db->select('userlevelid');
-	     	$this->db->from('user');
-	     	$this->db->where('userid',$userid); 
-			$query=$this->db->get();
-			$response=$query->result_array();	
-			return $response[0];
-		}
-
-
-		public function ChangeArtcStatus($data)
-		{
-			$artcid=$data['artcid'];
-			$input['artcstatusid']=$data['artcstatusid'];
-	        $this->db->where('artcid',$artcid); 
-	        $this->db->update('articles',$input);
-		}
 
 
 
@@ -188,32 +169,6 @@ class Auth_model extends MY_Model {
 	        $this->db->where('UserId',$UserId); 
 	        $this->db->update('usertable',$data); 
 		}
-    	public function autoCancel()
-        {			
-        	return $this ->db->select('userid,artcid,dlendtime,checkedtime,dlcrossedtime,isdisbaled,iscompleted')
-                      		 ->get('userartcrecord')
-			          		 ->result_array();	
-        }
-		public function UserLogsData($User_Id)
-		{
-			date_default_timezone_set("Canada/Saskatchewan");
-			$date=date('Y-m-d H:i:s');
-			$data = array (
-			'LastLogin_Timestamp' => $date,
-			'currentStatus'=>1
-			);
-			
-			$this->db->where('UserId',$User_Id);
-			$this->db->update('usertable',$data);
-		}
-		public function setLogoutUser()
-		{
-			$where="`Logout_Timestamp` IS NULL AND timediff(NOW(),`LastLogin_Timestamp`) > TIME('01:00:00')";
-			$data=array("currentStatus"=>0);
-			$this->db->where($where);
-			$this->db->update('usertable',$data);
-		}
-
 
 		
     }

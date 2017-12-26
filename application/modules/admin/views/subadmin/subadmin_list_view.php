@@ -23,6 +23,12 @@
     </div>
     <div class="page-content container-fluid">
         <div class="panel-body">
+            <?php if($this->session->flashdata('error')) { ?>
+                <?php echo $this->session->flashdata('error'); ?>
+            <?php } ?>
+            <?php if($this->session->flashdata('success')) { ?>
+                <p class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></p>
+            <?php } ?>
             <a href="<?php echo base_url('admin/manage_subadmin'); ?>" id="add_university" class="btn btn-success btnadd">Add New</a>
             <table id="university_list" class="table table-hover dataTable table-striped w-full table-bordered table-responsive">
                 <thead>

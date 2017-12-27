@@ -1,4 +1,8 @@
-
+<style type="text/css">
+    .radio-inline{
+        cursor: pointer;
+    }
+</style>
 <?php 
 $section[1]="Permission to manage section";
 $section[2]="Master management";
@@ -25,8 +29,8 @@ if(!empty($access_permission))
     foreach ($permission_array[$key] as $id => $permission) { ?>
         <tr>
             <td><?php echo $permission; ?></td>
-            <td><input type="radio" <?php if(isset($edit[$id]) && $edit[$id]=="true") { echo  "checked";} ?> name="<?php echo $id; ?>" value="1">Edit</td>
-            <td><input type="radio" <?php if(isset($view1[$id]) && $view1[$id]=="true") { echo  "checked";} ?> name="<?php echo $id; ?>" value="0">View</td>
+            <td><label class="radio-inline"><input type="radio" <?php if(isset($edit[$id]) && $edit[$id]=="true") { echo  "checked";} ?> name="<?php echo $id; ?>" value="1"> Edit</label></td>
+            <td><label class="radio-inline"><input type="radio" <?php if(isset($view1[$id]) && $view1[$id]=="true") { echo  "checked";} ?> name="<?php echo $id; ?>" value="0"> View</label></td>
         </tr>
     <?php } } ?>
 </tbody>

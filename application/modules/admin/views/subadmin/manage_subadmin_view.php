@@ -72,21 +72,21 @@ textarea {
                             <div class="form-group row">
                                 <label for="Style Number/Name"  class ="form-control-label col-sm-3 col-xl-2">Username</label>
                                 <div class="col-sm-9 col-xl-10">
-                                    <input type="text" required="" data-id="user_name" data-name="Username" id="username" class="form-control " name="user_name" placeholder="Enter Username for user" value="<?php if(isset($user_details->user_name) && strlen(trim($user_details->user_name))) { echo html_escape($user_details->user_name); } ?>"/>
+                                    <input type="text" required="" data-id="user_name" data-name="Username" id="username" class="form-control " name="user_name" placeholder="Enter Username for user" value="<?php if(isset($user_details->user_name) && strlen(trim($user_details->user_name))) { echo html_escape($user_details->user_name); }else{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['user_name']; }  } ?>"/>
                                     <span class="errorText"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="Style Number/Name" class ="form-control-label col-sm-3 col-xl-2">Email Address</label>
                                 <div class="col-sm-9 col-xl-10">
-                                    <input type="email" required="" data-id="email_id" data-name="Email Address" class="form-control chk" id="email_id" name="email_id" placeholder="Enter Email for user" value="<?php if(isset($user_details->email_id) && strlen(trim($user_details->email_id))) { echo html_escape($user_details->email_id); } ?>"/>
+                                    <input type="email" required="" data-id="email_id" data-name="Email Address" class="form-control chk" id="email_id" name="email_id" placeholder="Enter Email for user" value="<?php if(isset($user_details->email_id) && strlen(trim($user_details->email_id))) { echo html_escape($user_details->email_id); }else{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['email_id']; }  } ?>"/>
                                     <span class="errorText"></span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="Style Number/Name" class ="form-control-label col-sm-3 col-xl-2">Phone Number</label>
                                 <div class="col-sm-9 col-xl-10">
-                                    <input type="number" min="0" minlength=10 class="form-control" name="phonenumber" placeholder="Enter Phone Number of user" value="<?php if(isset($user_details->phonenumber) && strlen(trim($user_details->phonenumber))) { echo html_escape($user_details->phonenumber); } ?>"/>
+                                    <input type="number" min="0" minlength=10 class="form-control" name="phonenumber" placeholder="Enter Phone Number of user" value="<?php if(isset($user_details->phonenumber) && strlen(trim($user_details->phonenumber))) { echo html_escape($user_details->phonenumber); }{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['phonenumber']; }  } ?>"/>
                                     <input type="hidden" name="userlevel_id" value="4">
                                     <input type="hidden" name="user_id" id="user_id" value="<?php if(isset($user_details->user_id) && strlen(trim($user_details->user_id))) { echo html_escape($user_details->user_id); } ?>">
                                 </div>
@@ -94,9 +94,9 @@ textarea {
                             <div class="form-group row">
                                 <label for="Style Number/Name" class ="form-control-label col-sm-3 col-xl-2">Gender</label>
                                 <div class="col-sm-9 col-xl-10 mt-10">
-                                    <label class="radio-inline"><input type="radio" name="gender_id"  value="1"/> Male
+                                    <label class="radio-inline"><input <?php if(isset($user_details->gender_id) && $user_details->gender_id==1) { echo  "checked";}else{ if($this->session->flashdata('setData') && $this->session->flashdata('setData')['gender_id']==1){ echo 'checked'; }  } ?> type="radio" name="gender_id"  value="1"/> Male
                                     </label>
-                                    <label class="radio-inline"><input type="radio" name="gender_id"  value="2"/> Female
+                                    <label class="radio-inline"><input <?php if(isset($user_details->gender_id) && $user_details->gender_id==2) { echo  "checked";}else{ if($this->session->flashdata('setData') && $this->session->flashdata('setData')['gender_id']==2){ echo 'checked'; }  } ?> type="radio" name="gender_id"  value="2"/> Female
                                     </label>
                                 </div>
                             </div>

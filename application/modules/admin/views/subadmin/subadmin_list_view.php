@@ -45,12 +45,11 @@
                         <td><b>Name:</b><span class="description">&nbsp;<?php echo $round->user_name; ?> </span><br>
                             <b>Email:</b><span class="description">&nbsp;<?php echo $round->email_id; ?></span><br>
                             <b>Sign Up Date:</b><span class="description">&nbsp;<?php echo date("jS F Y, g:i a", strtotime($round->signup_date)) ?></span></td>
-                        <td><?php echo date("jS F Y, g:i a", strtotime($round->last_login)); ?></td>
-                        <td><?php echo date("jS F Y, g:i a", strtotime($round->last_updated)); ?></td>
+                        <td><?php if(strlen(trim($round->last_login))){ echo date("jS F Y, g:i a", strtotime($round->last_login)); } ?></td>
+                        <td><input type="checkbox" data-id="<?php echo $round->user_id; ?>" data-pk="user_id" data-type="users" class="switch" <?php if($round->is_active=='true'){echo 'checked';} ?> /></td>
                         <td><a href="<?php echo base_url('admin/manage_subadmin/'.$round->user_id);?>" class="btn btn-icon btn-primary" role="button"><i class="icon wb-pencil" aria-hidden="true"></i></a>
-                        <button type="button" data-id="<?php echo $round->user_id; ?>" data-pk="user_id" data-type="ref_approunds" class="btn btn-icon btn-danger delete ml-30"><i class="icon wb-trash" aria-hidden="true"></i></button><br>
+                        <button type="button" data-id="<?php echo $round->user_id; ?>" data-pk="user_id" data-type="users" class="btn btn-icon btn-danger delete ml-30"><i class="icon wb-trash" aria-hidden="true"></i></button><br>
                         <button data-toggle="modal" data-target="#modal" type="button" data-id="<?php echo $round->user_id; ?>" class="btn btn-icon btn-default mt-5 shadow access_rights">Access rights</button>
-
                         </td>
                     </tr>
                 <?php } ?>
@@ -63,7 +62,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="container">
-                <?php $arr=array('class'=>"form-horizontal");
+                <?php $arr=array('class'=>"form-horizontal", 'id'=>"permissionForm");
                             echo form_open('admin/agent_update_permissions',$arr); ?>
                 <div class="modal-header">
                     <h4>Assign Access Rights</h4>
@@ -74,7 +73,7 @@
                     <div class="row row-centered" id="targetBody"></div>
                 </div>
                 <div class="modal-footer">
-                     <button type="submit" class="btn btn-primary save_permission">Save changes</button>
+                     <button type="submit" class="btn btn-primary save_permission" data-dismiss="modal">Save changes</button>
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
                  <?php echo form_close(); ?>
@@ -100,6 +99,7 @@
                 });
             }
         })
+
     $("#university_list_length").append($("#add_university"));
     
     
@@ -113,10 +113,10 @@
                     if(changeCheckbox.checked)
                     {
                         toastr_type="success";
-                        str="University Enabled";
+                        str="User Login Enabled";
                     }else{
                         toastr_type="warning";
-                        str="University Disabled";
+                        str="User Login Disabled";
                     }
                     toastr.options = {
                       "closeButton": true
@@ -124,6 +124,7 @@
                     toastr[toastr_type](str);
             });
         });
+
 
         $(".delete").click(function(event){
             var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
@@ -137,6 +138,7 @@
                     {
                         $.post("<?php echo base_url('admin/delete') ?>", data, 
                             function(data, textStatus, xhr) {
+                                console.log(data);
                                 if(data=="success")
                                 {
                                     row.remove().draw();
@@ -161,16 +163,26 @@
                         $("#targetBody").html(data);
                     });
         });
-        $(document).on('click', '.save_permission1', function(event) {
+        $(document).on('click', '.save_permission', function(event) {
             event.preventDefault();
             var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
             csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
             var row = table.row($(this).parents('tr'));
-            data={[csrfName]:csrfHash,userid:$(this).data('id'),is_secure_request:'uKrt)6'};
-                $.post("<?php echo base_url('admin/agent_update_permissions') ?>", data, 
-                    function(data, textStatus, xhr) {
-                        $("#targetBody").html(data);
-                    });
+            var formData = new FormData($("#permissionForm")[0]);
+            formData.append('is_secure_request', 'uKrt)6');
+            formURL= "<?php echo base_url('admin/agent_update_permissions') ?>";
+            $.ajax({
+                url: formURL,
+                type: "POST",
+                data:  formData,
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data, textStatus, jqXHR)
+                {
+                    toastr.success("Permission Updated successfully");
+                }
+            });
         });
     });
 </script>

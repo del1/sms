@@ -86,8 +86,14 @@ class Admin extends Del {
         	 	redirect('admin/manage_subadmin');
 	        }
 	    }else{
-                $this->session->set_flashdata('error',  validation_errors('<p class="alert alert-danger">', '</p>'));
-                redirect('admin/manage_subadmin');
+            $this->session->set_flashdata('error',  validation_errors('<p class="alert alert-danger">', '</p>'));
+            if(isset($posted_data['user_id']) && strlen(trim($posted_data['user_id'])) )
+            {
+            	 redirect('admin/manage_subadmin/'.$posted_data['user_id']);
+            }else{
+            	$this->session->set_flashdata('setData', $posted_data);
+        	 	redirect('admin/manage_subadmin');
+            } 
         }
 	}
 
@@ -107,9 +113,10 @@ class Admin extends Del {
 	public function agent_update_permissions()
 	{
 		$posted_data=$this->security->xss_clean($this->input->post());
-		if (isset($posted_data['userid'])) {
+		if (isset($posted_data['userid']) && isset($posted_data['is_secure_request']) && $posted_data['is_secure_request']=='uKrt)6') {
 			$user_id=$posted_data['userid'];
 			unset($posted_data['userid']);
+			unset($posted_data['is_secure_request']);
 			foreach ($posted_data as $key => $value) {
 				$input['user_id']=$user_id;
 				$input['permission_id']=$key;
@@ -125,7 +132,9 @@ class Admin extends Del {
 			$this->lnk_user_to_permission->delete_by('user_id',$user_id);
 			$this->lnk_user_to_permission->insert_many($row,FALSE);
 		}
-		redirect('admin/subadmin');
+		if (!$this->input->is_ajax_request()) {
+			redirect('admin/subadmin');
+		}
 	}
 
 
@@ -142,6 +151,7 @@ class Admin extends Del {
 
 	public function delete()
 	{
+
 		if(isset($_POST['pk_id']) && isset($_POST['is_secure_request']) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
 		{
 			$type=$_POST['type'];

@@ -29,7 +29,9 @@
   <script src="<?php echo base_url('assets/admin/plugins/jquery/jquery.js');?>"></script>
   <script src="<?php echo base_url('assets/js/angular.js');?>"></script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/datatables.net-bs4/dataTables.bootstrap4.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/datatables.net-responsive-bs4/dataTables.responsive.bootstrap4.css');?>">

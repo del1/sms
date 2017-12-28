@@ -83,11 +83,18 @@ class Admin extends Del {
 	        	{
 	        		$this->session->set_flashdata('error','<p class="alert alert-danger">Email Address is already exists</p>');
 	        	}
-        	 	redirect('admin/manage_subadmin');
+				if(isset($posted_data['user_id']) && strlen($posted_data['user_id']))
+	            {
+	            	 redirect('admin/manage_subadmin/'.$posted_data['user_id']);
+	            }else{
+	            	$this->session->set_flashdata('setData', $posted_data);
+	        	 	redirect('admin/manage_subadmin');
+	            } 
 	        }
 	    }else{
             $this->session->set_flashdata('error',  validation_errors('<p class="alert alert-danger">', '</p>'));
-            if(isset($posted_data['user_id']) && strlen(trim($posted_data['user_id'])) )
+
+            if(isset($posted_data['user_id']) && strlen($posted_data['user_id']))
             {
             	 redirect('admin/manage_subadmin/'.$posted_data['user_id']);
             }else{

@@ -27,6 +27,8 @@ class Del extends MX_Controller
 		$this->load->model('db/ref/Ref_degree_model','ref_degree');
 		$this->load->model('db/ref/Ref_degree_types_model','ref_degree_type');
 		$this->load->model('db/ref/Ref_permission_model','ref_permission');
+		$this->load->model('db/ref/Ref_lead_types_model','ref_lead_types');
+		
 
 
 		

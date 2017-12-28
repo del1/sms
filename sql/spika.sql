@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2017 at 03:32 PM
+-- Generation Time: Dec 28, 2017 at 04:03 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -77,17 +77,23 @@ CREATE TABLE `lnk_user_to_permission` (
 --
 
 INSERT INTO `lnk_user_to_permission` (`utp_id`, `user_id`, `permission_id`, `edit`, `view`) VALUES
-(29, 5, 1, 'false', 'true'),
-(30, 5, 2, 'false', 'true'),
-(31, 5, 3, 'true', 'false'),
-(32, 5, 4, 'true', 'false'),
-(33, 5, 6, 'false', 'true'),
-(34, 5, 8, 'true', 'false'),
-(35, 5, 9, 'true', 'false'),
-(36, 5, 10, 'true', 'false'),
-(37, 5, 15, 'true', 'false'),
-(38, 5, 16, 'true', 'false'),
-(39, 5, 17, 'true', 'false');
+(82, 7, 1, 'true', 'false'),
+(83, 7, 2, 'true', 'false'),
+(84, 7, 3, 'true', 'false'),
+(85, 7, 4, 'false', 'true'),
+(86, 7, 5, 'true', 'false'),
+(87, 5, 1, 'false', 'true'),
+(88, 5, 2, 'false', 'true'),
+(89, 5, 3, 'false', 'true'),
+(90, 5, 4, 'false', 'true'),
+(91, 5, 5, 'false', 'true'),
+(92, 5, 6, 'false', 'true'),
+(93, 5, 8, 'true', 'false'),
+(94, 5, 9, 'true', 'false'),
+(95, 5, 10, 'true', 'false'),
+(96, 5, 15, 'true', 'false'),
+(97, 5, 16, 'true', 'false'),
+(98, 5, 17, 'true', 'false');
 
 -- --------------------------------------------------------
 
@@ -467,8 +473,18 @@ CREATE TABLE `ref_degrees` (
   `added_by` int(11) NOT NULL,
   `last_updated` datetime NOT NULL,
   `degree_type_id` int(11) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_degrees`
+--
+
+INSERT INTO `ref_degrees` (`degree_id`, `degree_name`, `added_by`, `last_updated`, `degree_type_id`, `is_active`) VALUES
+(1, 'Bachelor of Arts (BA)', 1, '2017-12-28 16:42:03', 1, 'true'),
+(2, 'Bachelor of Science (B.Sc)', 1, '2017-12-28 16:42:12', 1, 'true'),
+(3, 'Bachelor of Commerce (B.Com)', 1, '2017-12-28 16:42:24', 1, 'true'),
+(4, 'Bachelor of Engineering/Technology (BE/B.Tech)', 1, '2017-12-28 16:42:33', 1, 'true');
 
 -- --------------------------------------------------------
 
@@ -478,9 +494,18 @@ CREATE TABLE `ref_degrees` (
 
 CREATE TABLE `ref_degree_types` (
   `degree_type_id` int(11) NOT NULL,
+  `short_desc` varchar(255) NOT NULL,
   `degree_type_name` varchar(128) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_degree_types`
+--
+
+INSERT INTO `ref_degree_types` (`degree_type_id`, `short_desc`, `degree_type_name`, `is_active`) VALUES
+(1, 'UG', 'Under Graduate', 'true'),
+(2, 'PG', 'Post Graduate', 'true');
 
 -- --------------------------------------------------------
 
@@ -517,8 +542,16 @@ CREATE TABLE `ref_enquiry_status` (
 CREATE TABLE `ref_exam_types` (
   `exam_type_id` int(11) NOT NULL,
   `exam_name` varchar(128) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_exam_types`
+--
+
+INSERT INTO `ref_exam_types` (`exam_type_id`, `exam_name`, `is_active`) VALUES
+(1, 'GMAT', 'true'),
+(2, 'GRE', 'true');
 
 -- --------------------------------------------------------
 
@@ -573,8 +606,16 @@ CREATE TABLE `ref_interview_status` (
 CREATE TABLE `ref_lead_types` (
   `lead_type_id` int(11) NOT NULL,
   `lead_type` varchar(128) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_lead_types`
+--
+
+INSERT INTO `ref_lead_types` (`lead_type_id`, `lead_type`, `is_active`) VALUES
+(1, 'Hot', 'true'),
+(2, 'Cold', 'true');
 
 -- --------------------------------------------------------
 
@@ -659,7 +700,7 @@ CREATE TABLE `ref_sources` (
   `source_name` varchar(64) NOT NULL,
   `added_by` int(11) NOT NULL,
   `last_updated` datetime NOT NULL,
-  `is_active` enum('1','0') NOT NULL DEFAULT '1'
+  `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -667,7 +708,8 @@ CREATE TABLE `ref_sources` (
 --
 
 INSERT INTO `ref_sources` (`source_id`, `source_name`, `added_by`, `last_updated`, `is_active`) VALUES
-(2, 'ms', 1, '2017-11-13 02:35:52', '1');
+(2, 'ISB Mantra subscription', 1, '2017-12-28 13:55:10', 'true'),
+(3, 'GMAC Webinar', 1, '2017-12-28 13:55:27', 'true');
 
 -- --------------------------------------------------------
 
@@ -689,7 +731,7 @@ CREATE TABLE `ref_universities` (
 --
 
 INSERT INTO `ref_universities` (`university_id`, `university_name`, `country_id`, `added_by`, `last_updated`, `is_active`) VALUES
-(4, 'dawdasd', 6, 1, '2017-11-13 01:51:29', 'true');
+(4, 'First University', 99, 1, '2017-12-27 17:10:53', 'true');
 
 -- --------------------------------------------------------
 
@@ -840,12 +882,11 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-26 12:02:33', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2017-12-28 13:53:53', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (4, 'asdasd', 'asdasd@gmail.com', 'asdasd', '2017-11-10 12:18:20', 1, NULL, 2, NULL, NULL, '2017-11-10 12:18:20', 'false'),
-(5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'false'),
-(6, 'saurabh', 'saurabh@gmail.com', 'asdasd', '2017-12-26 20:00:48', 1, '1231231231231', 4, 1, NULL, '2017-12-26 20:00:48', 'false'),
-(7, 'abcedfe', 'abajksbd@asdak.com', 'asdasd', '2017-12-26 20:01:59', 1, '123123123123', 4, 1, NULL, '2017-12-26 20:01:59', 'false');
+(5, 'mahesh1', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
+(7, 'firstuser', 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '123123123123', 4, 1, NULL, '2017-12-27 15:39:52', 'true');
 
 --
 -- Indexes for dumped tables
@@ -1110,7 +1151,7 @@ ALTER TABLE `lnk_student_to_packages`
 -- AUTO_INCREMENT for table `lnk_user_to_permission`
 --
 ALTER TABLE `lnk_user_to_permission`
-  MODIFY `utp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `utp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT for table `ref_admit_status`
 --
@@ -1150,12 +1191,12 @@ ALTER TABLE `ref_countries`
 -- AUTO_INCREMENT for table `ref_degrees`
 --
 ALTER TABLE `ref_degrees`
-  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ref_degree_types`
 --
 ALTER TABLE `ref_degree_types`
-  MODIFY `degree_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `degree_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ref_employer`
 --
@@ -1170,7 +1211,7 @@ ALTER TABLE `ref_enquiry_status`
 -- AUTO_INCREMENT for table `ref_exam_types`
 --
 ALTER TABLE `ref_exam_types`
-  MODIFY `exam_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `exam_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ref_followup_status`
 --
@@ -1190,7 +1231,7 @@ ALTER TABLE `ref_interview_status`
 -- AUTO_INCREMENT for table `ref_lead_types`
 --
 ALTER TABLE `ref_lead_types`
-  MODIFY `lead_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lead_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ref_packages`
 --
@@ -1210,7 +1251,7 @@ ALTER TABLE `ref_programs`
 -- AUTO_INCREMENT for table `ref_sources`
 --
 ALTER TABLE `ref_sources`
-  MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ref_universities`
 --
@@ -1284,7 +1325,7 @@ ALTER TABLE `lnk_student_to_packages`
 -- Constraints for table `lnk_user_to_permission`
 --
 ALTER TABLE `lnk_user_to_permission`
-  ADD CONSTRAINT `lnk_user_to_permission_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`),
+  ADD CONSTRAINT `lnk_user_to_permission_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `lnk_user_to_permission_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `ref_permissions` (`permission_id`);
 
 --

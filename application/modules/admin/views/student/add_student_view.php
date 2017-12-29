@@ -12,8 +12,15 @@
     </div>
     <div class="page-content">
         <div class="panel">
+            <?php if($this->session->flashdata('error')) { ?>
+                <?php echo $this->session->flashdata('error'); ?>
+            <?php } ?>
+            <?php if($this->session->flashdata('success')) { ?>
+                <p class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></p>
+            <?php } ?>
             <div class="panel-body container-fluid">
-                <form class="form-horizontal" method="post" action="<?php echo base_url('admin/student/create'); ?>">
+                <?php $arr=array('class'=>"form-horizontal");
+                            echo form_open('admin/student/create',$arr); ?>
                     <div class="row row-lg">
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
                             <h4 class="example-title">Select enquiry agent</h4>
@@ -103,7 +110,7 @@
                                 <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                     <select data-plugin="select2" id="total_experience" name="total_experience" class="form-control ">
                                         <option hidden="">Select Experience</option>
-                                        <?php for ($i=1; $i < 31 ; $i++) {  ?>
+                                        <?php for ($i=0; $i < 31 ; $i++) {  ?>
                                         <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                         <?php } ?>
                                     </select>
@@ -146,13 +153,13 @@
 
                                 <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <input type="number" readonly="" id="gmat_score" maxlength="2" step="0.01" max="99.99" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+                                    <input type="number" disabled="" id="gmat_score" maxlength="2" step="0.01" max="99.99" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
                                 </div>
 
                                 <label for="gmat_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <div class="input-group">
-                                        <input type="text" readonly="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
+                                        <input type="text" disabled="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
                                         <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
@@ -170,13 +177,13 @@
 
                                 <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <input type="number" readonly="" id="gre_score" maxlength="2" step="0.01" max="99.99" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gre_tar">
+                                    <input type="number" disabled="" id="gre_score" maxlength="2" step="0.01" max="99.99" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
                                 </div>
 
                                 <label for="gre_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <div class="input-group">
-                                        <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" readonly="" placeholder="Select Tenative Date">
+                                        <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" disabled="" placeholder="Select Tenative Date">
                                         <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
@@ -184,7 +191,7 @@
 
                             <div class="form-group row mt-20" >
                                 <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6 col-6">
-                                    <button type="button" class="btn btn-success float-right">Save</button>
+                                    <button type="submit" class="btn btn-success float-right">Save</button>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6 col-6">
                                     <button type="button" class="btn btn-danger float-left">Cancel</button>
@@ -215,7 +222,7 @@
                             </table>
                         </div>
                     </div>
-                </form>
+                <?php echo form_close(); ?>
             </div>
         </div>
     </div>
@@ -261,11 +268,6 @@
             });
         });
 
-        $(document).on('change', '.trigger', function(event) {
-            event.preventDefault();
-            console.log($(this).data('tar'));
-            /* Act on the event */
-        });
     
 
         $("#enq_date").daterangepicker({
@@ -293,6 +295,25 @@
             minDate: moment(),
             locale: {
                 format: 'YYYY-MM-DD'
+            }
+        });
+
+        $(document).on('change', '.trigger', function(event) {
+            event.preventDefault();
+            if(this.value=="1"){
+
+                var targetClass=this.dataset.target;
+                var ab=document.getElementsByClassName(targetClass);
+                for (var i = 0; i < ab.length; i++) {
+                    ab[i].removeAttribute('disabled');
+                }
+
+            }else{
+                 var targetClass=this.dataset.target;
+                var ab=document.getElementsByClassName(targetClass);//.removeAttribute('readonly')
+                $(ab).each(function(index, el) {
+                    $(this).attr('disabled',"true");
+                });
             }
         });
 

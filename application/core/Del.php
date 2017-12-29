@@ -31,11 +31,14 @@ class Del extends MX_Controller
 		
 
 
-		
-
-
 
 		$this->load->model('db/tbl/Tbl_users_model','users');
+		$this->load->model('db/tbl/Tbl_student_profiles_model','student_profile');
+		$this->load->model('db/tbl/Tbl_enquiries_model','enquries');
+		$this->load->model('db/tbl/Tbl_student_to_taken_exams_model','student_to_exams');
+		
+		
+		
 
 		/*$this->load->model('db/ref/Ref_collection_model','ref_coll');
 		$this->load->model('db/ref/Ref_brand_model','ref_brand');*/

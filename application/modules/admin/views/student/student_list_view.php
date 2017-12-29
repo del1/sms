@@ -21,7 +21,7 @@
             <table id="store_list_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive" ><!-- data-plugin="dataTable" -->
             <thead>
               <tr>
-                <th>Expiary date</th>
+                <th>Enquiry date</th>
                 <th>Student name</th>
                 <th>Email Id</th>
                 <th>Phone number</th>
@@ -30,14 +30,24 @@
               </tr>
             </thead>
             <tbody>
-                <?php if(isset($product_list)) { foreach ($product_list as $product) { ?>
+                <?php if(isset($student_list)) { foreach ($student_list as $student) { ?>
                     <tr>
-                        <td><?php echo $product->product_name; ?></td>
-                        <td><?php echo $product->collection_name; ?></td>
-                        <td><?php echo $product->brand_name; ?> </td>
-                        <td><?php echo $product->season; ?> </td>
-                        <td><input type="checkbox" data-id="<?php echo $product->product_id; ?>" data-pk="product_id" data-type="tbl_product" class="switch" <?php if($product->is_active=='true'){echo 'checked';} ?>  /></td>
-                        <td><a href="<?php echo base_url('admin/manage_product/'.$product->product_id);?>" class="btn btn-primary" role="button">Manage</a>
+                        <td><?php echo $student->enq_date; ?></td>
+                        <td><?php echo $student->first_name." ".$student->last_name; ?></td>
+                        <td><?php echo $student->email_id; ?> </td>
+                        <td><?php echo $student->phonenumber; ?> </td>
+                        <td>
+                            <button type="button" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span> Personal
+                            </button>
+                            <button type="button" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span> Professional
+                            </button>
+                            <button type="button" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span> Application
+                            </button>
+                        </td>
+                        <td><a href="<?php echo base_url('admin/manage_product/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a></td>
                     </tr>
                 <?php } } ?>
             </tbody>

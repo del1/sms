@@ -17,7 +17,7 @@ class Del extends MX_Controller
 
 
 		$this->load->model('db/ref/Ref_universities_model','ref_universities');
-		$this->load->model('db/ref/Ref_country_model','ref_county');
+		$this->load->model('db/ref/Ref_country_model','ref_country');
 		$this->load->model('db/ref/Ref_application_rounds_model','ref_approunds');
 		$this->load->model('db/ref/Ref_program_model','ref_program');
 		$this->load->model('db/ref/Ref_packages_model','ref_packages');
@@ -28,6 +28,8 @@ class Del extends MX_Controller
 		$this->load->model('db/ref/Ref_degree_types_model','ref_degree_type');
 		$this->load->model('db/ref/Ref_permission_model','ref_permission');
 		$this->load->model('db/ref/Ref_lead_types_model','ref_lead_types');
+        $this->load->model('db/ref/Ref_states_model','ref_states');
+        $this->load->model('db/ref/Ref_city_model','ref_city');
 		
 
 

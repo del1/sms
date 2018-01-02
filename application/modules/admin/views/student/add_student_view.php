@@ -5,6 +5,9 @@
     .btnright{
         margin-right: 28px;
     }
+    .select2{
+        width: auto !important;
+    }
 </style>
 <div class="page">
     <div class="page-header">
@@ -82,22 +85,29 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mt-20">
-                                <label for="resideing_state" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Residing State</label>
+                            <div class="form-group row mt-20 ">
+                                <label for="resideing_country" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 " style="text-align: left;">Residing Country</label>
                                 <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                    <select id="resideing_state" data-plugin="select2" class="form-control" name="resident_state_id">
-                                        <option hidden="">Select State</option>
+                                    <select id="resideing_country" data-plugin="select2" class="form-control" name="resident_country_id">
+                                        <option hidden="">Select Country</option>
                                         <?php foreach ($county_list as $county) { ?>
                                             <option value="<?php echo $county->country_id;  ?>"><?php echo $county->country_name;  ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
+                                <label for="resideing_state" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Residing State</label>
+                                <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5" id="select_state">
+                                    <select id="resideing_state" class="form-control" name="resident_state_id">
+                                        <option hidden="">Select State</option>
+                                    </select>
+                                </div>
                                 <label for="resident_city" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2"  style="text-align: left;">Residing City</label>
-                                <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5" id="select_city">
                                     <select id="resident_city" name="resident_city_id" class="form-control ">
                                         <option hidden="">Select City</option>
                                     </select>
                                 </div>
+
                             </div>
 
                             <h3 class="example-title mt-50">Professional Details</h3>
@@ -315,6 +325,40 @@
                     $(this).attr('disabled',"true");
                 });
             }
+        });
+
+        $(document).on('change', '#resideing_country', function(event) {
+            event.preventDefault();
+            ;
+            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+                csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+            var data={country_id:$(this).val(),[csrfName]:csrfHash};
+            $.post("<?php echo base_url('admin/getStatesForCountry') ?>", data,
+                function(data, textStatus, xhr) {
+                    
+                    $('#resideing_state').empty();
+                    $('#resident_city').empty();
+                    $('#resideing_state').select2({
+                        dataType: 'json',
+                        data: JSON.parse(data)
+                    });
+                });
+        });
+
+        $(document).on('change', '#resideing_state', function(event) {
+            event.preventDefault();
+            ;
+            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+                csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+            var data={state_id:$(this).val(),[csrfName]:csrfHash};
+            $.post("<?php echo base_url('admin/getCitiesOfStates') ?>", data,
+                function(data, textStatus, xhr) {
+                    $('#resident_city').empty();
+                    $('#resident_city').select2({
+                        dataType: 'json',
+                        data: JSON.parse(data)
+                    });
+                });
         });
 
     });

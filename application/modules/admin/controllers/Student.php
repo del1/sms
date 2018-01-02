@@ -28,7 +28,7 @@ class Student extends Del {
 		$data['agent_list']=$this->users->select('user_id,user_name')->get_many_by(array('userlevel_id'=>4,'is_active'=>'true'));
 		$data['source_list']=$this->ref_source->select('source_id,source_name')->get_many_by('is_active','true');
 		$data['lead_types']=$this->ref_lead_types->select('lead_type_id,lead_type')->get_many_by('is_active','true');
-		$data['county_list']=$this->ref_county->get_all();
+		$data['county_list']=$this->ref_country->get_all();
 		$data['ug_degree_list']=$this->ref_degree->select('degree_id,degree_name')->get_many_by('is_active','true');
 		$data['program_list']=$this->ref_program->select('program_id,program_name')->get_many_by('is_active','true');
 		
@@ -38,7 +38,6 @@ class Student extends Del {
 
 	public function create()
 	{
-		
 		$this->form_validation->set_rules('agent_id', 'Agent', 'trim|required');
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
@@ -74,7 +73,7 @@ class Student extends Del {
 		 	if(strlen(trim($posted_data['user_id'])))
 		 	{
 			 	//adding student details
-			 	$strudent_proile = elements(array('user_id','resident_state_id','intro','total_experience'), $posted_data);//,'resident_city_id'
+			 	$strudent_proile = elements(array('user_id','resident_state_id','resident_city_id','resident_country_id','intro','total_experience'), $posted_data);//,''
 			 	$this->student_profile->insert($strudent_proile);
 			 	$posted_data['student_id']=$this->db->insert_id();
 
@@ -119,6 +118,37 @@ class Student extends Del {
 			$this->session->set_flashdata('error',  validation_errors('<p class="alert alert-danger">', '</p>'));
 			$this->session->set_flashdata('setData', $posted_data);
             redirect('admin/student/add');
+		}
+	}
+
+	public function updateStudentInfo(){
+		$this->mprint($_POST);
+	}
+
+	public function get_student_info(){
+		$posted_data=$this->security->xss_clean($this->input->post());
+		if(isset($posted_data['level'])&& isset($posted_data['user_id']) && ($posted_data['is_secure_request']=='uKrt)12'))
+		{
+			switch ($posted_data['level']) {
+				case 'Personal':
+					$data['student_info']=$this->users->get_personal_info($posted_data['user_id']);
+					$view = 'admin/ajax/student/ajax_student_personal_view';
+					break;
+				case 'Professional':
+					$data['student_profile']=$this->student_profile->get_professional_detail();
+					$this->mprint($data);
+					/*$data['student_info']=$this->users->select('user_id,first_name,last_name,email_id,signup_date,phonenumber,last_updated')->get($posted_data['user_id']);
+					$view = 'admin/ajax/student/ajax_student_professional_view';*/
+					break;
+				case 'Application':
+					# code...
+					break;	
+				
+				default:
+					# code...
+					break;
+			}
+			$this->load->view($view,$data);
 		}
 	}
 

@@ -34,6 +34,22 @@ class Admin extends Del {
 		echo Modules::run('template/admin_template', $view, $data);
 	}
 
+	public function getStatesForCountry()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$states=$this->ref_states->select('state_id as id,state_name as text')->get_many_by('country_id',$posted_data['country_id']);
+		echo json_encode($states);
+	}
+
+	public function getCitiesOfStates()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$states=$this->ref_city->select('city_id as id,city_name as text')->get_many_by('state_id',$posted_data['state_id']);
+		echo json_encode($states);
+	}
+
+	
+
 	public function add_update_subadmin()
 	{
 		$posted_data=$this->security->xss_clean($this->input->post());

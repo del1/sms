@@ -6,6 +6,9 @@
     .btnright{
         margin-right: 28px;
     }
+    #levelInfo{
+        font-weight: 100;
+    }
 </style>
 <div class="page">
     <div class="page-header">
@@ -33,17 +36,17 @@
                 <?php if(isset($student_list)) { foreach ($student_list as $student) { ?>
                     <tr>
                         <td><?php echo $student->enq_date; ?></td>
-                        <td><?php echo $student->first_name." ".$student->last_name; ?></td>
+                        <td class="stuname"><?php echo $student->first_name." ".$student->last_name; ?></td>
                         <td><?php echo $student->email_id; ?> </td>
                         <td><?php echo $student->phonenumber; ?> </td>
-                        <td>
-                            <button type="button" class="btn btn-info">
+                        <td data-id="<?php echo $student->user_id; ?>">
+                            <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-success btn-xs requestInfo" data-level="Personal" data>
                                 <span class="glyphicon glyphicon-search"></span> Personal
                             </button>
-                            <button type="button" class="btn btn-info">
+                            <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-primary btn-xs requestInfo" data-level="Professional">
                                 <span class="glyphicon glyphicon-search"></span> Professional
                             </button>
-                            <button type="button" class="btn btn-info">
+                            <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-warning btn-xs requestInfo" data-level="Application">
                                 <span class="glyphicon glyphicon-search"></span> Application
                             </button>
                         </td>
@@ -52,6 +55,31 @@
                 <?php } } ?>
             </tbody>
           </table>
+        </div>
+    </div>
+</div>
+<div class="modal modal-transparent modal-fullscreen fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="container">
+                <?php $arr=array('class'=>"form-horizontal", 'id'=>"permissionForm");
+                            echo form_open('admin/student/updateStudentInfo',$arr); ?>
+                <div class="modal-header">
+                    <h4><span id="studentName"></span> - <span id="levelInfo"></span></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="row row-centered" id="targetBody"></div>
+                </div>
+                <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                 <?php echo form_close(); ?>
+            </div>
         </div>
     </div>
 </div>
@@ -94,6 +122,20 @@
                     }
                     toastr[toastr_type](str);
             });
+        });
+
+        $(document).on('click', '.requestInfo', function(event) {
+            event.preventDefault();
+            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+            csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+            var level=$(this).data('level');
+            $("#levelInfo").html(level+" Information");
+            $("#studentName").html($(this).parents('tr').find('.stuname').html());
+                data={[csrfName]:csrfHash,level:level,user_id:$(this).parent().data('id'),is_secure_request:'uKrt)12'};
+                $.post("<?php echo base_url('admin/student/get_student_info') ?>", data, 
+                    function(data, textStatus, xhr) {
+                        $("#targetBody").html(data);
+                    });
         });
     });
 </script>

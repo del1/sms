@@ -19,4 +19,13 @@ class Tbl_student_profiles_model extends MY_Model
             $this->db->where('tbl_users.userlevel_id', 3);
             return $this->db->get()->result();
 	}
+
+	public function get_professional_detail($user_id)
+	{
+		$this->db->select('tbl_student_profiles.intro,tbl_student_profiles.total_experience,');
+            $this->db->from('tbl_users');
+            $this->db->join('tbl_student_profiles', 'tbl_users.user_id = tbl_student_profiles.user_id');
+            $this->db->where('tbl_users.user_id', $user_id);
+            return $this->db->get()->result();
+	}
 }

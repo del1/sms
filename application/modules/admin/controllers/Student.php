@@ -135,8 +135,7 @@ class Student extends Del {
 					$view = 'admin/ajax/student/ajax_student_personal_view';
 					break;
 				case 'Professional':
-					$data['student_profile']=$this->student_profile->get_professional_detail();
-					$this->mprint($data);
+					//$data['student_profile']=$this->student_profile->get_professional_detail();
 					/*$data['student_info']=$this->users->select('user_id,first_name,last_name,email_id,signup_date,phonenumber,last_updated')->get($posted_data['user_id']);
 					$view = 'admin/ajax/student/ajax_student_professional_view';*/
 					break;

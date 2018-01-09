@@ -50,7 +50,7 @@
                                 <span class="glyphicon glyphicon-search"></span> Application
                             </button>
                         </td>
-                        <td><a href="<?php echo base_url('admin/manage_product/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a></td>
+                        <td><a href="<?php echo base_url('admin/student/manage_student/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a></td>
                     </tr>
                 <?php } } ?>
             </tbody>

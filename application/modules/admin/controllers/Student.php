@@ -121,6 +121,20 @@ class Student extends Del {
 		}
 	}
 
+	public function manage_student($student_id='')
+	{
+		if($student_id)
+		{
+			$data['section']='student';
+			//$data
+			$data['enquiery_data']=$this->enquries->get_student_enquiries($student_id);
+			$this->mprint($data);
+			$data['page']='Edit student Details';
+			$view = 'admin/student/edit_student_view';
+			echo Modules::run('template/admin_template', $view, $data);	
+		}
+	}
+
 	public function updateStudentInfo(){
 		$this->mprint($_POST);
 	}

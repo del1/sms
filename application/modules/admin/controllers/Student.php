@@ -126,9 +126,20 @@ class Student extends Del {
 		if($student_id)
 		{
 			$data['section']='student';
-			//$data
-			$data['enquiery_data']=$this->enquries->get_student_enquiries($student_id);
-			$this->mprint($data);
+			$data['enquiery_data']=$student_data=$this->enquries->get_student_enquiries($student_id);
+			$data['gender_list']=$this->ref_gender->select('gender_id,gender')->get_all();
+
+			$data['UG_colleges_list']=$this->ref_college->get_collegesOfType(1);
+			$data['PG_colleges_list']=$this->ref_college->get_collegesOfType(2);
+			if(!empty($student_data)) //if enquiry data is avialable
+			{
+				$student_data=$student_data[0];
+				$data['personal_details']=$this->users->get_personal_info($student_data->student_id);
+				$data['professional_details']=$this->student_profile->get_professional_detail($student_data->student_id);
+				$data['college_details']=$this->student_to_degrees->get_many_by('student_id',$student_data->student_id);
+				$data['companies_history_history']=$this->student_professional_history->get_companies_history($student_data->student_id);
+				
+			}
 			$data['page']='Edit student Details';
 			$view = 'admin/student/edit_student_view';
 			echo Modules::run('template/admin_template', $view, $data);	
@@ -141,11 +152,11 @@ class Student extends Del {
 
 	public function get_student_info(){
 		$posted_data=$this->security->xss_clean($this->input->post());
-		if(isset($posted_data['level'])&& isset($posted_data['user_id']) && ($posted_data['is_secure_request']=='uKrt)12'))
+		if(isset($posted_data['level'])&& isset($posted_data['student_id']) && ($posted_data['is_secure_request']=='uKrt)12'))
 		{
 			switch ($posted_data['level']) {
 				case 'Personal':
-					$data['student_info']=$this->users->get_personal_info($posted_data['user_id']);
+					$data['student_info']=$this->users->get_personal_info($posted_data['student_id']);
 					$view = 'admin/ajax/student/ajax_student_personal_view';
 					break;
 				case 'Professional':

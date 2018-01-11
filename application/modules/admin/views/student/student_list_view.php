@@ -39,7 +39,7 @@
                         <td class="stuname"><?php echo $student->first_name." ".$student->last_name; ?></td>
                         <td><?php echo $student->email_id; ?> </td>
                         <td><?php echo $student->phonenumber; ?> </td>
-                        <td data-id="<?php echo $student->user_id; ?>">
+                        <td data-id="<?php echo $student->student_id; ?>">
                             <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-success btn-xs requestInfo" data-level="Personal" data>
                                 <span class="glyphicon glyphicon-search"></span> Personal
                             </button>
@@ -131,7 +131,7 @@
             var level=$(this).data('level');
             $("#levelInfo").html(level+" Information");
             $("#studentName").html($(this).parents('tr').find('.stuname').html());
-                data={[csrfName]:csrfHash,level:level,user_id:$(this).parent().data('id'),is_secure_request:'uKrt)12'};
+                data={[csrfName]:csrfHash,level:level,student_id:$(this).parent().data('id'),is_secure_request:'uKrt)12'};
                 $.post("<?php echo base_url('admin/student/get_student_info') ?>", data, 
                     function(data, textStatus, xhr) {
                         $("#targetBody").html(data);

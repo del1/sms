@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2018 at 03:27 PM
+-- Generation Time: Jan 11, 2018 at 10:54 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -53290,11 +53290,12 @@ CREATE TABLE `tbl_student_followups` (
 
 CREATE TABLE `tbl_student_professional_history` (
   `history_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
   `employer_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `description` text NOT NULL,
-  `student_id` int(11) NOT NULL
+  `is_current` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -53312,7 +53313,6 @@ CREATE TABLE `tbl_student_profiles` (
   `intro` text NOT NULL,
   `total_experience` int(11) NOT NULL,
   `professional_qualification` varchar(64) NOT NULL,
-  `current_employer_id` int(11) DEFAULT NULL,
   `remarks` text NOT NULL,
   `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -53321,11 +53321,11 @@ CREATE TABLE `tbl_student_profiles` (
 -- Dumping data for table `tbl_student_profiles`
 --
 
-INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_id`, `resident_state_id`, `resident_city_id`, `intro`, `total_experience`, `professional_qualification`, `current_employer_id`, `remarks`, `is_active`) VALUES
-(4, 13, 101, 22, 2763, 'asdasdasd', 0, '', NULL, '', 'true'),
-(5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, '', NULL, '', 'true'),
-(6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, '', NULL, '', 'true'),
-(7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', NULL, '', 'true');
+INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_id`, `resident_state_id`, `resident_city_id`, `intro`, `total_experience`, `professional_qualification`, `remarks`, `is_active`) VALUES
+(4, 13, 101, 22, 2763, 'asdasdasd', 0, '', '', 'true'),
+(5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, '', '', 'true'),
+(6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, '', '', 'true'),
+(7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', '', 'true');
 
 -- --------------------------------------------------------
 
@@ -53393,10 +53393,9 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-05 19:44:44', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-11 11:27:27', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', NULL, NULL, 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
-(4, 'asdasd', NULL, NULL, 'asdasd@gmail.com', 'asdasd', '2017-11-10 12:18:20', 1, NULL, 2, NULL, NULL, '2017-11-10 12:18:20', 'false'),
-(5, 'mahesh1', NULL, NULL, 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
+(5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', NULL, NULL, 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, NULL, '2017-12-27 15:39:52', 'true'),
 (13, NULL, 'mahesh', '0', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, NULL, NULL, '2017-12-29 16:24:59', 'true'),
 (14, NULL, 'saurabh', 'shelot', 'saurabh@connexistech.com', NULL, '2017-12-29 16:30:29', 1, '9090909090', 3, NULL, NULL, '2017-12-29 16:30:29', 'true'),
@@ -53626,7 +53625,6 @@ ALTER TABLE `tbl_student_profiles`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `resident_state_id` (`resident_state_id`),
   ADD KEY `resident_city_id` (`resident_city_id`),
-  ADD KEY `current_employer_id` (`current_employer_id`),
   ADD KEY `resident_country_id` (`resident_country_id`);
 
 --
@@ -53951,7 +53949,6 @@ ALTER TABLE `tbl_student_professional_history`
 ALTER TABLE `tbl_student_profiles`
   ADD CONSTRAINT `tbl_student_profiles_ibfk_1` FOREIGN KEY (`resident_state_id`) REFERENCES `ref_states` (`state_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_student_profiles_ibfk_2` FOREIGN KEY (`resident_city_id`) REFERENCES `ref_cities` (`city_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_student_profiles_ibfk_3` FOREIGN KEY (`current_employer_id`) REFERENCES `ref_employer` (`employer_id`),
   ADD CONSTRAINT `tbl_student_profiles_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_student_profiles_ibfk_5` FOREIGN KEY (`resident_country_id`) REFERENCES `ref_countries` (`country_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

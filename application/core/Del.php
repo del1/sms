@@ -30,6 +30,7 @@ class Del extends MX_Controller
 		$this->load->model('db/ref/Ref_lead_types_model','ref_lead_types');
         $this->load->model('db/ref/Ref_states_model','ref_states');
         $this->load->model('db/ref/Ref_city_model','ref_city');
+        $this->load->model('db/ref/Ref_gender_model','ref_gender');
 		
 
 
@@ -38,6 +39,11 @@ class Del extends MX_Controller
 		$this->load->model('db/tbl/Tbl_student_profiles_model','student_profile');
 		$this->load->model('db/tbl/Tbl_enquiries_model','enquries');
 		$this->load->model('db/tbl/Tbl_student_to_taken_exams_model','student_to_exams');
+		$this->load->model('db/tbl/Tbl_student_to_degrees_model','student_to_degrees');
+		$this->load->model('db/tbl/Tbl_student_professional_history_model','student_professional_history');
+		
+
+		
 		
 		
 		

@@ -37,15 +37,15 @@ class Tbl_users_model extends MY_Model
         return $this->db->get('tbl_users')->result();
 	}
 
-	public function get_personal_info($user_id){
+	public function get_personal_info($student_id){
 		$this->db->select('tbl_users.user_id,tbl_users.first_name,tbl_users.last_name,tbl_users.email_id, 
-			tbl_users.signup_date,tbl_users.phonenumber,tbl_users.last_updated,tbl_student_profiles.intro, tbl_student_profiles.total_experience,ref_countries.country_name,ref_states.state_name,ref_cities.city_name');
+			tbl_users.signup_date,tbl_users.phonenumber,tbl_users.last_updated,tbl_users.gender_id, tbl_student_profiles.intro, tbl_student_profiles.total_experience,ref_countries.country_name,ref_states.state_name,ref_cities.city_name');
             $this->db->from('tbl_users');
             $this->db->join('tbl_student_profiles', 'tbl_users.user_id = tbl_student_profiles.user_id');
             $this->db->join('ref_countries', 'tbl_student_profiles.resident_country_id = ref_countries.country_id','left');
             $this->db->join('ref_states', 'tbl_student_profiles.resident_state_id = ref_states.state_id','left');
             $this->db->join('ref_cities', 'tbl_student_profiles.resident_city_id = ref_cities.city_id','left');
-            $this->db->where('tbl_users.user_id', $user_id);
+            $this->db->where('tbl_student_profiles.student_id', $student_id);
             return $this->db->get()->result();
 	}
 }

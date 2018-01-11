@@ -84,18 +84,7 @@ span {
     float: left;
     margin: 0 15px 0 0;
 }
-.london {
-    background: url("http://placehold.it/50x50") top left no-repeat;
-    background-size: cover;
-}
-.newyork {
-    background: url("http://placehold.it/50x50") top left no-repeat;
-    background-size: cover;
-}
-.paris {
-    background: url("http://placehold.it/50x50") top left no-repeat;
-    background-size: cover;
-}
+
 </style>
 <div class="page">
     <div class="page-header">
@@ -106,6 +95,17 @@ span {
             <li class="breadcrumb-item active">Student details</li>
         </ol>
     </div>
+    <pre>
+        <?php print_r($this->_ci_cached_vars); ?>
+    </pre>
+    <?php
+    $enquiry_flag=0;
+    //assigning enquiry_data
+    if(isset($enquiery_data) && !empty($enquiery_data))
+    {
+        $enquiery_data=$enquiery_data[0];
+    }
+     ?>
     <div class="page-content">
         <div class="panel">
             <div class="panel-body container-fluid">
@@ -113,15 +113,15 @@ span {
                     <div class="row row-lg">
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
                             <h4 class="example-title">Enquiry agent</h4>
-                            <input type="text" name="enquiery_date" readonly="" class="form-control">
+                            <input type="text" name="enquiery_date" value="<?php if(isset($enquiery_data->agent_fname)) { echo $enquiery_data->agent_fname." ".$enquiery_data->agent_lname; } ?>" readonly="" class="form-control">
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
                             <h4 class="example-title">Enquiry date</h4>
-                            <input type="text" name="enquiery_date" readonly="" class="form-control">
+                            <input type="text" name="enquiery_date" value="<?php if(isset($enquiery_data->agent_fname)) { echo date("jS F Y, g:i a", strtotime($enquiery_data->enq_date)); } ?>" readonly="" class="form-control">
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
                             <h4 class="example-title">Source</h4>
-                            <input type="text" name="enquiery_date" readonly="" class="form-control">
+                            <input type="text" name="enquiery_date" value="<?php if(isset($enquiery_data->source_name)) { echo $enquiery_data->source_name; } ?>" readonly="" class="form-control">
                         </div>
                     </div>
                     <div id="integration-list" class="mt-50">

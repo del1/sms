@@ -208,7 +208,7 @@ class Admin extends Del {
 		{
 			$data['details']=$this->ref_universities->get($university_id);
 		}
-		$data['county_list']=$this->ref_county->get_all();
+		$data['county_list']=$this->ref_country->get_all();
 
 		$view = 'admin/masterlist/universities/manage_university_view';
 		echo Modules::run('template/admin_template', $view, $data);	

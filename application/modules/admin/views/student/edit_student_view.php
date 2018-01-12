@@ -13,6 +13,9 @@
     margin-bottom: 0px !important;
     margin-top: 0px !important;
 }
+.select2{
+        width: auto !important;
+}
 
 #integration-list {
     font-family: 'Open Sans', sans-serif;
@@ -105,6 +108,16 @@ span {
     {
         $enquiery_data=$enquiery_data[0];
     }
+
+    if(isset($personal_details) && !empty($personal_details))
+    {
+        $personal_details=$personal_details[0];
+    }
+
+    if(isset($professional_details) && !empty($professional_details))
+    {
+        $professional_details=$professional_details[0];
+    }
      ?>
     <div class="page-content">
         <div class="panel">
@@ -121,7 +134,7 @@ span {
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
                             <h4 class="example-title">Source</h4>
-                            <input type="text" name="enquiery_date" value="<?php if(isset($enquiery_data->source_name)) { echo $enquiery_data->source_name; } ?>" readonly="" class="form-control">
+                            <input  type="text" name="enquiery_date" value="<?php if(isset($enquiery_data->source_name)) { echo $enquiery_data->source_name; } ?>" readonly="" class="form-control">
                         </div>
                     </div>
                     <div id="integration-list" class="mt-50">
@@ -136,54 +149,49 @@ span {
                                 <div class="detail row row-lg">
                                     <div class="col-sm-12 col-md-12 mt-20">
                                         <div class="form-group row ">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">First name</label>
+                                            <label for="first_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">First name</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="first_name" readonly="" type="text" value="<?php if(isset($personal_details->first_name)) { echo $personal_details->first_name; } ?>" name="first_name" class="form-control ">
+
+
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Last name</label>
+                                            <label for="last_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Last name</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="last_name" type="text" readonly="" value="<?php if(isset($personal_details->last_name)) { echo $personal_details->last_name; } ?>" name="last_name" class="form-control ">
                                             </div>
                                         </div>
 
 
                                         <div class="form-group row mt-20">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Email Id</label>
+                                            <label for="email_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Email Id</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="email_id" type="text" readonly="" value="<?php if(isset($personal_details->email_id)) { echo $personal_details->email_id; } ?>"  name="email_id" class="form-control ">
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Gender</label>
+                                            <label for="gender_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Gender</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <select class="form-control">
+                                                <select id="gender_id" name="gender_id" required class="form-control">
                                                     <option hidden="">Select Gender</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
+                                                     <?php foreach ($gender_list as $key => $value) { ?>
+                                                        <option <?php if(isset($personal_details->gender_id) && strlen(trim($personal_details->gender_id)) && $personal_details->gender_id==$value->gender_id) { echo "selected"; } ?> value="<?php echo $value->gender_id ?>"><?php echo $value->gender ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row mt-20">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Phone number</label>
+                                            <label for="phonenumber" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Phone number</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="phonenumber" type="text" readonly="" value="<?php if(isset($personal_details->phonenumber)) { echo $personal_details->phonenumber; } ?>" name="phonenumber" class="form-control ">
                                             </div>
                                         </div>
 
                                         <div class="form-group row mt-20">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Residing State</label>
+                                            <label for="state_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Residing State</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <select class="form-control ">
-                                                    <option hidden="">Select State</option>
-                                                    <option value="1">Hot</option>
-                                                    <option value="2">Cold</option>
-                                                </select>
+                                                <input id="state_name" type="text" readonly="" value="<?php if(isset($personal_details->state_name)) { echo $personal_details->state_name; } ?>"  name="state_name" class="form-control ">
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Residing City</label>
+                                            <label for="city_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Residing City</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <select class="form-control ">
-                                                    <option hidden="">Select City</option>
-                                                    <option value="1">Hot</option>
-                                                    <option value="2">Cold</option>
-                                                </select>
+                                                <input id="city_name" type="text" readonly="" value="<?php if(isset($personal_details->city_name)) { echo $personal_details->city_name; } ?>"  name="city_name" class="form-control ">
                                             </div>
                                         </div>
                                     </div>
@@ -198,149 +206,111 @@ span {
                                 <div class="detail row row-lg">
                                     <div class="col-sm-12 col-md-12 mt-20">
                                         <div class="form-group row">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Intro</label>
+                                            <label for="intro" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Intro</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <textarea id="intro" name="intro" required="" readonly>
+                                                    <?php if(isset($professional_details->intro)) { echo $professional_details->intro; } ?>
+                                                </textarea> 
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Interested Program</label>
+                                            <label for="program_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Interested Program</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <select class="form-control" style="width: 44%">
-                                                    <option hidden="">Select program</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                </select>
+                                                <input id="program_name" type="text" name="program_name" value="<?php if(isset($enquiery_data->program_name)) { echo $enquiery_data->program_name; } ?>" readonly="" class="form-control">
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="form-group row">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate degree</label>
+                                            <label for="UG_degree_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate degree</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="UG_degree" type="text" name="UG_degree_name" class="form-control ">
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate college</label>
+                                            <label for="UG_college_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate college</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <select data-plugin="select2" id="UG_college_id" name="UG_college_id" class="form-control ">
+                                                    <option disabled="" hidden="">Select UG college</option>
+                                                    <?php if(!empty($UG_colleges_list)) { foreach ($UG_colleges_list as $key => $value) { ?>
+                                                        <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
+                                                    <?php } } ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
+                                            <label for="UG_passing_year" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <select data-plugin="select2" id="UG_passing_year" name="UG_passing_year" class="form-control ">
+                                                    <option disabled="" hidden="">Select Passing Year</option>
+                                                    <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate marks(GPA)</label>
+                                            <label for="UG_gpa_marks" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate marks(GPA)</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="UG_gpa_marks" type="number" max="10" min="0" step="0.01" name="UG_gpa_marks" class="form-control ">
                                             </div>
                                         </div><hr>
                                         <div class="form-group row">
                                             <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate degree</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="PG_degree" type="text" name="PG_degree_name" class="form-control ">
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate college</label>
+                                           
+                                            <label for="PG_college" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 " style="text-align: left;">Postgraduate college</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <select id="PG_college" data-plugin="select2" class="form-control" name="PG_college">
+                                                    <option disabled="" hidden="">Select PG college</option>
+                                                    <?php if(!empty($PG_colleges_list)) { foreach ($PG_colleges_list as $key => $value) { ?>
+                                                        <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
+                                                    <?php } } ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
+                                            <label for="PG_passing_year" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <select data-plugin="select2" id="PG_passing_year" name="PG_passing_year" class="form-control ">
+                                                    <option disabled="" hidden="">Select Passing Year</option>
+                                                    <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
+                                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate marks(GPA)</label>
+                                            <label for="PG_gpa_marks" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate marks(GPA)</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="PG_gpa_marks" type="number" max="10" min="0" step="0.01" name="PG_gpa_marks" class="form-control ">
                                             </div>
                                         </div><hr>
                                         <div class="form-group row">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Professional Qualification</label>
+                                            <label for="professional_qualification" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Professional Qualification</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="professional_qualification" type="text"  value="<?php if(isset($professional_details->phonenumber)) { echo $professional_details->phonenumber; } ?>" name="professional_qualification" class="form-control ">
                                             </div>
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Work experience</label>
+                                            <label for="total_experience" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Work experience</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                                <input type="text" name="enquiery_date" class="form-control ">
+                                                <input id="total_experience" type="number" min="0" step="1" name="total_experience" class="form-control ">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Current Employer</label>
+                                            <label for="c_employer_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Current Employer</label>
                                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                                <select class="form-control ">
-                                                    <option hidden="">Yes/No</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
-                                                </select>
+                                                <input id="c_employer_id" type="text" name="c_employer_id" placeholder="Current Employer" class="form-control ">
                                             </div>
 
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-2 col-lg-1" >Previous Employer 1</label>
+                                            <label for="p1_employer_id" class="form-control-label col-md-2 col-sm-2 col-xl-2 col-lg-1" >Previous Employer 1</label>
                                             <div class="col-md-2 col-lg-2 col-sm-4  col-xl-2">
-                                                <input type="text" name="enquiery_date" placeholder="if (yes)" class="form-control ">
+                                                <input id="p1_employer_id" type="text" name="p1_employer_id" placeholder="Previous Employer 1" class="form-control ">
                                             </div>
 
                                             <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Previous Employer 2</label>
                                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Select Enquiry Date" aria-label="Username" aria-describedby="basic-addon1">
-                                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
-                                                </div>
+                                                <input id="p2_employer_id" type="text" name="p2_employer_id" placeholder="Previous Employer 2" class="form-control ">
                                             </div>
                                         </div><hr>
                                         <div class="form-group row">
                                             <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-12">
                                                 <h6>Remarks if any</h6>
-                                                <textarea class="form-control" style="resize: none;"></textarea>
+                                                <textarea class="form-control" required style="resize: none;"><?php if(isset($professional_details->remarks)) { echo $professional_details->remarks; } ?></textarea>
                                             </div>
                                         </div>
-
-                                        <div class="form-group row mt-50" >
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">GMAT taken?</label>
-                                            <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                                <select class="form-control ">
-                                                    <option hidden="">Yes/No</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
-                                                </select>
-                                            </div>
-
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score</label>
-                                            <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                                <input type="text" name="enquiery_date" placeholder="if (yes)" class="form-control ">
-                                            </div>
-
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
-                                            <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Select Enquiry Date" aria-label="Username" aria-describedby="basic-addon1">
-                                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row mt-50">
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">GRE taken?</label>
-                                            <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                                <select class="form-control ">
-                                                    <option hidden="">Yes/No</option>
-                                                    <option value="1">Yes</option>
-                                                    <option value="2">No</option>
-                                                </select>
-                                            </div>
-
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score</label>
-                                            <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                                <input type="text" name="enquiery_date" placeholder="if (yes)" class="form-control ">
-                                            </div>
-
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
-                                            <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Select Enquiry Date" aria-label="Username" aria-describedby="basic-addon1">
-                                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="form-group row mt-20" >
                                             <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6 col-6">
                                                 <button type="button" class="btn btn-success float-right">Save</button>
@@ -359,68 +329,80 @@ span {
                                 </a>
                                 <div class="detail row row-lg">
                                     <div class="col-sm-12 col-md-12 mt-20">
-                                        <div class="form-group row" >
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">GMAT taken?</label>
+
+                                        <div class="form-group row mt-50" id="exam-section">
+                                            <label for="gmat_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 "  style="text-align: left;">GMAT taken?</label>
                                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                                <select class="form-control ">
+                                                <select id="gmat_select" class="form-control trigger" name="gmat" data-target="gmat_tar">
                                                     <option hidden="">Yes/No</option>
                                                     <option value="1">Yes</option>
                                                     <option value="2">No</option>
                                                 </select>
                                             </div>
 
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score</label>
+                                            <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                             <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                                <input type="text" name="enquiery_date" placeholder="if (yes)" class="form-control ">
+                                                <input type="number" disabled="" id="gmat_score" maxlength="2" step="0.01" max="99.99" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
                                             </div>
 
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
+                                            <label for="gmat_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Select Enquiry Date" aria-label="Username" aria-describedby="basic-addon1">
+                                                    <input type="text" disabled="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
                                                     <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row" >
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">GRE taken?</label>
+
+                                        <div class="form-group row mt-50" id="exam-section">
+                                            <label for="gre_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2"  style="text-align: left;">GRE taken?</label>
                                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                                <select class="form-control ">
+                                                <select id="gre_select" name="gre" class="form-control trigger" data-target="gre_tar">
                                                     <option hidden="">Yes/No</option>
                                                     <option value="1">Yes</option>
                                                     <option value="2">No</option>
                                                 </select>
                                             </div>
 
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score</label>
+                                            <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                             <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                                <input type="text" name="enquiery_date" placeholder="if (yes)" class="form-control ">
+                                                <input type="number" disabled="" id="gre_score" maxlength="2" step="0.01" max="99.99" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
                                             </div>
 
-                                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
+                                            <label for="gre_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Select Enquiry Date" aria-label="Username" aria-describedby="basic-addon1">
+                                                    <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" disabled="" placeholder="Select Tenative Date">
                                                     <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
-                                        </div><hr>
-                                        <h5>Packages</h5>
-                                        <div class="form-group row" >
-                                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Sign up date</label>
+                                        </div>
+
+
+                                        <hr>
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6">
+                                                <h5 class="float-left">Packages</h5>
+                                            </div>
+                                            <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6">
+                                                <button type="button" class="btn btn-success float-right mr-30">Add more college</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" id="basic_package">
+                                            <label for="signup_date" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Sign up date</label>
                                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Select Enquiry Date" aria-label="Username" aria-describedby="basic-addon1">
+                                                    <input name="signup_date[]" type="text" class="form-control signup_date" placeholder="Select Enquiry Date" aria-label="signup_date" aria-describedby="basic-addon1">
                                                     <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                                 </div>
                                             </div>
 
                                             <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Package name</label>
                                             <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                                <select class="form-control">
+                                                <select name="package_id[]" class="form-control">
                                                     <option hidden="">Select Package</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
+                                                    
                                                 </select>
                                             </div>
 
@@ -428,11 +410,11 @@ span {
                                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                                 <select class="form-control">
                                                     <option hidden="">Select Consultant</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
+                                                    
                                                 </select>
                                             </div>
                                         </div>
+
 
                                         <div class="form-group row mt-20" style="text-align: right">
                                             <div class="col-md-12 col-lg-12 col-sm-12  col-xl-12 col-12">
@@ -688,5 +670,55 @@ span {
       $expand.text("+");
     }
   });
+
+
+    $("#gmat_tenative_date").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minDate: moment(),
+        locale: {
+            format: 'YYYY-MM-DD'
+        } ,
+    });
+    $("#gre_tenative_date").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        minDate: moment(),
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+
+    $(".signup_date").each(function(index, el) {
+        $(this).daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            locale: {
+                format: 'YYYY-MM-DD'
+            }
+        });
+    });
+
+    
+
+
+    $(document).on('change', '.trigger', function(event) {
+            event.preventDefault();
+            if(this.value=="1"){
+
+                var targetClass=this.dataset.target;
+                var ab=document.getElementsByClassName(targetClass);
+                for (var i = 0; i < ab.length; i++) {
+                    ab[i].removeAttribute('disabled');
+                }
+
+            }else{
+                 var targetClass=this.dataset.target;
+                var ab=document.getElementsByClassName(targetClass);//.removeAttribute('readonly')
+                $(ab).each(function(index, el) {
+                    $(this).attr('disabled',"true");
+                });
+            }
+    });
 });
 </script>

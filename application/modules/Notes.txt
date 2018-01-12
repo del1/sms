@@ -1,0 +1,4 @@
+Notes
+1- Need to create Degrees table which will contain all degrees related to degree_type_id
+then we will save it as degree id ref to this new table
+

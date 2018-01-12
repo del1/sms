@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2018 at 10:54 AM
+-- Generation Time: Jan 12, 2018 at 11:42 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -48516,7 +48516,11 @@ CREATE TABLE `ref_colleges` (
 --
 
 INSERT INTO `ref_colleges` (`college_id`, `college_name`, `university_id`, `added_by`, `last_updated`, `college_type_id`, `is_active`) VALUES
-(1, 'first college', 4, 1, '2017-11-13 11:33:25', 2, 'true');
+(1, 'First PG College', 4, 1, '2018-01-12 11:06:16', 2, 'true'),
+(2, 'First UG College', 5, 1, '2018-01-12 11:05:25', 1, 'true'),
+(3, 'Second UG College', 5, 1, '2018-01-12 11:05:44', 1, 'true'),
+(4, 'Third UG College', 6, 1, '2018-01-12 11:06:00', 1, 'true'),
+(5, 'Second PG College', 6, 1, '2018-01-12 11:06:26', 2, 'true');
 
 -- --------------------------------------------------------
 
@@ -53214,7 +53218,9 @@ CREATE TABLE `ref_universities` (
 --
 
 INSERT INTO `ref_universities` (`university_id`, `university_name`, `country_id`, `added_by`, `last_updated`, `is_active`) VALUES
-(4, 'First University', 99, 1, '2017-12-27 17:10:53', 'true');
+(4, 'First University', 99, 1, '2017-12-27 17:10:53', 'true'),
+(5, 'Second University', 101, 1, '2018-01-12 11:04:51', 'true'),
+(6, 'Third University', 101, 1, '2018-01-12 11:05:00', 'true');
 
 -- --------------------------------------------------------
 
@@ -53322,7 +53328,7 @@ CREATE TABLE `tbl_student_profiles` (
 --
 
 INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_id`, `resident_state_id`, `resident_city_id`, `intro`, `total_experience`, `professional_qualification`, `remarks`, `is_active`) VALUES
-(4, 13, 101, 22, 2763, 'asdasdasd', 0, '', '', 'true'),
+(4, 13, 101, 22, 2763, 'asdasdasd', 0, '', 'asdasd', 'true'),
 (5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, '', '', 'true'),
 (6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, '', '', 'true'),
 (7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', '', 'true');
@@ -53393,7 +53399,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-11 11:27:27', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-12 10:26:20', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', NULL, NULL, 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', NULL, NULL, 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, NULL, '2017-12-27 15:39:52', 'true'),
@@ -53696,7 +53702,7 @@ ALTER TABLE `ref_cities`
 -- AUTO_INCREMENT for table `ref_colleges`
 --
 ALTER TABLE `ref_colleges`
-  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `ref_college_types`
 --
@@ -53781,7 +53787,7 @@ ALTER TABLE `ref_states`
 -- AUTO_INCREMENT for table `ref_universities`
 --
 ALTER TABLE `ref_universities`
-  MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ref_userlevels`
 --

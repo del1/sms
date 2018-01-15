@@ -121,6 +121,23 @@ class Student extends Del {
 		}
 	}
 
+	public function update()
+	{
+		
+		$posted_data=$this->security->xss_clean($this->input->post());
+
+		/*update personal data*/
+		$personal_details = elements(array('gender_id','user_id'), $posted_data);
+		$this->users->update($personal_details['user_id'], array( 'gender_id' => $personal_details['gender_id'] ));
+		/*end update personal data */
+
+		$student_degrees = array('degree_id'=>$posted_data['UG_degree_name'],"college_id"=>'UG_college_id','UG_passing_year','UG_gpa_marks');
+
+
+
+		print_r($posted_data);
+	}
+
 	public function manage_student($student_id='')
 	{
 		if($student_id)
@@ -128,9 +145,24 @@ class Student extends Del {
 			$data['section']='student';
 			$data['enquiery_data']=$student_data=$this->enquries->get_student_enquiries($student_id);
 			$data['gender_list']=$this->ref_gender->select('gender_id,gender')->get_all();
+			$data['package_list']=$this->ref_packages->get_many_by('is_active','true');
+			$data['consultant_list']=$this->users->get_consultants();
 
-			$data['UG_colleges_list']=$this->ref_college->get_collegesOfType(1);
-			$data['PG_colleges_list']=$this->ref_college->get_collegesOfType(2);
+			$data['UG_degree_list']=$this->ref_degree->get_many_by(array('degree_type_id'=>1,'is_active'=>'true'));
+			$data['PG_degree_list']=$this->ref_degree->get_many_by(array('degree_type_id'=>2,'is_active'=>'true'));
+
+			$data['colleges_list']=$this->ref_college->select('college_id,college_name,college_type_id')->get_many_by('is_active',"true");
+
+			$data['apply_college_list']=$this->ref_college->apply_college_list();
+			$data['apply_college_list']=$this->ref_college->apply_college_list();
+			$data['appround_list']=$this->ref_approunds->select('round_id,round_name')->get_many_by('is_active',"true");
+			$data['app_status_list']=$this->ref_application_status->select('app_status_id,app_status')->get_many_by('is_active',"true");
+			$data['interview_status_list']=$this->ref_interview_status->select('intv_status_id,intv_status')->get_many_by('is_active',"true");
+			$data['program_list']=$this->ref_program->select('program_id,program_name')->get_many_by('is_active','true');
+			$data['admit_status_list']=$this->ref_admit_status->select('admit_status_id,admit_status')->get_many_by('is_active','true');
+
+			
+			
 			if(!empty($student_data)) //if enquiry data is avialable
 			{
 				$student_data=$student_data[0];
@@ -138,10 +170,12 @@ class Student extends Del {
 				$data['professional_details']=$this->student_profile->get_professional_detail($student_data->student_id);
 				$data['college_details']=$this->student_to_degrees->get_many_by('student_id',$student_data->student_id);
 				$data['companies_history_history']=$this->student_professional_history->get_companies_history($student_data->student_id);
+
+
 				
 			}
 			$data['page']='Edit student Details';
-			$view = 'admin/student/edit_student_view';
+			$view = 'admin/student/edit_student_view1';
 			echo Modules::run('template/admin_template', $view, $data);	
 		}
 	}

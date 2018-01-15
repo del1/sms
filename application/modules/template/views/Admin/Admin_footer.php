@@ -46,6 +46,10 @@
   <script src="<?php echo base_url('assets/admin/plugins/Section/GridMenu.js');?>"></script>
   <script src="<?php echo base_url('assets/admin/plugins/toastr/toastr.js');?>"></script>
   <script src="<?php echo base_url('assets/admin/plugins/select2/select2.full.min.js');?>"></script>
+
+  <!-- form validation -->
+  <script src="<?php echo base_url('assets/admin/plugins/formvalidation/formValidation.min.js');?>"></script>
+  <script src="<?php echo base_url('assets/admin/plugins/formvalidation/framework/bootstrap4.min.js');?>"></script>
   <!-- Config -->
   <script src="<?php echo base_url('assets/admin/js/config/colors.js');?>"></script>
   <script src="<?php echo base_url('assets/admin/js/config/tour.js');?>"></script>
@@ -61,6 +65,9 @@
   <script src="<?php echo base_url('assets/admin/js/Plugin/toastr.js');?>"></script>
   <script src="<?php echo base_url('assets/admin/js/Plugin/formatter.js');?>"></script>
   <script src="<?php echo base_url('assets/admin/js/Plugin/bootstrap-datepicker.js');?>"></script>
+  <script src="<?php echo base_url('assets/admin/examples/js/forms/validation.js');?>"></script>
+
+
   <script>
   (function(document, window, $) {
     'use strict';

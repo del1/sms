@@ -20,5 +20,13 @@ class Ref_colleges_model extends MY_Model
 			->get_where('ref_colleges',array('ref_colleges.college_type_id'=>$typeId))->result();
 	}
 
+	public function apply_college_list()
+	{
+		return $this->db->select('ref_colleges.college_id,ref_colleges.college_name')
+			->join('ref_universities','ref_colleges.university_id = ref_universities.university_id')
+			->join('ref_countries','ref_universities.country_id = ref_countries.country_id')
+			->get_where('ref_colleges',array('ref_countries.country_code!='=>'IN',"ref_colleges.is_active"=>"true"))->result();
+	}
+
 	
 }

@@ -31,6 +31,11 @@ class Del extends MX_Controller
         $this->load->model('db/ref/Ref_states_model','ref_states');
         $this->load->model('db/ref/Ref_city_model','ref_city');
         $this->load->model('db/ref/Ref_gender_model','ref_gender');
+        $this->load->model('db/ref/Ref_application_status_model','ref_application_status');
+        $this->load->model('db/ref/Ref_interview_status_model','ref_interview_status');
+        $this->load->model('db/ref/Ref_admit_status_model','ref_admit_status');
+        
+        
 		
 
 

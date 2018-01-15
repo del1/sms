@@ -39,6 +39,10 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/datatables.net-buttons-bs4/dataTables.buttons.bootstrap4.css');?>">
    <link rel="stylesheet" href="<?php echo base_url('assets/admin/examples/css/forms/masks.css');?>">
 
+   <!-- form validation css -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/formvalidation/formValidation.min.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/admin/examples/css/forms/validation.css');?>">
+
 
   <!-- Fonts -->
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/fonts/web-icons/web-icons.min.css'); ?>">

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2018 at 11:42 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Jan 15, 2018 at 08:40 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -38,9 +38,9 @@ CREATE TABLE `lnk_student_to_applied_colleges` (
   `intv_status_id` int(11) NOT NULL,
   `applied_program_id` int(11) NOT NULL,
   `admit_status_id` int(11) NOT NULL,
-  `is_scholarship_awarded` enum('1','0') NOT NULL DEFAULT '0',
+  `is_scholarship_awarded` enum('true','false') NOT NULL DEFAULT 'false',
   `scholarship_amount` float NOT NULL,
-  `is_joined` enum('1','0') NOT NULL DEFAULT '0',
+  `is_joined` enum('true','false') NOT NULL DEFAULT 'false',
   `joining_year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -107,6 +107,15 @@ CREATE TABLE `ref_admit_status` (
   `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ref_admit_status`
+--
+
+INSERT INTO `ref_admit_status` (`admit_status_id`, `admit_status`, `is_active`) VALUES
+(1, 'Admitted', 'true'),
+(2, 'Rejected', 'true'),
+(3, 'On hold', 'true');
+
 -- --------------------------------------------------------
 
 --
@@ -131,14 +140,22 @@ INSERT INTO `ref_application_rounds` (`round_id`, `round_name`, `added_by`, `las
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ref_application_status_id`
+-- Table structure for table `ref_application_status`
 --
 
-CREATE TABLE `ref_application_status_id` (
+CREATE TABLE `ref_application_status` (
   `app_status_id` int(11) NOT NULL,
   `app_status` varchar(128) NOT NULL,
   `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_application_status`
+--
+
+INSERT INTO `ref_application_status` (`app_status_id`, `app_status`, `is_active`) VALUES
+(1, 'app_status1', 'true'),
+(2, 'app_status2', 'true');
 
 -- --------------------------------------------------------
 
@@ -48832,7 +48849,9 @@ INSERT INTO `ref_degrees` (`degree_id`, `degree_name`, `added_by`, `last_updated
 (1, 'Bachelor of Arts (BA)', 1, '2017-12-28 16:42:03', 1, 'true'),
 (2, 'Bachelor of Science (B.Sc)', 1, '2017-12-28 16:42:12', 1, 'true'),
 (3, 'Bachelor of Commerce (B.Com)', 1, '2017-12-28 16:42:24', 1, 'true'),
-(4, 'Bachelor of Engineering/Technology (BE/B.Tech)', 1, '2017-12-28 16:42:33', 1, 'true');
+(4, 'Bachelor of Engineering/Technology (BE/B.Tech)', 1, '2017-12-28 16:42:33', 1, 'true'),
+(5, 'Masters of computer science', 1, '2018-01-13 22:31:31', 2, 'true'),
+(6, 'Masters of computer application', 1, '2018-01-13 22:31:43', 2, 'true');
 
 -- --------------------------------------------------------
 
@@ -48942,8 +48961,16 @@ INSERT INTO `ref_genders` (`gender_id`, `gender`, `is_active`) VALUES
 CREATE TABLE `ref_interview_status` (
   `intv_status_id` int(11) NOT NULL,
   `intv_status` varchar(128) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_interview_status`
+--
+
+INSERT INTO `ref_interview_status` (`intv_status_id`, `intv_status`, `is_active`) VALUES
+(1, 'intv_status_1', 'true'),
+(2, 'intv_status_2', 'true');
 
 -- --------------------------------------------------------
 
@@ -48978,6 +49005,15 @@ CREATE TABLE `ref_packages` (
   `last_updated` datetime NOT NULL,
   `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_packages`
+--
+
+INSERT INTO `ref_packages` (`package_id`, `package_name`, `added_by`, `last_updated`, `is_active`) VALUES
+(1, 'Package1', 1, '2018-01-13 11:06:53', 'true'),
+(2, 'Package2', 1, '2018-01-13 11:07:00', 'true'),
+(3, 'Package3', 1, '2018-01-13 11:07:08', 'true');
 
 -- --------------------------------------------------------
 
@@ -53342,7 +53378,7 @@ INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_i
 CREATE TABLE `tbl_student_to_degrees` (
   `sd_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
-  `degree_type_id` int(11) NOT NULL,
+  `degree_id` int(11) NOT NULL,
   `college_id` int(11) NOT NULL,
   `passing_year` year(4) NOT NULL,
   `gpa_marks` float NOT NULL
@@ -53399,11 +53435,11 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-12 10:26:20', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-15 19:46:20', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', NULL, NULL, 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', NULL, NULL, 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, NULL, '2017-12-27 15:39:52', 'true'),
-(13, NULL, 'mahesh', '0', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, NULL, NULL, '2017-12-29 16:24:59', 'true'),
+(13, NULL, 'mahesh', '0', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, 1, NULL, '2017-12-29 16:24:59', 'true'),
 (14, NULL, 'saurabh', 'shelot', 'saurabh@connexistech.com', NULL, '2017-12-29 16:30:29', 1, '9090909090', 3, NULL, NULL, '2017-12-29 16:30:29', 'true'),
 (15, NULL, 'ankush', 'pawar', 'ankush.pawar@connexistech.com', NULL, '2017-12-29 16:42:58', 1, '9021654123', 3, NULL, NULL, '2017-12-29 16:42:58', 'true'),
 (16, NULL, 'shaym', 'bihari', 'shayam.bihari@connexistech.com', NULL, '2017-12-29 16:45:10', 1, '4512361245', 3, NULL, NULL, '2017-12-29 16:45:10', 'true');
@@ -53456,9 +53492,9 @@ ALTER TABLE `ref_application_rounds`
   ADD KEY `added_by` (`added_by`);
 
 --
--- Indexes for table `ref_application_status_id`
+-- Indexes for table `ref_application_status`
 --
-ALTER TABLE `ref_application_status_id`
+ALTER TABLE `ref_application_status`
   ADD PRIMARY KEY (`app_status_id`);
 
 --
@@ -53639,7 +53675,7 @@ ALTER TABLE `tbl_student_profiles`
 ALTER TABLE `tbl_student_to_degrees`
   ADD PRIMARY KEY (`sd_id`),
   ADD KEY `student_id` (`student_id`),
-  ADD KEY `degree_type_id` (`degree_type_id`),
+  ADD KEY `degree_type_id` (`degree_id`),
   ADD KEY `college_id` (`college_id`);
 
 --
@@ -53668,166 +53704,199 @@ ALTER TABLE `tbl_users`
 --
 ALTER TABLE `lnk_student_to_applied_colleges`
   MODIFY `stac_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `lnk_student_to_packages`
 --
 ALTER TABLE `lnk_student_to_packages`
   MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `lnk_user_to_permission`
 --
 ALTER TABLE `lnk_user_to_permission`
   MODIFY `utp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
 --
 -- AUTO_INCREMENT for table `ref_admit_status`
 --
 ALTER TABLE `ref_admit_status`
-  MODIFY `admit_status_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admit_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `ref_application_rounds`
 --
 ALTER TABLE `ref_application_rounds`
   MODIFY `round_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `ref_application_status_id`
+-- AUTO_INCREMENT for table `ref_application_status`
 --
-ALTER TABLE `ref_application_status_id`
-  MODIFY `app_status_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `ref_application_status`
+  MODIFY `app_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_cities`
 --
 ALTER TABLE `ref_cities`
   MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48315;
+
 --
 -- AUTO_INCREMENT for table `ref_colleges`
 --
 ALTER TABLE `ref_colleges`
   MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `ref_college_types`
 --
 ALTER TABLE `ref_college_types`
   MODIFY `college_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_countries`
 --
 ALTER TABLE `ref_countries`
   MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
+
 --
 -- AUTO_INCREMENT for table `ref_degrees`
 --
 ALTER TABLE `ref_degrees`
-  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `ref_degree_types`
 --
 ALTER TABLE `ref_degree_types`
   MODIFY `degree_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_employer`
 --
 ALTER TABLE `ref_employer`
   MODIFY `employer_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `ref_enquiry_status`
 --
 ALTER TABLE `ref_enquiry_status`
   MODIFY `enq_status_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `ref_exam_types`
 --
 ALTER TABLE `ref_exam_types`
   MODIFY `exam_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_followup_status`
 --
 ALTER TABLE `ref_followup_status`
   MODIFY `followup_status_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `ref_genders`
 --
 ALTER TABLE `ref_genders`
   MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_interview_status`
 --
 ALTER TABLE `ref_interview_status`
-  MODIFY `intv_status_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `intv_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_lead_types`
 --
 ALTER TABLE `ref_lead_types`
   MODIFY `lead_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `ref_packages`
 --
 ALTER TABLE `ref_packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `ref_permissions`
 --
 ALTER TABLE `ref_permissions`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `ref_programs`
 --
 ALTER TABLE `ref_programs`
   MODIFY `program_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `ref_sources`
 --
 ALTER TABLE `ref_sources`
   MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `ref_states`
 --
 ALTER TABLE `ref_states`
   MODIFY `state_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4121;
+
 --
 -- AUTO_INCREMENT for table `ref_universities`
 --
 ALTER TABLE `ref_universities`
   MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `ref_userlevels`
 --
 ALTER TABLE `ref_userlevels`
   MODIFY `userlevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `tbl_enquiries`
 --
 ALTER TABLE `tbl_enquiries`
   MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tbl_student_followups`
 --
 ALTER TABLE `tbl_student_followups`
   MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
 ALTER TABLE `tbl_student_professional_history`
   MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
 ALTER TABLE `tbl_student_profiles`
   MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
 ALTER TABLE `tbl_student_to_degrees`
   MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_student_to_taken_exams`
 --
 ALTER TABLE `tbl_student_to_taken_exams`
   MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- Constraints for dumped tables
 --
@@ -53839,7 +53908,7 @@ ALTER TABLE `lnk_student_to_applied_colleges`
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_2` FOREIGN KEY (`college_id`) REFERENCES `ref_colleges` (`college_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_3` FOREIGN KEY (`round_id`) REFERENCES `ref_application_rounds` (`round_id`),
-  ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_4` FOREIGN KEY (`app_status_id`) REFERENCES `ref_application_status_id` (`app_status_id`),
+  ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_4` FOREIGN KEY (`app_status_id`) REFERENCES `ref_application_status` (`app_status_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_5` FOREIGN KEY (`intv_status_id`) REFERENCES `ref_interview_status` (`intv_status_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_6` FOREIGN KEY (`applied_program_id`) REFERENCES `ref_programs` (`program_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_7` FOREIGN KEY (`admit_status_id`) REFERENCES `ref_admit_status` (`admit_status_id`);
@@ -53963,7 +54032,7 @@ ALTER TABLE `tbl_student_profiles`
 --
 ALTER TABLE `tbl_student_to_degrees`
   ADD CONSTRAINT `tbl_student_to_degrees_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`),
-  ADD CONSTRAINT `tbl_student_to_degrees_ibfk_2` FOREIGN KEY (`degree_type_id`) REFERENCES `ref_degree_types` (`degree_type_id`),
+  ADD CONSTRAINT `tbl_student_to_degrees_ibfk_2` FOREIGN KEY (`degree_id`) REFERENCES `ref_degrees` (`degree_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_student_to_degrees_ibfk_3` FOREIGN KEY (`college_id`) REFERENCES `ref_colleges` (`college_id`);
 
 --

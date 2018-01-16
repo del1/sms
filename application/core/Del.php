@@ -14,6 +14,9 @@ class Del extends MX_Controller
 		$this->load->helper(array('url','html','form'));		
 
 		$this->load->model('db/lnk/Lnk_user_to_permission_model','lnk_user_to_permission');
+		$this->load->model('db/lnk/Lnk_student_to_packages_model','lnk_student_to_packages');
+		$this->load->model('db/lnk/Lnk_student_to_applied_colleges_model','lnk_student_to_applied_colleges');
+		
 
 
 		$this->load->model('db/ref/Ref_universities_model','ref_universities');
@@ -34,6 +37,8 @@ class Del extends MX_Controller
         $this->load->model('db/ref/Ref_application_status_model','ref_application_status');
         $this->load->model('db/ref/Ref_interview_status_model','ref_interview_status');
         $this->load->model('db/ref/Ref_admit_status_model','ref_admit_status');
+        $this->load->model('db/ref/Ref_employer_model','ref_employer');
+        
         
         
 		

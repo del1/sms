@@ -186,7 +186,7 @@ hr{
                                             <label for="gender_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Gender</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select id="gender_id" name="gender_id" required class="form-control">
-                                                    <option hidden="">Select Gender</option>
+                                                    <option hidden="" values="0">Select Gender</option>
                                                      <?php foreach ($gender_list as $key => $value) { ?>
                                                         <option <?php if(isset($personal_details->gender_id) && strlen(trim($personal_details->gender_id)) && $personal_details->gender_id==$value->gender_id) { echo "selected"; } ?> value="<?php echo $value->gender_id ?>"><?php echo $value->gender ?></option>
                                                     <?php } ?>
@@ -237,7 +237,7 @@ hr{
                                             <label for="UG_degree_name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate degree</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select data-plugin="select2" id="UG_degree" name="UG_degree_name" class="form-control ">
-                                                    <option  hidden="">Select UG college</option>
+                                                    <option  hidden="" values="0">Select UG college</option>
                                                     <?php if(!empty($UG_degree_list)) { foreach ($UG_degree_list as $key => $value) { ?>
                                                         <option value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
                                                     <?php } } ?>
@@ -246,7 +246,7 @@ hr{
                                             <label for="UG_college_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate college</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select data-plugin="select2" id="UG_college_id" name="UG_college_id" class="form-control ">
-                                                    <option  hidden="">Select UG college</option>
+                                                    <option  hidden="" values="0">Select UG college</option>
                                                     <?php if(!empty($UG_colleges_list)) { foreach ($UG_colleges_list as $key => $value) { ?>
                                                         <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                                     <?php } } ?>
@@ -257,7 +257,7 @@ hr{
                                             <label for="UG_passing_year" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select data-plugin="select2" id="UG_passing_year" name="UG_passing_year" class="form-control ">
-                                                    <option  hidden="">Select Passing Year</option>
+                                                    <option  hidden="" values="0">Select Passing Year</option>
                                                     <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
                                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                                     <?php } ?>
@@ -272,7 +272,7 @@ hr{
                                             <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate degree</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select data-plugin="select2" id="PG_degree" name="PG_degree_name" class="form-control ">
-                                                    <option  hidden="">Select PG college</option>
+                                                    <option  hidden="" values="0">Select PG college</option>
                                                     <?php if(!empty($PG_degree_list)) { foreach ($PG_degree_list as $key => $value) { ?>
                                                         <option value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
                                                     <?php } } ?>
@@ -282,7 +282,7 @@ hr{
                                             <label for="PG_college" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 " style="text-align: left;">Postgraduate college</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select id="PG_college" data-plugin="select2" class="form-control" name="PG_college">
-                                                    <option  hidden="">Select PG college</option>
+                                                    <option  hidden="" values="0">Select PG college</option>
                                                     <?php if(!empty($PG_colleges_list)) { foreach ($PG_colleges_list as $key => $value) { ?>
                                                         <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                                     <?php } } ?>
@@ -293,7 +293,7 @@ hr{
                                             <label for="PG_passing_year" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
                                             <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                                 <select data-plugin="select2" id="PG_passing_year" name="PG_passing_year" class="form-control ">
-                                                    <option  hidden="">Select Passing Year</option>
+                                                    <option  hidden="" values="0">Select Passing Year</option>
                                                     <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
                                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                                     <?php } ?>
@@ -359,7 +359,7 @@ hr{
                                             <label for="gmat_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 "  style="text-align: left;">GMAT taken?</label>
                                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                                 <select id="gmat_select" class="form-control trigger" name="gmat" data-target="gmat_tar">
-                                                    <option hidden="">Yes/No</option>
+                                                    <option hidden="" values="0">Yes/No</option>
                                                     <option value="1">Yes</option>
                                                     <option value="2">No</option>
                                                 </select>
@@ -383,7 +383,7 @@ hr{
                                             <label for="gre_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2"  style="text-align: left;">GRE taken?</label>
                                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                                 <select id="gre_select" name="gre" class="form-control trigger" data-target="gre_tar">
-                                                    <option hidden="">Yes/No</option>
+                                                    <option hidden="" values="0">Yes/No</option>
                                                     <option value="1">Yes</option>
                                                     <option value="2">No</option>
                                                 </select>
@@ -426,7 +426,7 @@ hr{
                                             <label for="package_id" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Package name</label>
                                             <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                                 <select data-plugin="select2" name="package_id[]" class="form-control">
-                                                    <option hidden="">Select Package</option>
+                                                    <option hidden="" values="0">Select Package</option>
                                                     <?php foreach ($package_list as $key => $value) { ?>
                                                         <option value="<?php echo $value->package_id; ?>"><?php echo $value->package_name; ?></option>
                                                     <?php } ?>
@@ -436,7 +436,7 @@ hr{
                                             <label for="consultant_id" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Consultant Assigned</label>
                                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                                 <select name="consultant_id[]" class="form-control">
-                                                    <option hidden="">Select Consultant</option>
+                                                    <option hidden="" values="0">Select Consultant</option>
                                                     <?php foreach ($consultant_list as $key => $value) { ?>
                                                         <option value="<?php echo $value->user_id; ?>"><?php echo $value->user_name; ?></option>
                                                     <?php } ?>
@@ -472,7 +472,7 @@ hr{
                                 <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select data-plugin="select2" id="college_id" name="college_id[]" class="form-control ">
-                                        <option  hidden="">Select Applied college</option>
+                                        <option  hidden="" values="0">Select Applied college</option>
                                         <?php if(!empty($apply_college_list)) { foreach ($apply_college_list as $key => $value) { ?>
                                             <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                         <?php } } ?>
@@ -482,7 +482,7 @@ hr{
                                 <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                     <select data-plugin="select2" name="intake_year[]" class="form-control ">
-                                        <option  hidden="">Select Intake year</option>
+                                        <option  hidden="" values="0">Select Intake year</option>
                                         <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
                                         <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                         <?php } ?>
@@ -492,7 +492,7 @@ hr{
                                 <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Application round</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <select data-plugin="select2" id="college_id" name="round_id[]" class="form-control ">
-                                        <option  hidden="">Select Application round</option>
+                                        <option  hidden="" values="0">Select Application round</option>
                                         <?php if(!empty($appround_list)) { foreach ($appround_list as $key => $value) { ?>
                                             <option value="<?php echo $value->round_id;?>"><?php echo $value->round_name ;?></option>
                                         <?php } } ?>
@@ -503,7 +503,7 @@ hr{
                                 <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Application status</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select data-plugin="select2" name="app_status_id[]" class="form-control ">
-                                        <option  hidden="">Select Application Status</option>
+                                        <option  hidden="" values="0">Select Application Status</option>
                                         <?php if(!empty($app_status_list)) { foreach ($app_status_list as $key => $value) { ?>
                                             <option value="<?php echo $value->app_status_id;?>"><?php echo $value->app_status;?></option>
                                         <?php } } ?>
@@ -513,7 +513,7 @@ hr{
                                 <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Interview status</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                     <select data-plugin="select2" name="intv_status_id[]" class="form-control ">
-                                        <option  hidden="">Select Interview Status</option>
+                                        <option  hidden="" values="0">Select Interview Status</option>
                                         <?php if(!empty($interview_status_list)) { foreach ($interview_status_list as $key => $value) { ?>
                                             <option value="<?php echo $value->intv_status_id;?>"><?php echo $value->intv_status;?></option>
                                         <?php } } ?>
@@ -523,7 +523,7 @@ hr{
                                 <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Applied program</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <select data-plugin="select2" name="applied_program_id[]" class="form-control ">
-                                        <option  hidden="">Select Applied program</option>
+                                        <option  hidden="" values="0">Select Applied program</option>
                                         <?php if(!empty($program_list)) { foreach ($program_list as $key => $value) { ?>
                                             <option value="<?php echo $value->program_id;?>"><?php echo $value->program_name;?></option>
                                         <?php } } ?>
@@ -534,7 +534,7 @@ hr{
                                 <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select name="admit_status_id[]" class="form-control admit_status_id">
-                                        <option  hidden="">Select Applied program</option>
+                                        <option  hidden="" values="0">Select Applied program</option>
                                         <?php if(!empty($admit_status_list)) { foreach ($admit_status_list as $key => $value) { ?>
                                             <option value="<?php echo $value->admit_status_id;?>"><?php echo $value->admit_status;?></option>
                                         <?php } } ?>
@@ -580,7 +580,7 @@ hr{
                             <label for="joining_year" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Joining year</label>
                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                 <select data-plugin="select2" id="joining_year" name="joining_year" class="form-control ">
-                                    <option  hidden="">Select Passing Year</option>
+                                    <option  hidden="" values="0">Select Passing Year</option>
                                     <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                     <?php } ?>
@@ -672,7 +672,7 @@ hr{
     <label for="package_id" class="form-control-label col-md-1 col-sm-4 col-xl-1 col-lg-1" >Package name</label>
     <div class="col-md-2 col-lg-2 col-sm-3  col-xl-2">
         <select name="package_id[]" class="form-control package_id">
-            <option  hidden="">Select Package</option>
+            <option  hidden="" values="0">Select Package</option>
             <?php foreach ($package_list as $key => $value) { ?>
                 <option value="<?php echo $value->package_id; ?>"><?php echo $value->package_name; ?></option>
             <?php } ?>
@@ -682,7 +682,7 @@ hr{
     <label for="consultant_id" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Consultant Assigned</label>
     <div class="col-md-2 col-lg-2 col-sm-5  col-xl-2">
         <select name="consultant_id[]" class="form-control">
-            <option hidden="">Select Consultant</option>
+            <option hidden="" values="0">Select Consultant</option>
             <?php foreach ($consultant_list as $key => $value) { ?>
                 <option value="<?php echo $value->user_id; ?>"><?php echo $value->user_name; ?></option>
             <?php } ?>
@@ -703,7 +703,7 @@ hr{
         <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="college_id[]" class="form-control college_id">
-                <option  hidden="">Select Applied college</option>
+                <option  hidden="" values="0">Select Applied college</option>
                 <?php if(!empty($apply_college_list)) { foreach ($apply_college_list as $key => $value) { ?>
                     <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                 <?php } } ?>
@@ -713,7 +713,7 @@ hr{
         <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="intake_year[]" class="form-control intake_year">
-                <option  hidden="">Select Intake year</option>
+                <option  hidden="" values="0">Select Intake year</option>
                 <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                 <?php } ?>
@@ -723,7 +723,7 @@ hr{
         <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Application round</label>
         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
             <select name="round_id[]" class="form-control round_id">
-                <option  hidden="">Select Application round</option>
+                <option  hidden="" values="0">Select Application round</option>
                 <?php if(!empty($appround_list)) { foreach ($appround_list as $key => $value) { ?>
                     <option value="<?php echo $value->round_id;?>"><?php echo $value->round_name ;?></option>
                 <?php } } ?>
@@ -734,7 +734,7 @@ hr{
         <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Application status</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="app_status_id[]" class="form-control app_status_id">
-                <option  hidden="">Select Application Status</option>
+                <option  hidden="" values="0">Select Application Status</option>
                 <?php if(!empty($app_status_list)) { foreach ($app_status_list as $key => $value) { ?>
                     <option value="<?php echo $value->app_status_id;?>"><?php echo $value->app_status;?></option>
                 <?php } } ?>
@@ -744,7 +744,7 @@ hr{
         <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Interview status</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="intv_status_id[]" class="form-control intv_status_id">
-                <option  hidden="">Select Interview Status</option>
+                <option  hidden="" values="0">Select Interview Status</option>
                 <?php if(!empty($interview_status_list)) { foreach ($interview_status_list as $key => $value) { ?>
                     <option value="<?php echo $value->intv_status_id;?>"><?php echo $value->intv_status;?></option>
                 <?php } } ?>
@@ -754,7 +754,7 @@ hr{
         <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Applied program</label>
         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
             <select name="applied_program_id[]" class="form-control applied_program_id">
-                <option  hidden="">Select Applied program</option>
+                <option  hidden="" values="0">Select Applied program</option>
                 <?php if(!empty($program_list)) { foreach ($program_list as $key => $value) { ?>
                     <option value="<?php echo $value->program_id;?>"><?php echo $value->program_name;?></option>
                 <?php } } ?>
@@ -765,7 +765,7 @@ hr{
         <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="admit_status_id[]" class="form-control admit_status_id">
-                <option  hidden="">Select Applied program</option>
+                <option  hidden="" values="0">Select Applied program</option>
                 <?php if(!empty($admit_status_list)) { foreach ($admit_status_list as $key => $value) { ?>
                     <option value="<?php echo $value->admit_status_id;?>"><?php echo $value->admit_status;?></option>
                 <?php } } ?>

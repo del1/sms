@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2018 at 08:40 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 5.6.32
+-- Generation Time: Jan 16, 2018 at 03:49 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,10 +39,17 @@ CREATE TABLE `lnk_student_to_applied_colleges` (
   `applied_program_id` int(11) NOT NULL,
   `admit_status_id` int(11) NOT NULL,
   `is_scholarship_awarded` enum('true','false') NOT NULL DEFAULT 'false',
-  `scholarship_amount` float NOT NULL,
+  `scholarship_amount` decimal(18,2) NOT NULL,
   `is_joined` enum('true','false') NOT NULL DEFAULT 'false',
   `joining_year` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lnk_student_to_applied_colleges`
+--
+
+INSERT INTO `lnk_student_to_applied_colleges` (`stac_id`, `student_id`, `college_id`, `intake_year`, `round_id`, `app_status_id`, `intv_status_id`, `applied_program_id`, `admit_status_id`, `is_scholarship_awarded`, `scholarship_amount`, `is_joined`, `joining_year`) VALUES
+(2, 4, 1, 2018, 1, 1, 1, 3, 1, 'true', '7000.00', 'false', 0000);
 
 -- --------------------------------------------------------
 
@@ -57,6 +64,13 @@ CREATE TABLE `lnk_student_to_packages` (
   `signup_date` datetime NOT NULL,
   `consultant_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `lnk_student_to_packages`
+--
+
+INSERT INTO `lnk_student_to_packages` (`stp_id`, `package_id`, `student_id`, `signup_date`, `consultant_id`) VALUES
+(8, 2, 4, '2018-01-16 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +149,8 @@ CREATE TABLE `ref_application_rounds` (
 --
 
 INSERT INTO `ref_application_rounds` (`round_id`, `round_name`, `added_by`, `last_updated`, `is_active`) VALUES
-(1, 'round1', 1, '2017-11-13 01:28:36', 'true');
+(1, 'round1', 1, '2017-11-13 01:28:36', 'true'),
+(2, 'Round2', 1, '2018-01-16 18:11:21', 'true');
 
 -- --------------------------------------------------------
 
@@ -48885,8 +48900,18 @@ CREATE TABLE `ref_employer` (
   `employer_name` varchar(128) NOT NULL,
   `added_by` int(11) NOT NULL,
   `last_updated` datetime NOT NULL,
-  `is_active` enum('1','0') NOT NULL DEFAULT '1'
+  `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_employer`
+--
+
+INSERT INTO `ref_employer` (`employer_id`, `employer_name`, `added_by`, `last_updated`, `is_active`) VALUES
+(1, 'Emp1', 1, '2018-01-09 00:00:00', 'true'),
+(2, 'Emp2', 1, '2018-01-11 00:00:00', 'true'),
+(3, 'Emp3', 1, '2018-01-11 00:00:00', 'true'),
+(4, 'Emp4', 1, '2018-01-18 00:00:00', 'true');
 
 -- --------------------------------------------------------
 
@@ -53334,9 +53359,9 @@ CREATE TABLE `tbl_student_professional_history` (
   `history_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `employer_id` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `description` text NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `description` text,
   `is_current` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -53364,7 +53389,7 @@ CREATE TABLE `tbl_student_profiles` (
 --
 
 INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_id`, `resident_state_id`, `resident_city_id`, `intro`, `total_experience`, `professional_qualification`, `remarks`, `is_active`) VALUES
-(4, 13, 101, 22, 2763, 'asdasdasd', 0, '', 'asdasd', 'true'),
+(4, 13, 101, 22, 2763, 'asdasdasd', 4, 'PHP Developer', 'asdasd', 'true'),
 (5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, '', '', 'true'),
 (6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, '', '', 'true'),
 (7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', '', 'true');
@@ -53383,6 +53408,13 @@ CREATE TABLE `tbl_student_to_degrees` (
   `passing_year` year(4) NOT NULL,
   `gpa_marks` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_student_to_degrees`
+--
+
+INSERT INTO `tbl_student_to_degrees` (`sd_id`, `student_id`, `degree_id`, `college_id`, `passing_year`, `gpa_marks`) VALUES
+(53, 4, 2, 3, 2011, 6.48);
 
 -- --------------------------------------------------------
 
@@ -53405,7 +53437,9 @@ CREATE TABLE `tbl_student_to_taken_exams` (
 INSERT INTO `tbl_student_to_taken_exams` (`et_id`, `exam_type_id`, `score`, `tentative_date`, `student_id`) VALUES
 (1, 1, '74.47', '2019-12-19', 6),
 (2, 1, '74.45', '2019-12-13', 7),
-(3, 2, '39.40', '2017-12-29', 7);
+(3, 2, '39.40', '2017-12-29', 7),
+(4, 1, '312.00', '2016-08-24', 4),
+(5, 2, '318.00', '2017-10-25', 4);
 
 -- --------------------------------------------------------
 
@@ -53435,11 +53469,11 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-15 19:46:20', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-16 08:56:37', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', NULL, NULL, 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', NULL, NULL, 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, NULL, '2017-12-27 15:39:52', 'true'),
-(13, NULL, 'mahesh', '0', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, 1, NULL, '2017-12-29 16:24:59', 'true'),
+(13, NULL, 'mahesh', '0', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, 2, NULL, '2017-12-29 16:24:59', 'true'),
 (14, NULL, 'saurabh', 'shelot', 'saurabh@connexistech.com', NULL, '2017-12-29 16:30:29', 1, '9090909090', 3, NULL, NULL, '2017-12-29 16:30:29', 'true'),
 (15, NULL, 'ankush', 'pawar', 'ankush.pawar@connexistech.com', NULL, '2017-12-29 16:42:58', 1, '9021654123', 3, NULL, NULL, '2017-12-29 16:42:58', 'true'),
 (16, NULL, 'shaym', 'bihari', 'shayam.bihari@connexistech.com', NULL, '2017-12-29 16:45:10', 1, '4512361245', 3, NULL, NULL, '2017-12-29 16:45:10', 'true');
@@ -53703,200 +53737,167 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `lnk_student_to_applied_colleges`
 --
 ALTER TABLE `lnk_student_to_applied_colleges`
-  MODIFY `stac_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `stac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `lnk_student_to_packages`
 --
 ALTER TABLE `lnk_student_to_packages`
-  MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `lnk_user_to_permission`
 --
 ALTER TABLE `lnk_user_to_permission`
   MODIFY `utp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
-
 --
 -- AUTO_INCREMENT for table `ref_admit_status`
 --
 ALTER TABLE `ref_admit_status`
   MODIFY `admit_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `ref_application_rounds`
 --
 ALTER TABLE `ref_application_rounds`
-  MODIFY `round_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `round_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ref_application_status`
 --
 ALTER TABLE `ref_application_status`
   MODIFY `app_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_cities`
 --
 ALTER TABLE `ref_cities`
   MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48315;
-
 --
 -- AUTO_INCREMENT for table `ref_colleges`
 --
 ALTER TABLE `ref_colleges`
   MODIFY `college_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `ref_college_types`
 --
 ALTER TABLE `ref_college_types`
   MODIFY `college_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_countries`
 --
 ALTER TABLE `ref_countries`
   MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
-
 --
 -- AUTO_INCREMENT for table `ref_degrees`
 --
 ALTER TABLE `ref_degrees`
   MODIFY `degree_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `ref_degree_types`
 --
 ALTER TABLE `ref_degree_types`
   MODIFY `degree_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_employer`
 --
 ALTER TABLE `ref_employer`
-  MODIFY `employer_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `employer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `ref_enquiry_status`
 --
 ALTER TABLE `ref_enquiry_status`
   MODIFY `enq_status_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `ref_exam_types`
 --
 ALTER TABLE `ref_exam_types`
   MODIFY `exam_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_followup_status`
 --
 ALTER TABLE `ref_followup_status`
   MODIFY `followup_status_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `ref_genders`
 --
 ALTER TABLE `ref_genders`
   MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_interview_status`
 --
 ALTER TABLE `ref_interview_status`
   MODIFY `intv_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_lead_types`
 --
 ALTER TABLE `ref_lead_types`
   MODIFY `lead_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `ref_packages`
 --
 ALTER TABLE `ref_packages`
   MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `ref_permissions`
 --
 ALTER TABLE `ref_permissions`
   MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT for table `ref_programs`
 --
 ALTER TABLE `ref_programs`
   MODIFY `program_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `ref_sources`
 --
 ALTER TABLE `ref_sources`
   MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `ref_states`
 --
 ALTER TABLE `ref_states`
   MODIFY `state_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4121;
-
 --
 -- AUTO_INCREMENT for table `ref_universities`
 --
 ALTER TABLE `ref_universities`
   MODIFY `university_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `ref_userlevels`
 --
 ALTER TABLE `ref_userlevels`
   MODIFY `userlevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `tbl_enquiries`
 --
 ALTER TABLE `tbl_enquiries`
   MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tbl_student_followups`
 --
 ALTER TABLE `tbl_student_followups`
   MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
 ALTER TABLE `tbl_student_professional_history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
 ALTER TABLE `tbl_student_profiles`
   MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
 ALTER TABLE `tbl_student_to_degrees`
-  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `tbl_student_to_taken_exams`
 --
 ALTER TABLE `tbl_student_to_taken_exams`
-  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
 --
 -- Constraints for dumped tables
 --

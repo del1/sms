@@ -123,19 +123,169 @@ class Student extends Del {
 
 	public function update()
 	{
-		
 		$posted_data=$this->security->xss_clean($this->input->post());
 
 		/*update personal data*/
-		$personal_details = elements(array('gender_id','user_id'), $posted_data);
-		$this->users->update($personal_details['user_id'], array( 'gender_id' => $personal_details['gender_id'] ));
+		if(isset($posted_data['gender_id']) && strlen(trim($posted_data['gender_id'])))
+		{
+			$personal_details = elements(array('gender_id','user_id'), $posted_data);
+			$this->users->update($personal_details['user_id'], array( 'gender_id' => $personal_details['gender_id'] ));
+		}
 		/*end update personal data */
 
-		$student_degrees = array('degree_id'=>$posted_data['UG_degree_name'],"college_id"=>'UG_college_id','UG_passing_year','UG_gpa_marks');
+		//preparation about ug degree - approach delete insert
 
+		$delete_id = $this->student_to_degrees->delete_by('student_id',$posted_data['student_id']);
+		/*update UG data - -tbl_student_to_degrees*/
+		if($posted_data['UG_degree_name']!="0" && $posted_data['UG_college_id']!="0" && $posted_data['UG_passing_year']!="0" && strlen(trim($posted_data['UG_gpa_marks'])))
+		{
+			$student_degrees = array(
+				"student_id"=>$posted_data['student_id'],
+				"degree_id"=>$posted_data['UG_degree_name'],
+				"college_id"=>$posted_data['UG_college_id'],
+				"passing_year"=>$posted_data['UG_passing_year'],
+				"gpa_marks"=>$posted_data['UG_gpa_marks']);
+			$update_id = $this->student_to_degrees->insert($student_degrees);
+		}
+		/*end UG data*/
 
+		/*update PG data -tbl_student_to_degrees*/
+		if($posted_data['PG_degree_name']!="0" && $posted_data['PG_college']!="0" && $posted_data['PG_passing_year']!="0" && strlen(trim($posted_data['PG_gpa_marks'])))
+		{
+			$student_degrees = array(
+				"student_id"=>$posted_data['student_id'],
+				"degree_id"=>$posted_data['PG_degree_name'],
+				"college_id"=>$posted_data['PG_college'],
+				"passing_year"=>$posted_data['PG_passing_year'],
+				"gpa_marks"=>$posted_data['PG_gpa_marks']);
+			$update_id = $this->student_to_degrees->insert($student_degrees);
+		}
+		/*end PG data*/
 
-		print_r($posted_data);
+		/*update student profile data- tbl_student_profiles*/
+		if(strlen(trim($posted_data['professional_qualification'])) && strlen(trim($posted_data['total_experience'])))
+		{
+			$student_profile_details = elements(array('professional_qualification','total_experience'), $posted_data);
+			$this->student_profile->update($posted_data['student_id'], $student_profile_details);
+		}
+		/*end of student profile*/
+
+		/*update professional history- tbl_student_professional_history*/
+		$professional_history=array();
+		$delete_id = $this->student_professional_history->delete_by('student_id',$posted_data['student_id']);
+		if(trim($posted_data['c_employer_id'])!="0")
+		{
+			$row['student_id']=$posted_data['student_id'];
+			$row['employer_id']=$posted_data['c_employer_id'];
+			$row['is_current']="true";
+			array_push($professional_history, $row);
+		}
+		if(trim($posted_data['p1_employer_id'])!="0")
+		{
+			$row['student_id']=$posted_data['student_id'];
+			$row['employer_id']=$posted_data['p1_employer_id'];
+			$row['is_current']="false";
+			array_push($professional_history, $row);
+		}
+		if(trim($posted_data['p2_employer_id'])!="0")
+		{
+			$row['student_id']=$posted_data['student_id'];
+			$row['employer_id']=$posted_data['p2_employer_id'];
+			$row['is_current']="false";
+			array_push($professional_history, $row);
+		}
+		if(!empty($professional_history))
+		{
+			$this->student_professional_history->insert_many($professional_history,FALSE);
+		}
+		//end of student profile*/
+
+		//gmat insert*/
+    	if($posted_data['gmat']=="1")
+    	{
+    		$gmat_array['exam_type_id']=1;
+    		$gmat_array['score']=$posted_data['gmat_score'];
+    		$gmat_array['tentative_date']=$posted_data['gmat_tentative_date'];
+    		$gmat_array['student_id']=$posted_data['student_id'];
+    		$row=$this->student_to_exams->get_by(array('student_id'=>$posted_data['student_id'],"exam_type_id"=>1));
+    		if(!empty($row))
+    		{
+    			$this->student_to_exams->update_by(array('student_id'=>$posted_data['student_id'],"exam_type_id"=>1),$gmat_array);
+    		}else{
+    			$this->student_to_exams->Insert($gmat_array);
+    		}
+    	}
+		//end of gmat*/
+
+		//gre insert
+		if($posted_data['gre']=="1")
+    	{
+    		$gmat_array['exam_type_id']=2;
+    		$gmat_array['score']=$posted_data['gre_score'];
+    		$gmat_array['tentative_date']=$posted_data['gre_tentative_date'];
+    		$gmat_array['student_id']=$posted_data['student_id'];
+    		$row=$this->student_to_exams->get_by(array('student_id'=>$posted_data['student_id'],"exam_type_id"=>2));
+    		if(!empty($row))
+    		{
+    			$this->student_to_exams->update_by(array('student_id'=>$posted_data['student_id'],"exam_type_id"=>2),$gmat_array);
+    		}else{
+    			$this->student_to_exams->Insert($gmat_array);
+    		}
+    	}
+		//end of gre insert
+
+		//package update data
+    	$this->lnk_student_to_packages->delete_by('student_id',$posted_data['student_id']);
+		for ($i=0; $i < count($posted_data['signup_date']) ; $i++) { 
+			$ar['package_id']=$posted_data['package_id'][$i];
+			$ar['signup_date']=$posted_data['signup_date'][$i];
+			$ar['consultant_id']=$posted_data['consultant_id'][$i];
+			$ar['student_id']=$posted_data['student_id'];
+
+			if($ar['consultant_id']!=0 && $ar['package_id']!=0)
+			{//check if packages are entered correctly or not
+				$row=$this->lnk_student_to_packages->get_by(array('student_id'=>$posted_data['student_id'],"package_id"=>$ar['package_id']));
+				if(!empty($row))
+				{
+					$this->lnk_student_to_packages->update_by(array('student_id'=>$posted_data['student_id'],"package_id"=>$ar['package_id']),$ar);
+				}else{
+					$this->lnk_student_to_packages->insert($ar);
+				}
+			}
+		}
+	}
+
+	public function updateCollege()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$this->lnk_student_to_applied_colleges->delete_by('student_id',$posted_data['student_id']);
+		for ($i=0; $i < count($posted_data['college_id']) ; $i++) { 
+			$ar['student_id']=$posted_data['student_id'][$i];
+			$ar['college_id']=$posted_data['college_id'][$i];
+			$ar['intake_year']=$posted_data['intake_year'][$i];
+			$ar['round_id']=$posted_data['round_id'][$i];
+			$ar['app_status_id']=$posted_data['app_status_id'][$i];
+			$ar['intv_status_id']=$posted_data['intv_status_id'][$i];
+			$ar['applied_program_id']=$posted_data['applied_program_id'][$i];
+			$ar['admit_status_id']=$posted_data['admit_status_id'][$i];
+			if(isset($posted_data['is_scholarship_awarded'][$i]))
+			{
+				$ar['is_scholarship_awarded']=$posted_data['is_scholarship_awarded'][$i];
+			}else{
+				$ar['is_scholarship_awarded']="false";
+			}
+			if(isset($posted_data['scholarship_amount'][$i]))
+			{
+				$ar['scholarship_amount']=$posted_data['scholarship_amount'][$i];
+			}
+			$row=$this->lnk_student_to_applied_colleges->get_by(array('student_id'=>$posted_data['student_id'],"college_id"=>$ar['college_id']));
+			if(!empty($row))
+			{
+				$this->lnk_student_to_applied_colleges->update_by(array('student_id'=>$posted_data['student_id'],"college_id"=>$ar['college_id']),$ar);
+			}else{
+				$this->lnk_student_to_applied_colleges->insert($ar);
+			}
+		}
 	}
 
 	public function manage_student($student_id='')
@@ -160,8 +310,7 @@ class Student extends Del {
 			$data['interview_status_list']=$this->ref_interview_status->select('intv_status_id,intv_status')->get_many_by('is_active',"true");
 			$data['program_list']=$this->ref_program->select('program_id,program_name')->get_many_by('is_active','true');
 			$data['admit_status_list']=$this->ref_admit_status->select('admit_status_id,admit_status')->get_many_by('is_active','true');
-
-			
+			$data['employer_list']=$this->ref_employer->select('employer_id,employer_name')->get_many_by('is_active','true');
 			
 			if(!empty($student_data)) //if enquiry data is avialable
 			{
@@ -170,9 +319,6 @@ class Student extends Del {
 				$data['professional_details']=$this->student_profile->get_professional_detail($student_data->student_id);
 				$data['college_details']=$this->student_to_degrees->get_many_by('student_id',$student_data->student_id);
 				$data['companies_history_history']=$this->student_professional_history->get_companies_history($student_data->student_id);
-
-
-				
 			}
 			$data['page']='Edit student Details';
 			$view = 'admin/student/edit_student_view1';

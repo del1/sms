@@ -281,7 +281,7 @@ hr{
                                     <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate degree</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                         <select data-plugin="select2" id="PG_degree" name="PG_degree_name" class="form-control ">
-                                            <option  hidden="">Select PG college</option>
+                                            <option  hidden="" value="0">Select PG Degree</option>
                                             <?php if(!empty($PG_degree_list)) { foreach ($PG_degree_list as $key => $value) { ?>
                                                 <option value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
                                             <?php } } ?>
@@ -292,7 +292,7 @@ hr{
                                     <label for="PG_college" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 " style="text-align: left;">Postgraduate college</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                         <select id="PG_college" data-plugin="select2" class="form-control" name="PG_college">
-                                            <option  hidden="">Select PG college</option>
+                                            <option  hidden="" value="0">Select PG college</option>
                                             <?php if(!empty($PG_colleges_list)) { foreach ($PG_colleges_list as $key => $value) { ?>
                                                 <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                             <?php } } ?>
@@ -304,7 +304,7 @@ hr{
                                     <label for="PG_passing_year" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Passing Year</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                         <select data-plugin="select2" id="PG_passing_year" name="PG_passing_year" class="form-control ">
-                                            <option  hidden="">Select Passing Year</option>
+                                            <option  hidden="" value="0">Select Passing Year</option>
                                             <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
                                             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                             <?php } ?>
@@ -330,23 +330,39 @@ hr{
                                 <div class="form-group row">
                                     <label for="c_employer_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Current Employer</label>
                                     <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                        <input id="c_employer_id" type="text" name="c_employer_id" placeholder="Current Employer" class="form-control ">
+                                        <select data-plugin="select2" id="c_employer_id" name="c_employer_id" class="form-control ">
+                                            <option  hidden="" value="0">Select Current Employer</option>
+                                            <?php if(!empty($employer_list)) { foreach ($employer_list as $key => $value) { ?>
+                                                <option value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
+                                            <?php } } ?>
+                                        </select>
+                                        <span id="c_employer_id_error" class="error"></span>
                                     </div>
 
                                     <label for="p1_employer_id" class="form-control-label col-md-2 col-sm-2 col-xl-2 col-lg-1" >Previous Employer 1</label>
                                     <div class="col-md-2 col-lg-2 col-sm-4  col-xl-2">
-                                        <input id="p1_employer_id" type="text" name="p1_employer_id" placeholder="Previous Employer 1" class="form-control ">
+                                        <select data-plugin="select2" id="p1_employer_id" name="p1_employer_id" class="form-control ">
+                                            <option  hidden="" value="0">Select Previous Employer 1</option>
+                                            <?php if(!empty($employer_list)) { foreach ($employer_list as $key => $value) { ?>
+                                                <option value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
+                                            <?php } } ?>
+                                        </select>
                                     </div>
 
                                     <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Previous Employer 2</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                        <input id="p2_employer_id" type="text" name="p2_employer_id" placeholder="Previous Employer 2" class="form-control ">
+                                        <select data-plugin="select2" id="p2_employer_id" name="p2_employer_id" class="form-control ">
+                                            <option  hidden="" value="0">Select Previous Employer 1</option>
+                                            <?php if(!empty($employer_list)) { foreach ($employer_list as $key => $value) { ?>
+                                                <option value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
+                                            <?php } } ?>
+                                        </select>
                                     </div>
                                 </div><!-- <hr>
                                 <div class="form-group row">
                                     <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-12">
                                         <h6>Remarks if any</h6>
-                                        <textarea class="form-control" required style="resize: none;"><?php if(isset($professional_details->remarks)) { echo $professional_details->remarks; } ?></textarea>
+                                        <textarea class="form-control" required style="resize: none;"><?php // if(isset($professional_details->remarks)) { echo $professional_details->remarks; } ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row mt-20" >
@@ -436,7 +452,7 @@ hr{
                                     <label for="package_id" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Package name</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                         <select data-plugin="select2" name="package_id[]" class="form-control">
-                                            <option hidden="">Select Package</option>
+                                            <option hidden="" value="0">Select Package</option>
                                             <?php foreach ($package_list as $key => $value) { ?>
                                                 <option value="<?php echo $value->package_id; ?>"><?php echo $value->package_name; ?></option>
                                             <?php } ?>
@@ -446,7 +462,7 @@ hr{
                                     <label for="consultant_id" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Consultant Assigned</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <select name="consultant_id[]" class="form-control">
-                                            <option hidden="">Select Consultant</option>
+                                            <option hidden="" value="0">Select Consultant</option>
                                             <?php foreach ($consultant_list as $key => $value) { ?>
                                                 <option value="<?php echo $value->user_id; ?>"><?php echo $value->user_name; ?></option>
                                             <?php } ?>
@@ -464,7 +480,8 @@ hr{
                         </div>
                     </div>
                 <?php echo form_close(); ?>
-                <form class="form-horizontal" id="second_section">
+                <?php $arr=array('class'=>"form-horizontal mt-30","id"=>"second_section");
+                            echo form_open('admin/student/updateCollege',$arr); ?>
                     <div class="form-group row mt-50" >
                         <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6">
                             <h5 class="title">College Applications</h5>
@@ -477,74 +494,82 @@ hr{
                         <div class="form-group row" >
                             <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                <select data-plugin="select2" id="college_id" name="college_id[]" class="form-control ">
-                                    <option  hidden="">Select Applied college</option>
+                                <select data-plugin="select2" name="college_id[]" class="form-control college_id">
+                                    <option  hidden="" value="0">Select Applied college</option>
                                     <?php if(!empty($apply_college_list)) { foreach ($apply_college_list as $key => $value) { ?>
                                         <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                     <?php } } ?>
                                 </select>
+                                <input type="hidden" name="student_id" value="<?php echo $enquiery_data->student_id; ?>">
+                                <span class="error"></span>
                             </div>
 
                             <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
                             <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                <select data-plugin="select2" name="intake_year[]" class="form-control ">
-                                    <option  hidden="">Select Intake year</option>
+                                <select data-plugin="select2" name="intake_year[]" class="form-control intake_year">
+                                    <option  hidden="" value="0">Select Intake year</option>
                                     <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                     <?php } ?>
                                 </select>
+                                <span class="error"></span>
                             </div>
 
                             <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Application round</label>
                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                <select data-plugin="select2" id="college_id" name="round_id[]" class="form-control ">
-                                    <option  hidden="">Select Application round</option>
+                                <select data-plugin="select2" name="round_id[]" class="form-control round_id">
+                                    <option  hidden="" value="0">Select Application round</option>
                                     <?php if(!empty($appround_list)) { foreach ($appround_list as $key => $value) { ?>
                                         <option value="<?php echo $value->round_id;?>"><?php echo $value->round_name ;?></option>
                                     <?php } } ?>
                                 </select>
+                                <span class="error"></span>
                             </div>
                         </div>
                         <div class="form-group row" >
                             <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Application status</label>
                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                <select data-plugin="select2" name="app_status_id[]" class="form-control ">
-                                    <option  hidden="">Select Application Status</option>
+                                <select name="app_status_id[]" class="form-control app_status_id">
+                                    <option  hidden="" value="0">Select Application Status</option>
                                     <?php if(!empty($app_status_list)) { foreach ($app_status_list as $key => $value) { ?>
                                         <option value="<?php echo $value->app_status_id;?>"><?php echo $value->app_status;?></option>
                                     <?php } } ?>
                                 </select>
+                                <span class="error"></span>
                             </div>
 
                             <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Interview status</label>
                             <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                <select data-plugin="select2" name="intv_status_id[]" class="form-control ">
-                                    <option  hidden="">Select Interview Status</option>
+                                <select name="intv_status_id[]" class="form-control intv_status_id">
+                                    <option  hidden="" value="0">Select Interview Status</option>
                                     <?php if(!empty($interview_status_list)) { foreach ($interview_status_list as $key => $value) { ?>
                                         <option value="<?php echo $value->intv_status_id;?>"><?php echo $value->intv_status;?></option>
                                     <?php } } ?>
                                 </select>
+                                <span class="error"></span>
                             </div>
 
                             <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Applied program</label>
                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                <select data-plugin="select2" name="applied_program_id[]" class="form-control ">
-                                    <option  hidden="">Select Applied program</option>
+                                <select data-plugin="select2" name="applied_program_id[]" class="form-control applied_program_id">
+                                    <option  hidden="" value="0">Select Applied program</option>
                                     <?php if(!empty($program_list)) { foreach ($program_list as $key => $value) { ?>
                                         <option value="<?php echo $value->program_id;?>"><?php echo $value->program_name;?></option>
                                     <?php } } ?>
                                 </select>
+                                <span class="error"></span>
                             </div>
                         </div>
                         <div class="form-group row" >
                             <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
                             <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                 <select name="admit_status_id[]" class="form-control admit_status_id">
-                                    <option  hidden="">Select Applied program</option>
+                                    <option  hidden="" value="0">Select Applied program</option>
                                     <?php if(!empty($admit_status_list)) { foreach ($admit_status_list as $key => $value) { ?>
                                         <option value="<?php echo $value->admit_status_id;?>"><?php echo $value->admit_status;?></option>
                                     <?php } } ?>
                                 </select>
+                                <span class="error"></span>
                             </div>
 
 
@@ -555,11 +580,13 @@ hr{
                                     <option value="1">Yes</option>
                                     <option value="2">No</option>
                                 </select>
+                                <span class="error"></span>
                             </div>
 
                             <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
                             <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                 <input type="number" disabled="" required="" min="0" step="0.1" name="scholarship_amount[]" class="form-control scholarship_amount">
+                                <span class="error"></span>
                             </div>
                         </div>
                     </section>
@@ -586,7 +613,7 @@ hr{
                         <label for="joining_year" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Joining year</label>
                         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                             <select data-plugin="select2" id="joining_year" name="joining_year" class="form-control ">
-                                <option  hidden="">Select Passing Year</option>
+                                <option  hidden="" value="0">Select Passing Year</option>
                                 <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
                                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                 <?php } ?>
@@ -677,7 +704,7 @@ hr{
     <label for="package_id" class="form-control-label col-md-1 col-sm-4 col-xl-1 col-lg-1" >Package name</label>
     <div class="col-md-2 col-lg-2 col-sm-3  col-xl-2">
         <select name="package_id[]" class="form-control package_id">
-            <option  hidden="">Select Package</option>
+            <option  hidden="" value="0">Select Package</option>
             <?php foreach ($package_list as $key => $value) { ?>
                 <option value="<?php echo $value->package_id; ?>"><?php echo $value->package_name; ?></option>
             <?php } ?>
@@ -687,7 +714,7 @@ hr{
     <label for="consultant_id" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Consultant Assigned</label>
     <div class="col-md-2 col-lg-2 col-sm-5  col-xl-2">
         <select name="consultant_id[]" class="form-control">
-            <option hidden="">Select Consultant</option>
+            <option hidden="" value="0">Select Consultant</option>
             <?php foreach ($consultant_list as $key => $value) { ?>
                 <option value="<?php echo $value->user_id; ?>"><?php echo $value->user_name; ?></option>
             <?php } ?>
@@ -698,101 +725,111 @@ hr{
         <a class="btn btn-danger btn-icon del" title="Click to Delete the Phonenumber"><span data-image="" data-product="" class="icon wb-close-mini remove_image"></span></a>
     </div>
 </div>
-<section style="display: none;" class="removeCollegeParent"  id="basic_college_application">
+<section style="display: none;" class="removeCollegeParent" id="basic_college_application">
     <div class="form-group row" >
         <div class="col-sm-12 col-12 col-md-12 col-lg-12 col-xl-12 icondemo iconWrap" >
             <a class="btn btn-danger btn-icon delCollege float-right"><span data-image="" data-product="" class="icon wb-close-mini remove_image"></span></a>
         </div>
     </div>
     <div class="form-group row" >
-        <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
+        <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="college_id[]" class="form-control college_id">
-                <option  hidden="">Select Applied college</option>
+                <option  hidden="" value="0">Select Applied college</option>
                 <?php if(!empty($apply_college_list)) { foreach ($apply_college_list as $key => $value) { ?>
                     <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                 <?php } } ?>
             </select>
+            <span class="error"></span>
         </div>
 
-        <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
+        <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="intake_year[]" class="form-control intake_year">
-                <option  hidden="">Select Intake year</option>
+                <option  hidden="" value="0">Select Intake year</option>
                 <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                 <?php } ?>
             </select>
+            <span class="error"></span>
         </div>
 
         <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Application round</label>
         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
             <select name="round_id[]" class="form-control round_id">
-                <option  hidden="">Select Application round</option>
+                <option  hidden="" value="0">Select Application round</option>
                 <?php if(!empty($appround_list)) { foreach ($appround_list as $key => $value) { ?>
                     <option value="<?php echo $value->round_id;?>"><?php echo $value->round_name ;?></option>
                 <?php } } ?>
             </select>
+            <span class="error"></span>
         </div>
     </div>
     <div class="form-group row" >
         <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Application status</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="app_status_id[]" class="form-control app_status_id">
-                <option  hidden="">Select Application Status</option>
+                <option  hidden="" value="0">Select Application Status</option>
                 <?php if(!empty($app_status_list)) { foreach ($app_status_list as $key => $value) { ?>
                     <option value="<?php echo $value->app_status_id;?>"><?php echo $value->app_status;?></option>
                 <?php } } ?>
             </select>
+            <span class="error"></span>
         </div>
 
         <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Interview status</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="intv_status_id[]" class="form-control intv_status_id">
-                <option  hidden="">Select Interview Status</option>
+                <option  hidden="" value="0">Select Interview Status</option>
                 <?php if(!empty($interview_status_list)) { foreach ($interview_status_list as $key => $value) { ?>
                     <option value="<?php echo $value->intv_status_id;?>"><?php echo $value->intv_status;?></option>
                 <?php } } ?>
             </select>
+            <span class="error"></span>
         </div>
 
         <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Applied program</label>
         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
             <select name="applied_program_id[]" class="form-control applied_program_id">
-                <option  hidden="">Select Applied program</option>
+                <option  hidden="" value="0">Select Applied program</option>
                 <?php if(!empty($program_list)) { foreach ($program_list as $key => $value) { ?>
                     <option value="<?php echo $value->program_id;?>"><?php echo $value->program_name;?></option>
                 <?php } } ?>
             </select>
+            <span class="error"></span>
         </div>
     </div>
     <div class="form-group row" >
-        <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
+        <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="admit_status_id[]" class="form-control admit_status_id">
-                <option  hidden="">Select Applied program</option>
+                <option  hidden="" value="0">Select Applied program</option>
                 <?php if(!empty($admit_status_list)) { foreach ($admit_status_list as $key => $value) { ?>
                     <option value="<?php echo $value->admit_status_id;?>"><?php echo $value->admit_status;?></option>
                 <?php } } ?>
             </select>
+            <span class="error"></span>
         </div>
 
 
-        <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
+        <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="is_scholarship_awarded[]" disabled="" class="form-control is_scholarship_awarded">
                 <option hidden="" value="0">Yes/No</option>
                 <option value="1">Yes</option>
                 <option value="2">No</option>
             </select>
+            <span class="error"></span>
         </div>
 
         <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
             <input type="number" disabled="" required="" min="0" step="0.1" name="scholarship_amount[]" class="form-control scholarship_amount">
+            <span class="error"></span>
         </div>
     </div>
 </section>
+
 <!-- End Page -->
 <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -964,7 +1001,7 @@ hr{
 
 
         $(document).on('click', '.btnSubmit', function(event) {
-
+            event.preventDefault();
             var gendererr,UG_degree_err,UG_college_error,UG_passing_year,UG_gpa_marks=0;
             var PG_degree_error,PG_college_error,PG_passing_year_error,PG_gpa_marks_error,PG_degree_error=0;
             var PG_college_error,PG_passing_year_error,PG_gpa_marks_error,gmat_score_error,gmat_tenative_date_error=0;
@@ -1040,8 +1077,6 @@ hr{
                     PG_degree_error=0;
                 }
 
-
-
                 if(isNaN(PG_college) || !(parseInt(PG_college)))
                 {
                     $("#PG_college_error").html("Please add GPA marks");
@@ -1082,7 +1117,6 @@ hr{
             var gmat_select=parseInt($("#gmat_select").val());
             if(gmat_select==1)
             {
-                
                 if(parseInt($("#gmat_score").val()) && $("#gmat_tenative_date").val())
                 {
                     $("#gmat_score_error").empty();
@@ -1175,18 +1209,104 @@ hr{
                     processData:false,
                     success: function(data, textStatus, jqXHR)
                     {
+                        str="Information Stored successfully";
+                        toastr.options = {
+                          "closeButton": true,
+                          timeOut: 5000
+                        }
+                        toastr["success"](str);
+                    }         
+                });
+            }
+        });
+
+        $(document).on('click', '.btnSec2Submit', function(event) {
+            event.preventDefault();
+            var section2err=0;
+            var find_array=["college_id","intake_year","round_id","app_status_id","intv_status_id","applied_program_id","admit_status_id"];
+            var error_array=["Please select College","Please add intake year","Please Select Application round","Please Select Application Status","Please Select Interview Status","Please Select Applied Program","Please select Admit Status"];
+
+            find_array.forEach(function(element,index1) {
+                $("#second_section").find('.'+element).each(function(index, el) {
+                    if(!parseInt($(this).val()))
+                    {
+                        $(this).parent().find('span.error').html(error_array[index1]);
+                        section2err=1;
+                    }else{
+                        $(this).parent().find('span.error').empty();
+                    }
+                });
+            });
+
+            $("#second_section").find('.admit_status_id').each(function(index, el) {
+                if(parseInt($(this).val())==1)
+                {
+                    var t1=$(this).parents("section").find('.is_scholarship_awarded');
+                    if(t1.val()=="1")
+                    {//schollership awarded 
+                        t1.parent().find('span.error').empty();
+                        var t2=t1.parents("section").find('.scholarship_amount');
+                        if(t2.val()=="")
+                        {
+                            t2.parent().find('span.error').html("Please add schollership amount");
+                            section2err=1;
+                        }else{
+                            t2.parent().find('span.error').empty();
+                        }
+                    }else{//no- for schollership awarded
+                        if(t1.val()=="0")
+                        {
+                            t1.parent().find('span.error').html("Please select schollership status");
+                            section2err=1;
+                        }
+                        if(t1.val()=="2")
+                        {
+                            t1.parent().find('span.error').empty();
+                        }
+                    }
+                }else{
+                    if(parseInt($(this).val())!=0)
+                    {
+                        $(this).parent().find('span.error').empty();
+                    }
+                }
+            });
+
+            if(section2err==1)
+            {
+                str="Please check the errors in College Application section";
+                toastr.options = {
+                  "closeButton": true,
+                  timeOut: 10000
+                }
+                toastr["error"](str);
+            }else{
+                var formObj = $("#second_section");
+                var formData = new FormData(formObj[0]);
+                var formURL="<?php echo base_url('admin/student/updateCollege'); ?>";
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data:  formData,
+                    async: true,
+                    datatype : false,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(data, textStatus, jqXHR)
+                    {
                         console.log(data);
+                        str="Information Stored successfully";
+                        toastr.options = {
+                          "closeButton": true,
+                          timeOut: 5000
+                        }
+                        toastr["success"](str);
                     }         
                 });
             }
 
-
-
-        });
-
-        $(document).on('click', '.btnSec2Submit', function(event) {
-            console.log("wronf button");
-
+            
         });
 
         

@@ -109,6 +109,23 @@ hr{
 .bdr_sucs{
      border: 1px solid #e4eaec;
 }
+.modal-label{
+    font-weight: 500;
+}
+.modal-header-success {
+    color:#fff;
+    padding:2px 6px;
+    border-bottom:1px solid #eee;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+}
+.btnClose{
+    font-size: 25px;
+}
 
 </style>
 <div class="page">
@@ -137,6 +154,7 @@ hr{
     {
         $professional_details=$professional_details[0];
     }
+    
      ?>
 
      <?php foreach ($colleges_list as $key => $value) {
@@ -596,7 +614,11 @@ hr{
                             <button type="button" class="btn btn-warning btnSec2Cancel">Cancel</button>
                             <button type="button" class="btn btn-danger btnSec2Delete">Delete</button>
                         </div>
-                    </div><hr>
+                    </div>
+                <?php echo form_close(); ?>
+                    <hr>
+                <?php $arr=array('class'=>"form-horizontal mt-30","id"=>"third_section");
+                            echo form_open('admin/student/updateJoiningProgram',$arr); ?>
                     <div class="form-group row" >
                         <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Joining program</label>
                         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
@@ -628,33 +650,11 @@ hr{
                             <button type="button" class="btn btn-danger float-left">Cancel</button>
                         </div>
                     </div>
-                </form>
-                        <!-- <li>
-                            <a class="expand">
-                                <div class="right-arrow">+</div>
-                                <h2>Line Hardware</h2>
-                                <span>Pole, cable, pipe, coil pipe, flatbed, low-boy and equipment trailers.</span>
-                            </a>
-
-                            <div class="detail">
-                                <div id="left" style="width:15%;float:left;height:100%;">
-                                    <div id="sup">
-                                        <img src="http://www.linehardware.com/graphics/logo2.gif" width="100%" />
-                                    </div>
-                                </div>
-                                <div id="right" style="width:85%;float:right;height:100%;padding-left:20px;">
-                                    <div id="sup">
-                                        <div><span>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</span>
-                                            <br />
-                                            <br /><a href="#">Visit Website</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>-->
+                <?php echo form_close(); ?>
                 <div class="row row-lg mt-50">
                     <div class="col-sm-12 col-md-12 mt-20">
                         <h3 class="example-title ">Conversation Summary</h3>
+                        <a href="javascript:void(0)" data-action="add_new" data-toggle="modal" data-target="#myModal" data-id="<?php echo $enquiery_data->enq_id; ?>" id="add_follow_up" class="btn btn-success btnadd requestFollowUp">Add New Follow-Up</a>
                         <table id="store_list_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive " ><!-- data-plugin="dataTable" -->
                             <thead>
                                 <tr>
@@ -665,23 +665,19 @@ hr{
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if(!empty($followup_data)) {
+                                foreach ($followup_data as $key => $value) { ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
+                                    <td><?php echo date("jS F Y", strtotime($value->followup_date)); ?></td>
+                                    <td><?php echo $value->first_name." ".$value->last_name; ?></td>
+                                    <td><?php echo $value->followup_comment; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline btn-icon btn-warning btn-outline"><i class="icon wb-pencil" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn  btn-outline btn-danger btn-sm"><i class="icon wb-trash" aria-hidden="true"></i></button>
+                                        <button type="button" data-toggle="modal" data-target="#myModal" data-id="<?php echo $value->followup_id; ?>" class="btn btn-outline btn-icon btn-warning btn-outline requestFollowUp" data-action="edit"><i class="icon wb-pencil" aria-hidden="true"></i></button>
+                                        <button data-id="<?php echo $value->followup_id; ?>" type="button" class="btn  btn-outline btn-danger btn-sm requestFollowUp" data-action="delete"><i class="icon wb-trash" aria-hidden="true"></i></button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <button type="button" class="btn  btn-outline btn-success btn-sm"><i class="icon wb-plus" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                    <?php } } ?>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -830,6 +826,31 @@ hr{
     </div>
 </section>
 
+<div class="modal modal-transparent modal-fullscreen fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="container">
+                <?php $arr=array('class'=>"form-horizontal", 'id'=>"followUpForm");
+                            echo form_open('admin/add_follow_up',$arr); ?>
+                <div class="modal-header modal-header-success">
+                    <h4>Add follow up for - <?php echo  $personal_details->first_name." ".$personal_details->last_name; ?></h4>
+                    <button type="button btn-lg" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="btnClose">&times;</span>
+                    </button>                
+                </div>
+                <div class="modal-body" id="targetBody">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success BtnSaveFollowup">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                 <?php echo form_close(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- End Page -->
 <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -850,8 +871,7 @@ hr{
                 });
             }
         })
-        $("#store_list_table_length").append($("#manage_product"));
-        $("#store_list_table_filter").prepend($("#stylelist"));
+        $("#store_list_table_length").append($("#add_follow_up"));
         
         $(".switch").change(function(event) {
             var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
@@ -903,6 +923,8 @@ hr{
                 }
             });
         });
+        
+        
     
 
 
@@ -1305,15 +1327,109 @@ hr{
                     }         
                 });
             }
-
-            
         });
 
-        
+        $(document).on('click', '.BtnSaveFollowup', function(event) {
+            event.preventDefault();
+            var section3err=0;
+            var find_array=["enquiery_date_nfup","agent_id","followup_comment"];
+            var error_array=["Please select Followup data","Please Select Agent","Please add Follow-up comment's"];
+            if(!parseInt($("#agent_id").val()))
+            {
+                $("#agent_id").parent().find('span.error').html("Please Select Agent");
+                section3err=1;
+            }else{
+                $("#agent_id").parent().find('span.error').empty();
+            }
 
+            if(!$("#followup_comment").val().length)
+            {
+                $("#followup_comment").parent().find('span.error').html("Please add Follow-up comment's");
+                section3err=1;
+            }else{
+                $("#followup_comment").parent().find('span.error').empty();
+            }  
 
+            if(section3err){
+                str="Please check the errors in Follow Up section";
+                toastr.options = {
+                  "closeButton": true,
+                  timeOut: 10000
+                }
+                toastr["error"](str);
+            }else{
+                var formObj = $("#followUpForm");
+                var formData = new FormData(formObj[0]);
+                var formURL="<?php echo base_url('admin/add_follow_up'); ?>";
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data:  formData,
+                    async: true,
+                    datatype : false,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(data, textStatus, jqXHR)
+                    {
+                        $("#myModal").modal("hide");
+                        str="Follow up updated successfully";
+                        toastr.options = {
+                          "closeButton": true,
+                          timeOut: 5000
+                        }
+                        toastr["success"](str);
+                    }         
+                });
+            }   
+        });
 
+        $(document).on('click', '.requestFollowUp', function(event) {
+            event.preventDefault();
+            var action=$(this).data('action');
+            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+            csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+            var row = table.row($(this).parents('tr'));
+            data={[csrfName]:csrfHash,action:action,followupid:$(this).data('id')};
+
+            if(action=="edit"|| action=="add_new")
+            {
+                $.post("<?php echo base_url('admin/request_follow_up') ?>", data, 
+                    function(data, textStatus, xhr) {
+                        $("#targetBody").html(data);
+                        $('#agent_id').select2();
+                        $("#enquiery_date_nfup").daterangepicker({
+                            singleDatePicker: true,
+                            showDropdowns: true,
+                            minDate: moment(),
+                            locale: {
+                                format: 'YYYY-MM-DD'
+                            }
+                        });
+                });
+            }
+            if(action=="delete"){
+                bootbox.confirm({
+                message: "Are you Sure, You want to delete this Follow-up?",
+                callback: function (result) {
+                    if(result==true)
+                    {
+                    $.post("<?php echo base_url('admin/request_follow_up') ?>", data, 
+                        function(data, textStatus, xhr) {
+                            console.log(data)
+                            if(textStatus=="success")
+                            {
+                                row.remove().draw();
+                                toastr.success("Record delete successfully");
+                            }else{
+                                toastr.warning("There was problem deleting the record");
+                            }
+                        });
+                    }
+                }
+            });
+            }
+
+        });
     });
-
- 
 </script>

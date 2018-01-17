@@ -160,6 +160,42 @@ class Admin extends Del {
 		}
 	}
 
+	public function request_follow_up()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$data['agent_list']=$this->users->select('user_id,user_name')->get_many_by(array('userlevel_id'=>4,'is_active'=>'true'));
+		if($posted_data['action']=="edit" || $posted_data['action']=="add_new")
+		{
+			if($posted_data['action']=="edit")
+			{
+				$data['followup_data']=$this->student_followup->get($posted_data['followupid']);
+			}else{
+				$data['followup_data']= new stdClass();
+				$data['followup_data']->enq_id=$posted_data['followupid'];
+			}
+			$view = 'admin/ajax/ajax_followup_popup';
+			$this->load->view($view,$data);
+		}
+		if($posted_data['action']=="delete" && isset($posted_data['followupid']))
+		{
+			$this->student_followup->delete($posted_data['followupid']);
+		}
+	}
+
+	public function add_follow_up()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		if(isset($posted_data['followup_id']))
+		{
+			$followup_data = elements(array('agent_id','followup_comment','followup_date'), $posted_data);
+			$this->student_followup->update($posted_data['followup_id'], $followup_data);
+			echo $this->db->insert_id();
+		}else{
+			$followup_data = elements(array('enq_id','agent_id','followup_comment','followup_date'), $posted_data);
+			$this->student_followup->insert($followup_data);
+			echo $this->db->insert_id();
+		}
+	}
 
 	/*Genral Function section begins*/
 

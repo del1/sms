@@ -51,6 +51,7 @@ class Del extends MX_Controller
 		$this->load->model('db/tbl/Tbl_student_to_taken_exams_model','student_to_exams');
 		$this->load->model('db/tbl/Tbl_student_to_degrees_model','student_to_degrees');
 		$this->load->model('db/tbl/Tbl_student_professional_history_model','student_professional_history');
+		$this->load->model('db/tbl/Tbl_student_followups_model','student_followup');
 		
 
 		

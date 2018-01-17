@@ -311,6 +311,8 @@ class Student extends Del {
 			$data['program_list']=$this->ref_program->select('program_id,program_name')->get_many_by('is_active','true');
 			$data['admit_status_list']=$this->ref_admit_status->select('admit_status_id,admit_status')->get_many_by('is_active','true');
 			$data['employer_list']=$this->ref_employer->select('employer_id,employer_name')->get_many_by('is_active','true');
+			$data['followup_data']=$this->student_followup->get_student_followups($student_id);
+
 			
 			if(!empty($student_data)) //if enquiry data is avialable
 			{
@@ -325,6 +327,7 @@ class Student extends Del {
 			echo Modules::run('template/admin_template', $view, $data);	
 		}
 	}
+
 
 	public function updateStudentInfo(){
 		$this->mprint($_POST);

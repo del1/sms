@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2018 at 03:49 PM
+-- Generation Time: Jan 17, 2018 at 03:30 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -53343,11 +53343,18 @@ INSERT INTO `tbl_enquiries` (`enq_id`, `enq_date`, `student_id`, `source_id`, `a
 CREATE TABLE `tbl_student_followups` (
   `followup_id` int(11) NOT NULL,
   `enq_id` int(11) NOT NULL,
-  `followup_date` datetime NOT NULL,
+  `followup_date` date NOT NULL,
   `agent_id` int(11) NOT NULL,
   `followup_comment` text NOT NULL,
-  `is_completed` enum('1','0') NOT NULL DEFAULT '0'
+  `is_completed` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_student_followups`
+--
+
+INSERT INTO `tbl_student_followups` (`followup_id`, `enq_id`, `followup_date`, `agent_id`, `followup_comment`, `is_completed`) VALUES
+(3, 1, '2018-01-19', 5, 'take another followup', 'false');
 
 -- --------------------------------------------------------
 
@@ -53469,7 +53476,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-16 08:56:37', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-17 11:27:04', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', NULL, NULL, 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', NULL, NULL, 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, NULL, '2017-12-27 15:39:52', 'true'),
@@ -53872,12 +53879,12 @@ ALTER TABLE `tbl_enquiries`
 -- AUTO_INCREMENT for table `tbl_student_followups`
 --
 ALTER TABLE `tbl_student_followups`
-  MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
 ALTER TABLE `tbl_student_professional_history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --

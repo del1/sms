@@ -14,6 +14,7 @@ class Tbl_student_professional_history_model extends MY_Model
 		{
 			return $this->db->select('tbl_student_professional_history.*,ref_employer.employer_name as company_name')
 			->join('ref_employer', 'tbl_student_professional_history.employer_id = ref_employer.employer_id')
+			->order_by("tbl_student_professional_history.history_id", "asc")
 	        ->get_where('tbl_student_professional_history',array('tbl_student_professional_history.student_id'=> $student_id))->result();
     	}
 	}

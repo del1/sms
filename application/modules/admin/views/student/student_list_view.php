@@ -35,7 +35,7 @@
             <tbody>
                 <?php if(isset($student_list)) { foreach ($student_list as $student) { ?>
                     <tr>
-                        <td><?php echo $student->enq_date; ?></td>
+                        <td><?php echo date("jS F Y", strtotime($student->enq_date)); ?></td>
                         <td class="stuname"><?php echo $student->first_name." ".$student->last_name; ?></td>
                         <td><?php echo $student->email_id; ?> </td>
                         <td><?php echo $student->phonenumber; ?> </td>
@@ -50,7 +50,9 @@
                                 <span class="glyphicon glyphicon-search"></span> Application
                             </button>
                         </td>
-                        <td><a href="<?php echo base_url('admin/student/manage_student/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a></td>
+                        <td><a href="<?php echo base_url('admin/student/manage_student/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a>
+                            <button type="button" data-id="<?php echo $student->student_id; ?>" class="btn btn-icon btn-warning">Convert</button>
+                        </td>
                     </tr>
                 <?php } } ?>
             </tbody>
@@ -69,11 +71,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    
-                    
                 </div>
                 <div class="modal-body">
-                    <div class="row row-centered" id="targetBody"></div>
+                    <div id="targetBody"></div>
                 </div>
                 <div class="modal-footer">
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -134,6 +134,7 @@
                 data={[csrfName]:csrfHash,level:level,student_id:$(this).parent().data('id'),is_secure_request:'uKrt)12'};
                 $.post("<?php echo base_url('admin/student/get_student_info') ?>", data, 
                     function(data, textStatus, xhr) {
+                        console.log(data);
                         $("#targetBody").html(data);
                     });
         });

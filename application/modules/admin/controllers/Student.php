@@ -319,8 +319,9 @@ class Student extends Del {
 				$student_data=$student_data[0];
 				$data['personal_details']=$this->users->get_personal_info($student_data->student_id);
 				$data['professional_details']=$this->student_profile->get_professional_detail($student_data->student_id);
-				$data['college_details']=$this->student_to_degrees->get_many_by('student_id',$student_data->student_id);
-				$data['companies_history_history']=$this->student_professional_history->get_companies_history($student_data->student_id);
+				//$data['college_details']=$this->student_to_degrees->get_many_by('student_id',$student_data->student_id);
+				$data['education_details']=$this->student_to_degrees->get_education_detail($student_data->student_id);
+				$data['companies_history']=$this->student_professional_history->get_companies_history($student_data->student_id);
 			}
 			$data['page']='Edit student Details';
 			$view = 'admin/student/edit_student_view1';
@@ -341,11 +342,13 @@ class Student extends Del {
 				case 'Personal':
 					$data['student_info']=$this->users->get_personal_info($posted_data['student_id']);
 					$view = 'admin/ajax/student/ajax_student_personal_view';
+					
 					break;
 				case 'Professional':
-					//$data['student_profile']=$this->student_profile->get_professional_detail();
-					/*$data['student_info']=$this->users->select('user_id,first_name,last_name,email_id,signup_date,phonenumber,last_updated')->get($posted_data['user_id']);
-					$view = 'admin/ajax/student/ajax_student_professional_view';*/
+					$data['professional_details']=$this->student_profile->get_professional_detail($posted_data['student_id']);
+					$data['education_details']=$this->student_to_degrees->get_education_detail($posted_data['student_id']);
+					$data['companies_history']=$this->student_professional_history->get_companies_history($posted_data['student_id']);
+					$view = 'admin/ajax/student/ajax_student_professional_view1';
 					break;
 				case 'Application':
 					# code...
@@ -356,6 +359,7 @@ class Student extends Del {
 					break;
 			}
 			$this->load->view($view,$data);
+			
 		}
 	}
 

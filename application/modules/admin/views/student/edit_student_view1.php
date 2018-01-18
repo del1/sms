@@ -243,6 +243,19 @@ hr{
                         </div>
                         <h3>Professional Details</h3>
                         <div>
+                        <?php
+                        if(!empty($education_details)){
+                            foreach ($education_details as $key => $value) {
+                                if($value->degree_type_id==1)
+                                {
+                                    $ugData=$value;
+                                }
+                                if($value->degree_type_id==2)
+                                {
+                                    $pgData=$value;
+                                }
+                            }
+                        } ?>
                             <div class="col-sm-12 col-md-12 mt-20">
                                 <div class="form-group row">
                                     <label for="intro" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Intro</label>
@@ -262,7 +275,7 @@ hr{
                                         <select data-plugin="select2" id="UG_degree" name="UG_degree_name" class="form-control ">
                                             <option  hidden="">Select UG college</option>
                                             <?php if(!empty($UG_degree_list)) { foreach ($UG_degree_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
+                                                <option <?php if(isset($ugData->degree_id) && $ugData->degree_id==$value->degree_id){ echo "selected"; } ?>  value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                         <span id="UG_degree_err" class="error"></span>
@@ -272,7 +285,7 @@ hr{
                                         <select data-plugin="select2" id="UG_college_id" name="UG_college_id" class="form-control ">
                                             <option  hidden="">Select UG college</option>
                                             <?php if(!empty($UG_colleges_list)) { foreach ($UG_colleges_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
+                                                <option <?php if(isset($ugData->college_id) && $ugData->college_id==$value->college_id){ echo "selected"; } ?> value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                         <span id="UG_college_error" class="error"></span>
@@ -284,14 +297,14 @@ hr{
                                         <select data-plugin="select2" id="UG_passing_year" name="UG_passing_year" class="form-control ">
                                             <option  hidden="">Select Passing Year</option>
                                             <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
-                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                            <option <?php if(isset($ugData->passing_year) && $ugData->passing_year==$i){ echo "selected"; } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                             <?php } ?>
                                         </select>
                                         <span id="UG_passing_year_error" class="error"></span>
                                     </div>
                                     <label for="UG_gpa_marks" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Undergraduate marks(GPA)</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                        <input id="UG_gpa_marks" type="number" max="10" min="0" step="0.01" name="UG_gpa_marks" class="form-control ">
+                                        <input id="UG_gpa_marks" value="<?php if(isset($ugData->gpa_marks)){ echo $ugData->gpa_marks; } ?>" type="number" max="10" min="0" step="0.01" name="UG_gpa_marks" class="form-control ">
                                         <span id="UG_gpa_marks_error" class="error"></span>
                                     </div>
                                 </div><hr>
@@ -301,7 +314,7 @@ hr{
                                         <select data-plugin="select2" id="PG_degree" name="PG_degree_name" class="form-control ">
                                             <option  hidden="" value="0">Select PG Degree</option>
                                             <?php if(!empty($PG_degree_list)) { foreach ($PG_degree_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
+                                                <option <?php if(isset($pgData->degree_id) && $pgData->degree_id==$value->degree_id){ echo "selected"; } ?> value="<?php echo $value->degree_id;?>"><?php echo $value->degree_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                         <span id="PG_degree_error" class="error"></span>
@@ -312,7 +325,7 @@ hr{
                                         <select id="PG_college" data-plugin="select2" class="form-control" name="PG_college">
                                             <option  hidden="" value="0">Select PG college</option>
                                             <?php if(!empty($PG_colleges_list)) { foreach ($PG_colleges_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
+                                                <option <?php if(isset($pgData->college_id) && $pgData->college_id==$value->college_id){ echo "selected"; } ?> value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                         <span id="PG_college_error" class="error"></span>
@@ -324,34 +337,60 @@ hr{
                                         <select data-plugin="select2" id="PG_passing_year" name="PG_passing_year" class="form-control ">
                                             <option  hidden="" value="0">Select Passing Year</option>
                                             <?php for ($i=date("Y"); $i > date("Y")-25 ; $i--) {  ?>
-                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                            <option <?php if(isset($pgData->passing_year) && $pgData->passing_year==$i){ echo "selected"; } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                             <?php } ?>
                                         </select>
                                         <span id="PG_passing_year_error" class="error"></span>
                                     </div>
                                     <label for="PG_gpa_marks" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate marks(GPA)</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                        <input id="PG_gpa_marks" type="number" max="10" min="0" step="0.01" name="PG_gpa_marks" class="form-control ">
+                                        <input id="PG_gpa_marks" type="number" max="10" min="0" step="0.01" value="<?php if(isset($pgData->gpa_marks)){ echo $pgData->gpa_marks; } ?>" name="PG_gpa_marks" class="form-control ">
                                         <span id="PG_gpa_marks_error" class="error"></span>
                                     </div>
                                 </div><hr>
+
                                 <div class="form-group row">
                                     <label for="professional_qualification" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Professional Qualification</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                        <input id="professional_qualification" type="text"  value="<?php if(isset($professional_details->phonenumber)) { echo $professional_details->phonenumber; } ?>" name="professional_qualification" class="form-control ">
+                                        <input id="professional_qualification" type="text"  value="<?php if(isset($professional_details->professional_qualification)) { echo $professional_details->professional_qualification; } ?>" name="professional_qualification" class="form-control ">
                                     </div>
                                     <label for="total_experience" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Work experience</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                        <input id="total_experience" type="number" min="0" step="1" name="total_experience" class="form-control ">
+                                        <input id="total_experience" value="<?php if(isset($professional_details->total_experience)) { echo $professional_details->total_experience; } ?>" type="number" min="0" step="1" name="total_experience" class="form-control ">
                                     </div>
                                 </div>
+                               <?php 
+                                $emp1=array();
+                                $emp2=array();
+                                 if(!empty($companies_history)){
+                                    foreach ($companies_history as $key => $value) {
+                                        if($value->is_current=="true")
+                                        {
+                                            $Current_company=$value;
+                                            unset($companies_history[$key]);
+                                            continue;
+                                        }
+                                        if(empty($emp1))
+                                        {
+                                            $emp1=$value;
+                                            unset($companies_history[$key]);
+                                            continue;
+                                        }
+
+                                        if(empty($emp2))
+                                        {
+                                            $emp2=$value;
+                                            unset($companies_history[$key]);
+                                        }
+                                    }
+                                } ?>
                                 <div class="form-group row">
                                     <label for="c_employer_id" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Current Employer</label>
                                     <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                         <select data-plugin="select2" id="c_employer_id" name="c_employer_id" class="form-control ">
                                             <option  hidden="" value="0">Select Current Employer</option>
                                             <?php if(!empty($employer_list)) { foreach ($employer_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
+                                                <option <?php if(isset($Current_company->employer_id) && $Current_company->employer_id==$value->employer_id) { echo "selected"; } ?> value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                         <span id="c_employer_id_error" class="error"></span>
@@ -362,7 +401,7 @@ hr{
                                         <select data-plugin="select2" id="p1_employer_id" name="p1_employer_id" class="form-control ">
                                             <option  hidden="" value="0">Select Previous Employer 1</option>
                                             <?php if(!empty($employer_list)) { foreach ($employer_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
+                                                <option <?php if(isset($emp1->employer_id) && $emp1->employer_id==$value->employer_id) { echo "selected"; } ?> value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                     </div>
@@ -372,7 +411,7 @@ hr{
                                         <select data-plugin="select2" id="p2_employer_id" name="p2_employer_id" class="form-control ">
                                             <option  hidden="" value="0">Select Previous Employer 1</option>
                                             <?php if(!empty($employer_list)) { foreach ($employer_list as $key => $value) { ?>
-                                                <option value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
+                                                <option <?php if(isset($emp2->employer_id) && $emp2->employer_id==$value->employer_id) { echo "selected"; } ?> value="<?php echo $value->employer_id;?>"><?php echo $value->employer_name ;?></option>
                                             <?php } } ?>
                                         </select>
                                     </div>
@@ -408,7 +447,7 @@ hr{
 
                                     <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                        <input type="number" disabled="" id="gmat_score" maxlength="2" step="0.01" max="99.99" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+                                        <input type="number" disabled="" id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
                                         <span id="gmat_score_error" class="error"></span>
                                     </div>
 
@@ -435,7 +474,7 @@ hr{
 
                                     <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                        <input type="number" disabled="" id="gre_score" maxlength="2" step="0.01" max="99.99" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
+                                        <input type="number" disabled="" id="gre_score" maxlength="3" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
                                         <span id="gre_score_error" class="error"></span>
                                     </div>
 

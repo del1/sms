@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2018 at 03:30 PM
+-- Generation Time: Jan 18, 2018 at 03:18 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -70,7 +70,7 @@ CREATE TABLE `lnk_student_to_packages` (
 --
 
 INSERT INTO `lnk_student_to_packages` (`stp_id`, `package_id`, `student_id`, `signup_date`, `consultant_id`) VALUES
-(8, 2, 4, '2018-01-16 00:00:00', 1);
+(10, 1, 4, '2018-01-18 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -53372,6 +53372,15 @@ CREATE TABLE `tbl_student_professional_history` (
   `is_current` enum('true','false') NOT NULL DEFAULT 'false'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_student_professional_history`
+--
+
+INSERT INTO `tbl_student_professional_history` (`history_id`, `student_id`, `employer_id`, `start_date`, `end_date`, `description`, `is_current`) VALUES
+(6, 4, 1, NULL, NULL, NULL, 'true'),
+(7, 4, 2, NULL, NULL, NULL, 'false'),
+(8, 4, 3, NULL, NULL, NULL, 'false');
+
 -- --------------------------------------------------------
 
 --
@@ -53421,7 +53430,7 @@ CREATE TABLE `tbl_student_to_degrees` (
 --
 
 INSERT INTO `tbl_student_to_degrees` (`sd_id`, `student_id`, `degree_id`, `college_id`, `passing_year`, `gpa_marks`) VALUES
-(53, 4, 2, 3, 2011, 6.48);
+(58, 4, 2, 3, 2011, 6.48);
 
 -- --------------------------------------------------------
 
@@ -53445,8 +53454,8 @@ INSERT INTO `tbl_student_to_taken_exams` (`et_id`, `exam_type_id`, `score`, `ten
 (1, 1, '74.47', '2019-12-19', 6),
 (2, 1, '74.45', '2019-12-13', 7),
 (3, 2, '39.40', '2017-12-29', 7),
-(4, 1, '312.00', '2016-08-24', 4),
-(5, 2, '318.00', '2017-10-25', 4);
+(4, 1, '600.00', '2007-06-14', 4),
+(5, 2, '312.00', '2017-09-19', 4);
 
 -- --------------------------------------------------------
 
@@ -53476,7 +53485,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-17 11:27:04', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', NULL, NULL, 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-18 10:20:36', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', NULL, NULL, 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', NULL, NULL, 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, NULL, '2017-12-27 15:39:52', 'true'),
@@ -53749,7 +53758,7 @@ ALTER TABLE `lnk_student_to_applied_colleges`
 -- AUTO_INCREMENT for table `lnk_student_to_packages`
 --
 ALTER TABLE `lnk_student_to_packages`
-  MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `lnk_user_to_permission`
 --
@@ -53884,7 +53893,7 @@ ALTER TABLE `tbl_student_followups`
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
 ALTER TABLE `tbl_student_professional_history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
@@ -53894,7 +53903,7 @@ ALTER TABLE `tbl_student_profiles`
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
 ALTER TABLE `tbl_student_to_degrees`
-  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `tbl_student_to_taken_exams`
 --

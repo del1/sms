@@ -168,7 +168,7 @@
 
                                 <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <input type="number" disabled="" id="gmat_score" maxlength="2" step="0.01" max="99.99" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+                                    <input type="number" disabled="" id="gmat_score" maxlength="2" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
                                 </div>
 
                                 <label for="gmat_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
@@ -192,7 +192,7 @@
 
                                 <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <input type="number" disabled="" id="gre_score" maxlength="2" step="0.01" max="99.99" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
+                                    <input type="number" disabled="" id="gre_score" maxlength="2" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
                                 </div>
 
                                 <label for="gre_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>

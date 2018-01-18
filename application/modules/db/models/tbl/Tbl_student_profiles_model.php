@@ -23,7 +23,6 @@ class Tbl_student_profiles_model extends MY_Model
 	public function get_professional_detail($student_id)
 	{
 		return $this->db->select('tbl_student_profiles.intro,tbl_student_profiles.total_experience,tbl_student_profiles.professional_qualification, tbl_student_profiles.remarks')
-        
         ->get_where('tbl_student_profiles',array('tbl_student_profiles.student_id'=> $student_id))->result();
 	}
 }

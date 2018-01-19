@@ -14,7 +14,7 @@
         <select id="agent_id" data-plugin="select2" name="agent_id" class="form-control">
             <option hidden="" value="0">Select Agent</option>
             <?php foreach ($agent_list as $key => $value) { ?>
-                <option <?php if (isset($followup_data->agent_id) &&  $followup_data->agent_id==$value->user_id) { echo "selected"; }; ?> value="<?php echo $value->user_id; ?>"><?php echo $value->user_name; ?></option>
+                <option <?php if (isset($followup_data->agent_id) &&  $followup_data->agent_id==$value->user_id) { echo "selected"; }; ?> value="<?php echo $value->user_id; ?>"><?php echo $value->first_name." ".$value->last_name; ?></option>
             <?php } ?>
         </select>
         <span class="error"></span>

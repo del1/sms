@@ -58,6 +58,8 @@ class Admin extends Del {
 		$this->form_validation->set_rules('email_id', 'Email', 'trim|required|valid_email' );
 		$this->form_validation->set_rules('gender_id', 'Gender', 'required' );
 		$this->form_validation->set_rules('phonenumber', 'Phone Number', 'min_length[10]' );
+		$this->form_validation->set_rules('first_name', 'First name', 'trim|required' );
+		$this->form_validation->set_rules('last_name', 'Last name', 'trim|required' );
 		if($this->form_validation->run() !== false){
 			//step2- data validation-checking if data is already exist
 	        if (isset($posted_data['user_id']) && strlen(trim($posted_data['user_id']))) 
@@ -77,7 +79,7 @@ class Admin extends Del {
 	        if(empty($data['email_id']) && empty($data['username']))
 	        {
 	        	//proceed further
-	        	$required_array = elements(array('user_name','email_id','phonenumber','userlevel_id','gender_id'), $posted_data);
+	        	$required_array = elements(array('user_name','first_name','last_name','email_id','phonenumber','userlevel_id','gender_id'), $posted_data);
 	        	$required_array['added_by']=$this->session->User_Id;
 	        	$required_array['last_updated']=date('Y-m-d H:i:s');
 	        	if(isset($posted_data['user_id']) && strlen(trim($posted_data['user_id'])))
@@ -163,7 +165,7 @@ class Admin extends Del {
 	public function request_follow_up()
 	{
 		$posted_data=$this->security->xss_clean($this->input->post());
-		$data['agent_list']=$this->users->select('user_id,user_name')->get_many_by(array('userlevel_id'=>4,'is_active'=>'true'));
+		$data['agent_list']=$this->users->select('user_id,first_name,last_name,user_name')->get_many_by(array('userlevel_id'=>4,'is_active'=>'true'));
 		if($posted_data['action']=="edit" || $posted_data['action']=="add_new")
 		{
 			if($posted_data['action']=="edit")
@@ -180,6 +182,15 @@ class Admin extends Del {
 		{
 			$this->student_followup->delete($posted_data['followupid']);
 		}
+	}
+
+	public function request_conversation_table_update()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$student_id=$posted_data['student_id'];
+		$data['followup_data']=$this->student_followup->get_student_followups($student_id);
+		$view = 'admin/ajax/request_conversation_table_update';
+		$this->load->view($view,$data);
 	}
 
 	public function add_follow_up()

@@ -434,27 +434,41 @@ hr{
                         </div>
                         <h3>Application Details</h3>
                         <div>
+                            <?php 
+                            if(!empty($exam_taken_details))
+                            {
+                                foreach ($exam_taken_details as $key => $value) {
+                                    if($value->exam_type_id==1)
+                                    {
+                                        $student_gmat=$value;
+                                    }
+                                    if($value->exam_type_id==2)
+                                    {
+                                        $student_gre=$value;
+                                    }
+                                }
+                            } ?>
                             <div class="col-sm-12 col-md-12 mt-20">
                                 <div class="form-group row mt-50" id="exam-section">
                                     <label for="gmat_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 "  style="text-align: left;">GMAT taken?</label>
                                     <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                         <select id="gmat_select" class="form-control trigger" name="gmat" data-target="gmat_tar">
                                             <option hidden="" value="0">Yes/No</option>
-                                            <option value="1">Yes</option>
+                                            <option <?php if(isset($student_gmat)){ echo 'selected';} ?> value="1">Yes</option>
                                             <option value="2">No</option>
                                         </select>
                                     </div>
 
                                     <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                        <input type="number" disabled="" id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+                                        <input type="number" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
                                         <span id="gmat_score_error" class="error"></span>
                                     </div>
 
                                     <label for="gmat_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <div class="input-group">
-                                            <input type="text" disabled="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
+                                            <input type="text" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
                                             <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                             <span id="gmat_tenative_date_error" class="error"></span>
                                         </div>
@@ -466,7 +480,7 @@ hr{
                                     <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                         <select id="gre_select" name="gre" class="form-control trigger" data-target="gre_tar">
                                             <option hidden="" value="0">Yes/No</option>
-                                            <option value="1">Yes</option>
+                                            <option <?php if(isset($student_gre)){ echo 'selected';} ?> value="1">Yes</option>
                                             <option value="2">No</option>
                                         </select>
                                         <span id="gre_select_error" class="error"></span>
@@ -474,22 +488,21 @@ hr{
 
                                     <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                        <input type="number" disabled="" id="gre_score" maxlength="3" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
+                                        <input type="number" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gre_score" maxlength="3" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
                                         <span id="gre_score_error" class="error"></span>
                                     </div>
 
                                     <label for="gre_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <div class="input-group">
-                                            <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" disabled="" placeholder="Select Tenative Date">
+                                            <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> placeholder="Select Tenative Date">
                                             <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                             <span id="gre_tenative_date_error" class="error"></span>
-
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="form-group row">
+                                <div class="form-group row last_package1">
                                     <div class="col-md-6 col-lg-6 col-sm-6  col-xl-6">
                                         <h5 class="float-left">Packages</h5>
                                     </div>
@@ -497,7 +510,7 @@ hr{
                                         <button type="button" class="btn btn-success float-right mr-30" id="btn_add_package">Add more packages</button>
                                     </div>
                                 </div>
-                                <div class="form-group row last_package1"> 
+                                <!-- <div class="form-group row" add_class="last_package1"> 
                                     <label for="signup_date" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Sign up date</label>
                                     <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                         <div class="input-group">
@@ -525,7 +538,7 @@ hr{
                                             <?php } ?>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row mt-20" style="text-align: right">
                                     <div class="col-md-12 col-lg-12 col-sm-12  col-xl-12 col-12">
                                         <button type="submit" class="btn btn-success btnSubmit">Submit</button>
@@ -703,7 +716,7 @@ hr{
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="conversation_tbody">
                                 <?php if(!empty($followup_data)) {
                                 foreach ($followup_data as $key => $value) { ?>
                                 <tr>
@@ -1397,6 +1410,7 @@ hr{
                 }
                 toastr["error"](str);
             }else{
+                var student_id= $("input[name='student_id']").val();
                 var formObj = $("#followUpForm");
                 var formData = new FormData(formObj[0]);
                 var formURL="<?php echo base_url('admin/add_follow_up'); ?>";
@@ -1418,6 +1432,13 @@ hr{
                           timeOut: 5000
                         }
                         toastr["success"](str);
+                        var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+                        csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+                        data={[csrfName]:csrfHash,student_id:student_id};
+                        $.post("<?php echo base_url('admin/request_conversation_table_update') ?>", data, 
+                            function(data, textStatus, xhr) {
+                                $("#conversation_tbody").html(data);
+                        });
                     }         
                 });
             }   
@@ -1436,7 +1457,7 @@ hr{
                 $.post("<?php echo base_url('admin/request_follow_up') ?>", data, 
                     function(data, textStatus, xhr) {
                         $("#targetBody").html(data);
-                        $('#agent_id').select2();
+                        var agent=$('#agent_id').select2();
                         $("#enquiery_date_nfup").daterangepicker({
                             singleDatePicker: true,
                             showDropdowns: true,

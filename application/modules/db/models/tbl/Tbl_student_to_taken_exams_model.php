@@ -7,4 +7,5 @@ class Tbl_student_to_taken_exams_model extends MY_Model
 	{
 		parent::__construct();
 	}
+
 }

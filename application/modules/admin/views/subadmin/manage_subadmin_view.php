@@ -68,11 +68,25 @@ textarea {
                         <p class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></p>
                     <?php } ?>
                         <?php $arr=array('class'=>"form-horizontal");
-                            echo form_open_multipart('admin/add_update_subadmin',$arr); ?>
+                            echo form_open('admin/add_update_subadmin',$arr); ?>
                             <div class="form-group row">
                                 <label for="Style Number/Name"  class ="form-control-label col-sm-3 col-xl-2">Username</label>
                                 <div class="col-sm-9 col-xl-10">
                                     <input type="text" required="" data-id="user_name" data-name="Username" id="username" class="form-control " name="user_name" placeholder="Enter Username for user" value="<?php if(isset($user_details->user_name) && strlen(trim($user_details->user_name))) { echo html_escape($user_details->user_name); }else{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['user_name']; }  } ?>"/>
+                                    <span class="errorText"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="first_name"  class ="form-control-label col-sm-3 col-xl-2">First Name</label>
+                                <div class="col-sm-9 col-xl-10">
+                                    <input type="text" required="" data-id="user_name" data-name="first_name" id="first_name" class="form-control " name="first_name" placeholder="Enter First name for user" value="<?php if(isset($user_details->first_name) && strlen(trim($user_details->first_name))) { echo html_escape($user_details->first_name); }else{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['first_name']; }  } ?>"/>
+                                    <span class="errorText"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="last_name"  class ="form-control-label col-sm-3 col-xl-2">Last Name</label>
+                                <div class="col-sm-9 col-xl-10">
+                                    <input type="text" required="" data-id="last_name" data-name="last_name" id="last_name" class="form-control " name="last_name" placeholder="Enter Last name for user" value="<?php if(isset($user_details->last_name) && strlen(trim($user_details->last_name))) { echo html_escape($user_details->last_name); }else{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['last_name']; }  } ?>"/>
                                     <span class="errorText"></span>
                                 </div>
                             </div>

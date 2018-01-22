@@ -324,6 +324,7 @@ class Student extends Del {
 				$data['companies_history']=$this->student_professional_history->get_companies_history($student_data->student_id);
 				$data['exam_taken_details']=$this->student_to_exams->get_many_by('student_id',$student_data->student_id);
 				$data['student_packages']=$this->lnk_student_to_packages->get_many_by('student_id',$student_data->student_id);
+				$data['applied_student_colleges']=$this->lnk_student_to_applied_colleges->get_many_by('student_id',$student_data->student_id);
 			}
 			$data['page']='Edit student Details';
 			$view = 'admin/student/edit_student_view1';

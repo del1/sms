@@ -132,6 +132,11 @@ hr{
     font-size: 25px;
 }
 
+textarea{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 </style>
 <div class="page">
     <div class="page-header">
@@ -314,7 +319,7 @@ hr{
                                     </div>
                                 </div><hr>
                                 <div class="form-group row">
-                                    <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate degree</label>
+                                    <label  class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Postgraduate degree</label>
                                     <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                         <select data-plugin="select2" id="PG_degree" name="PG_degree_name" class="form-control ">
                                             <option  hidden="" value="0">Select PG Degree</option>
@@ -411,7 +416,7 @@ hr{
                                         </select>
                                     </div>
 
-                                    <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Previous Employer 2</label>
+                                    <label  class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Previous Employer 2</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <select data-plugin="select2" id="p2_employer_id" name="p2_employer_id" class="form-control ">
                                             <option  hidden="" value="0">Select Previous Employer 1</option>
@@ -464,7 +469,7 @@ hr{
                                         </select>
                                     </div>
 
-                                    <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
+                                    <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >GMAT Score</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                         <input type="number" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
                                         <span id="gmat_score_error" class="error"></span>
@@ -491,7 +496,7 @@ hr{
                                         <span id="gre_select_error" class="error"></span>
                                     </div>
 
-                                    <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
+                                    <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >GRE Score</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                         <input type="number" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gre_score" maxlength="3" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
                                         <span id="gre_score_error" class="error"></span>
@@ -637,106 +642,6 @@ hr{
                         </div>
                     </div>
                     <section id="basic_college_application1"></section>
-                    <!--<section id="basic_college_application1">
-                        <div class="form-group row" >
-                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
-                            <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                <select data-plugin="select2" name="college_id[]" class="form-control college_id">
-                                    <option  hidden="" value="0">Select Applied college</option>
-                                    <?php if(!empty($apply_college_list)) { foreach ($apply_college_list as $key => $value) { ?>
-                                        <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
-                                    <?php } } ?>
-                                </select>
-                                <input type="hidden" name="student_id" value="<?php echo $enquiery_data->student_id; ?>">
-                                <span class="error"></span>
-                            </div>
-
-                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
-                            <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                <select data-plugin="select2" name="intake_year[]" class="form-control intake_year">
-                                    <option  hidden="" value="0">Select Intake year</option>
-                                    <?php for ($i=date("Y"); $i <= date("Y")+5 ; $i++) {  ?>
-                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-
-                            <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Application round</label>
-                            <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                <select data-plugin="select2" name="round_id[]" class="form-control round_id">
-                                    <option  hidden="" value="0">Select Application round</option>
-                                    <?php if(!empty($appround_list)) { foreach ($appround_list as $key => $value) { ?>
-                                        <option value="<?php echo $value->round_id;?>"><?php echo $value->round_name ;?></option>
-                                    <?php } } ?>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row" >
-                            <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Application status</label>
-                            <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                <select name="app_status_id[]" class="form-control app_status_id">
-                                    <option  hidden="" value="0">Select Application Status</option>
-                                    <?php if(!empty($app_status_list)) { foreach ($app_status_list as $key => $value) { ?>
-                                        <option value="<?php echo $value->app_status_id;?>"><?php echo $value->app_status;?></option>
-                                    <?php } } ?>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-
-                            <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Interview status</label>
-                            <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                <select name="intv_status_id[]" class="form-control intv_status_id">
-                                    <option  hidden="" value="0">Select Interview Status</option>
-                                    <?php if(!empty($interview_status_list)) { foreach ($interview_status_list as $key => $value) { ?>
-                                        <option value="<?php echo $value->intv_status_id;?>"><?php echo $value->intv_status;?></option>
-                                    <?php } } ?>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-
-                            <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Applied program</label>
-                            <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                <select data-plugin="select2" name="applied_program_id[]" class="form-control applied_program_id">
-                                    <option  hidden="" value="0">Select Applied program</option>
-                                    <?php if(!empty($program_list)) { foreach ($program_list as $key => $value) { ?>
-                                        <option value="<?php echo $value->program_id;?>"><?php echo $value->program_name;?></option>
-                                    <?php } } ?>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row" >
-                            <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
-                            <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
-                                <select name="admit_status_id[]" class="form-control admit_status_id">
-                                    <option  hidden="" value="0">Select Applied program</option>
-                                    <?php if(!empty($admit_status_list)) { foreach ($admit_status_list as $key => $value) { ?>
-                                        <option value="<?php echo $value->admit_status_id;?>"><?php echo $value->admit_status;?></option>
-                                    <?php } } ?>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-
-
-                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
-                            <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                <select name="is_scholarship_awarded[]" disabled="" class="form-control is_scholarship_awarded">
-                                    <option hidden="" value="0">Yes/No</option>
-                                    <option value="1">Yes</option>
-                                    <option value="2">No</option>
-                                </select>
-                                <span class="error"></span>
-                            </div>
-
-                            <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
-                            <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
-                                <input type="number" disabled="" required="" min="0" step="0.1" name="scholarship_amount[]" class="form-control scholarship_amount">
-                                <span class="error"></span>
-                            </div>
-                        </div>
-                    </section> -->
                     <?php if(isset($applied_student_colleges) && !empty($applied_student_colleges)){ 
                         foreach ($applied_student_colleges as $app_key => $app_college) { ?>
                         <section class="removeCollegeParent <?php if(end($applied_student_colleges)==$app_college) { echo 'last_college_application'; } ?>">
@@ -746,7 +651,7 @@ hr{
                                 </div>
                             </div>
                             <div class="form-group row" >
-                                <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
+                                <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select name="college_id[]" class="form-control college_id">
                                         <option  hidden="" value="0">Select Applied college</option>
@@ -754,10 +659,11 @@ hr{
                                             <option <?php if($app_college->college_id==$value->college_id){ echo "Selected"; } ?> value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                         <?php } } ?>
                                     </select>
+                                    <input type="hidden" name="student_id" value="<?php echo $enquiery_data->student_id; ?>">
                                     <span class="error"></span>
                                 </div>
 
-                                <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
+                                <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                     <select name="intake_year[]" class="form-control intake_year">
                                         <option  hidden="" value="0">Select Intake year</option>
@@ -814,7 +720,7 @@ hr{
                                 </div>
                             </div>
                             <div class="form-group row" >
-                                <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
+                                <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select name="admit_status_id[]" class="form-control admit_status_id">
                                         <option  hidden="" value="0">Select Applied program</option>
@@ -826,9 +732,9 @@ hr{
                                 </div>
 
 
-                                <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
+                                <label class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <select name="is_scholarship_awarded[]" disabled="" class="form-control is_scholarship_awarded">
+                                    <select name="is_scholarship_awarded[]" <?php if(isset($app_college->admit_status_id) && $app_college->admit_status_id==1){}else{echo  'disabled'; } ?> class="form-control is_scholarship_awarded">
                                         <option hidden="" value="0">Yes/No</option>
                                         <option <?php if($app_college->is_scholarship_awarded=="true"){ echo "Selected"; } ?> value="1">Yes</option>
                                         <option value="2">No</option>
@@ -836,7 +742,7 @@ hr{
                                     <span class="error"></span>
                                 </div>
 
-                                <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
+                                <label class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <input type="number" <?php if($app_college->is_scholarship_awarded=="true"){ ?> value="<?php echo $app_college->scholarship_amount; ?>" <?php }else{ echo "disabled;";  } ?>  required="" min="0" step="0.1" name="scholarship_amount[]" class="form-control scholarship_amount">
                                     <span class="error"></span>
@@ -851,7 +757,7 @@ hr{
                                 </div>
                             </div>
                             <div class="form-group row" >
-                                <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
+                                <label class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select name="college_id[]" class="form-control college_id">
                                         <option  hidden="" value="0">Select Applied college</option>
@@ -859,10 +765,11 @@ hr{
                                             <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                                         <?php } } ?>
                                     </select>
+                                    <input type="hidden" name="student_id" value="<?php echo $enquiery_data->student_id; ?>">
                                     <span class="error"></span>
                                 </div>
 
-                                <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
+                                <label  class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                     <select name="intake_year[]" class="form-control intake_year">
                                         <option  hidden="" value="0">Select Intake year</option>
@@ -919,7 +826,7 @@ hr{
                                 </div>
                             </div>
                             <div class="form-group row" >
-                                <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
+                                <label  class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select name="admit_status_id[]" class="form-control admit_status_id">
                                         <option  hidden="" value="0">Select Applied program</option>
@@ -931,7 +838,7 @@ hr{
                                 </div>
 
 
-                                <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
+                                <label  class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                                     <select name="is_scholarship_awarded[]" disabled="" class="form-control is_scholarship_awarded">
                                         <option hidden="" value="0">Yes/No</option>
@@ -941,7 +848,7 @@ hr{
                                     <span class="error"></span>
                                 </div>
 
-                                <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
+                                <label  class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <input type="number" disabled="" required="" min="0" step="0.1" name="scholarship_amount[]" class="form-control scholarship_amount">
                                     <span class="error"></span>
@@ -962,13 +869,13 @@ hr{
                 <?php $arr=array('class'=>"form-horizontal mt-30","id"=>"third_section");
                             echo form_open('admin/student/updateJoiningProgram',$arr); ?>
                     <div class="form-group row" >
-                        <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Joining program</label>
+                        <label  class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Joining program</label>
                         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                             <select class="form-control ">
                             </select>
                         </div>
 
-                        <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Joining college</label>
+                        <label  class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Joining college</label>
                         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
                             <select class="form-control ">
                             </select>
@@ -1070,7 +977,7 @@ hr{
         </div>
     </div>
     <div class="form-group row" >
-        <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
+        <label  class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Applied college</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="college_id[]" class="form-control college_id">
                 <option  hidden="" value="0">Select Applied college</option>
@@ -1078,10 +985,11 @@ hr{
                     <option value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
                 <?php } } ?>
             </select>
+            <input type="hidden" name="student_id" value="<?php echo $enquiery_data->student_id; ?>">
             <span class="error"></span>
         </div>
 
-        <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
+        <label  class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Intake year</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="intake_year[]" class="form-control intake_year">
                 <option  hidden="" value="0">Select Intake year</option>
@@ -1138,7 +1046,7 @@ hr{
         </div>
     </div>
     <div class="form-group row" >
-        <label for="Degree Name" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
+        <label  class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Admit status</label>
         <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
             <select name="admit_status_id[]" class="form-control admit_status_id">
                 <option  hidden="" value="0">Select Applied program</option>
@@ -1150,7 +1058,7 @@ hr{
         </div>
 
 
-        <label for="Degree Name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
+        <label  class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Scholarship awarded</label>
         <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
             <select name="is_scholarship_awarded[]" disabled="" class="form-control is_scholarship_awarded">
                 <option hidden="" value="0">Yes/No</option>
@@ -1160,7 +1068,7 @@ hr{
             <span class="error"></span>
         </div>
 
-        <label for="Degree Name" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
+        <label  class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Scholarship amount</label>
         <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
             <input type="number" disabled="" required="" min="0" step="0.1" name="scholarship_amount[]" class="form-control scholarship_amount">
             <span class="error"></span>
@@ -1750,7 +1658,7 @@ hr{
                         $("#enquiery_date_nfup").daterangepicker({
                             singleDatePicker: true,
                             showDropdowns: true,
-                            minDate: moment(),
+                            //minDate: moment(),
                             locale: {
                                 format: 'YYYY-MM-DD'
                             }

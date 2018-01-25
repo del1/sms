@@ -208,6 +208,23 @@ class Admin extends Del {
 		}
 	}
 
+	public function convert_student()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		if(isset($posted_data['student_id']) && isset($posted_data['is_secure_request']) && $this->input->post('is_secure_request',TRUE)=='uKrt)12')
+		{
+			$res=$this->enquries->select('is_converted')->get_by('student_id',$posted_data['student_id']);
+			if($res->is_converted=="false")
+			{
+				$q=$this->enquries->update_by(array('student_id'=>$posted_data['student_id']),array('is_converted'=>"true"));
+				echo json_encode($q);
+			}else{
+				echo json_encode(false);
+			}
+			
+		}
+	}
+
 	/*Genral Function section begins*/
 
 

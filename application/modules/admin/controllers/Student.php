@@ -38,6 +38,7 @@ class Student extends Del {
 
 	public function create()
 	{
+		$posted_data=$this->security->xss_clean($this->input->post());
 		$this->form_validation->set_rules('agent_id', 'Agent', 'trim|required');
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
@@ -46,7 +47,6 @@ class Student extends Del {
 		//$this->form_validation->set_rules('resident_state_id', 'Residing State', 'trim|required');
 		$this->form_validation->set_rules('interested_program_id', 'Interested Program', 'trim|required');
 		if($this->form_validation->run($this) !== FALSE){
-			$posted_data=$this->security->xss_clean($this->input->post());
 			$posted_data['signup_date']=date('Y-m-d H:i:s');
 			$posted_data['added_by'] =$this->session->User_Id;
 			$posted_data['userlevel_id'] =3;
@@ -257,6 +257,7 @@ class Student extends Del {
 
 	public function updateCollege()
 	{
+
 		$posted_data=$this->security->xss_clean($this->input->post());
 		$this->lnk_student_to_applied_colleges->delete_by('student_id',$posted_data['student_id']);
 		for ($i=0; $i < count($posted_data['college_id']) ; $i++) { 
@@ -326,10 +327,16 @@ class Student extends Del {
 				$data['student_packages']=$this->lnk_student_to_packages->get_many_by('student_id',$student_data->student_id);
 				$data['applied_student_colleges']=$this->lnk_student_to_applied_colleges->get_many_by('student_id',$student_data->student_id);
 			}
-			$data['page']='Edit student Details';
+			$data['page']='student_details';
 			$view = 'admin/student/edit_student_view1';
 			echo Modules::run('template/admin_template', $view, $data);	
 		}
+	}
+
+	public function followup_list(){
+		$data['page']='Follow Up Updates';
+		$view = 'admin/followup_list';
+		echo Modules::run('template/admin_template', $view, $data);	
 	}
 
 
@@ -345,7 +352,6 @@ class Student extends Del {
 				case 'Personal':
 					$data['student_info']=$this->users->get_personal_info($posted_data['student_id']);
 					$view = 'admin/ajax/student/ajax_student_personal_view';
-					
 					break;
 				case 'Professional':
 					$data['professional_details']=$this->student_profile->get_professional_detail($posted_data['student_id']);
@@ -354,15 +360,16 @@ class Student extends Del {
 					$view = 'admin/ajax/student/ajax_student_professional_view1';
 					break;
 				case 'Application':
-					# code...
+					$data['exam_taken_details']=$this->student_to_exams->get_many_by('student_id',$posted_data['student_id']);
+					$data['student_packages']=$this->lnk_student_to_packages->get_student_packages($posted_data['student_id']);
+					$view = 'admin/ajax/student/ajax_student_application_view';
 					break;	
-				
 				default:
-					# code...
+					$data['student_info']=$this->users->get_personal_info($posted_data['student_id']);
+					$view = 'admin/ajax/student/ajax_student_personal_view';
 					break;
 			}
 			$this->load->view($view,$data);
-			
 		}
 	}
 

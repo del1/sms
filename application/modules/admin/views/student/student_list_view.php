@@ -40,18 +40,20 @@
                         <td><?php echo $student->email_id; ?> </td>
                         <td><?php echo $student->phonenumber; ?> </td>
                         <td data-id="<?php echo $student->student_id; ?>">
-                            <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-success btn-xs requestInfo" data-level="Personal" data>
+                            <button  type="button" class="btn btn-success btn-xs requestInfo" data-level="Personal" data>
                                 <span class="glyphicon glyphicon-search"></span> Personal
                             </button>
-                            <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-primary btn-xs requestInfo" data-level="Professional">
+                            <button  type="button" class="btn btn-primary btn-xs requestInfo" data-level="Professional">
                                 <span class="glyphicon glyphicon-search"></span> Professional
                             </button>
-                            <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-warning btn-xs requestInfo" data-level="Application">
+                            <button type="button" class="btn btn-warning btn-xs requestInfo" data-level="Application">
                                 <span class="glyphicon glyphicon-search"></span> Application
                             </button>
                         </td>
                         <td><a href="<?php echo base_url('admin/student/manage_student/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a>
-                            <button type="button" data-id="<?php echo $student->student_id; ?>" class="btn btn-icon btn-warning">Convert</button>
+                            <?php if($student->is_converted=="false"){ ?>
+                                <button type="button" data-id="<?php echo $student->student_id; ?>" class="btn btn-icon btn-warning stuConvert">Convert</button>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php } } ?>
@@ -134,9 +136,33 @@
                 data={[csrfName]:csrfHash,level:level,student_id:$(this).parent().data('id'),is_secure_request:'uKrt)12'};
                 $.post("<?php echo base_url('admin/student/get_student_info') ?>", data, 
                     function(data, textStatus, xhr) {
-                        console.log(data);
                         $("#targetBody").html(data);
-                    });
+                        $("#modal").modal('show');
+                    })
         });
+
+        $(document).on('click', '.stuConvert', function(event) {
+            event.preventDefault();
+            $row=$(this);
+            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+            csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+            var student_id=$(this).data('id');
+                data={[csrfName]:csrfHash,student_id:student_id,is_secure_request:'uKrt)12'};
+                $.post("<?php echo base_url('admin/convert_student') ?>", data, 
+                    function(data, textStatus, xhr) {
+                        if(xhr['status']==200 && data=="true")
+                        {
+                            $row.remove();
+                            toastr_type="success";
+                            str="Candidate converted to customer successfully";
+                            toastr.options = {
+                                  "closeButton": true
+                            }
+                            toastr[toastr_type](str);
+                        }
+                })
+        });
+
+        
     });
 </script>

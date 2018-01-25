@@ -100,7 +100,7 @@ textarea {
                             <div class="form-group row">
                                 <label for="Style Number/Name" class ="form-control-label col-sm-3 col-xl-2">Phone Number</label>
                                 <div class="col-sm-9 col-xl-10">
-                                    <input type="number" min="0" minlength=10 class="form-control" name="phonenumber" placeholder="Enter Phone Number of user" value="<?php if(isset($user_details->phonenumber) && strlen(trim($user_details->phonenumber))) { echo html_escape($user_details->phonenumber); }{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['phonenumber']; }  } ?>"/>
+                                    <input type="number" min="0" minlength=10 class="form-control" name="phonenumber" placeholder="Enter Phone Number of user" required="" value="<?php if(isset($user_details->phonenumber) && strlen(trim($user_details->phonenumber))) { echo html_escape($user_details->phonenumber); }{ if($this->session->flashdata('setData')){ echo $this->session->flashdata('setData')['phonenumber']; }  } ?>"/>
                                     <input type="hidden" name="userlevel_id" value="4">
                                     <input type="hidden" name="user_id" id="user_id" value="<?php if(isset($user_details->user_id) && strlen(trim($user_details->user_id))) { echo html_escape($user_details->user_id); } ?>">
                                 </div>
@@ -108,9 +108,9 @@ textarea {
                             <div class="form-group row">
                                 <label for="Style Number/Name" class ="form-control-label col-sm-3 col-xl-2">Gender</label>
                                 <div class="col-sm-9 col-xl-10 mt-10">
-                                    <label class="radio-inline"><input <?php if(isset($user_details->gender_id) && $user_details->gender_id==1) { echo  "checked";}else{ if($this->session->flashdata('setData') && $this->session->flashdata('setData')['gender_id']==1){ echo 'checked'; }  } ?> type="radio" name="gender_id"  value="1"/> Male
+                                    <label class="radio-inline"><input <?php if(isset($user_details->gender_id) && $user_details->gender_id==1) { echo  "checked";}else{ if($this->session->flashdata('setData') && isset($this->session->flashdata('setData')['gender_id']) &&  $this->session->flashdata('setData')['gender_id']==1){ echo 'checked'; }  } ?> type="radio" name="gender_id"  value="1"/> Male
                                     </label>
-                                    <label class="radio-inline"><input <?php if(isset($user_details->gender_id) && $user_details->gender_id==2) { echo  "checked";}else{ if($this->session->flashdata('setData') && $this->session->flashdata('setData')['gender_id']==2){ echo 'checked'; }  } ?> type="radio" name="gender_id"  value="2"/> Female
+                                    <label class="radio-inline"><input <?php if(isset($user_details->gender_id) && $user_details->gender_id==2) { echo  "checked";}else{ if($this->session->flashdata('setData')&& isset($this->session->flashdata('setData')['gender_id']) && $this->session->flashdata('setData')['gender_id']==2){ echo 'checked'; }  } ?> type="radio" name="gender_id"  value="2"/> Female
                                     </label>
                                 </div>
                             </div>

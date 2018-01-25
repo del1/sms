@@ -1,3 +1,19 @@
+<style type="text/css">
+    label{
+        font-weight: 600;
+    }
+    .form-control[readonly]{
+        background-color: #ccc;
+        font-weight: 400;
+    }
+    .modal-body{
+        margin-top: 5px;
+        padding-top: 0px;
+    }
+    .modal-header{
+        padding-bottom: 0px;
+    }
+</style>
 <?php $student_info=$student_info[0]; ?>
 <div class="row row-centered">
     <div class="form-group row col-md-6 col-sm-6 col-xl-6 col-6">

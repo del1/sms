@@ -107,17 +107,17 @@
             </a>
             <ul class="site-menu-sub">
               <li class="site-menu-item">
-                <a  href="javascript:void(0)">
+                <a  href="<?php echo base_url('admin/reports/lead'); ?>">
                   <span class="site-menu-title">Lead Report</span>
                 </a>
               </li>
               <li class="site-menu-item">
-                <a  href="javascript:void(0)">
+                <a  href="<?php echo base_url('admin/reports/student'); ?>">
                   <span class="site-menu-title">Student Report</span>
                 </a>
               </li>
               <li class="site-menu-item">
-                <a  href="javascript:void(0)">
+                <a href="<?php echo base_url('admin/reports/success'); ?>">
                   <span class="site-menu-title">Success Report</span>
                 </a>
               </li>

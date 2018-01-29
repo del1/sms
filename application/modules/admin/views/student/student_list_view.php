@@ -20,6 +20,7 @@
     </div>
     <div class="page-content container">
         <div class="panel-body">
+            
             <a href="<?php echo base_url('admin/student/add'); ?>" id="manage_product" class="btn btn-success btnadd">Add Student</a>
             <table id="store_list_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive" ><!-- data-plugin="dataTable" -->
             <thead>

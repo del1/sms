@@ -19,7 +19,7 @@ class Admin extends Del {
 	}
 
 	public function subadmin(){
-		$data['page']='Sub Admin list';
+		$data['page']='Sub_Admin_list';
 		$data['consultant_list']=$this->users->get_many_by('userlevel_id',4);
 		$view = 'admin/subadmin/subadmin_list_view';
 		echo Modules::run('template/admin_template', $view, $data);
@@ -301,7 +301,7 @@ class Admin extends Del {
 	
 	public function application_rounds()//list
 	{
-		$data['page']='Application Rounds';
+		$data['page']='application_rounds';
 		$data['appround_list']=$this->ref_approunds->get_application_rounds();
 		$view = 'admin/masterlist/application_rounds/approunds_list_view';
 		echo Modules::run('template/admin_template', $view, $data);	
@@ -469,18 +469,19 @@ class Admin extends Del {
 		if($type){
 			switch ($type) {
 				case 'UG':
-							$data['page']='UG College';
+							$data['page']='ug_college';
 							$data['type']='UG';
 							$data['college_list']=$this->ref_college->get_collegesOfType(1);
 							break;
 				case 'PG':
-							$data['page']='PG College';
+							$data['page']='pg_college';
 							$data['type']='PG';
 							$data['college_list']=$this->ref_college->get_collegesOfType(2);
 							break;
 				default:
-							$data['page']='UG College';
-							break;
+							$data['page']='ug_college';
+							$data['type']='UG';
+							$data['college_list']=$this->ref_college->get_collegesOfType(1);
 				}
 		}else{
 			$data['page']='UG Colleges';
@@ -536,12 +537,12 @@ class Admin extends Del {
 		if($type){
 			switch ($type) {
 				case 'UG':
-							$data['page']='UG Degree';
+							$data['page']='ug_degree';
 							$data['type']='UG';
 							$data['degree_list']=$this->ref_degree->get_degreesOfType(1);
 							break;
 				case 'PG':
-							$data['page']='PG Degree';
+							$data['page']='pg_degree';
 							$data['type']='PG';
 							$data['degree_list']=$this->ref_degree->get_degreesOfType(2);
 							break;

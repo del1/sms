@@ -15,7 +15,7 @@ class Student extends Del {
 	public function summary()
 	{
 		$data['section']='student';
-		$data['page']='student summary';
+		$data['page']='student_summary';
 		$data['student_list']=$this->student_profile->get_student_list();
 		$view = 'admin/student/student_list_view';
 		echo Modules::run('template/admin_template', $view, $data);	
@@ -304,7 +304,6 @@ class Student extends Del {
 
 			$data['colleges_list']=$this->ref_college->select('college_id,college_name,college_type_id')->get_many_by('is_active',"true");
 
-			$data['apply_college_list']=$this->ref_college->apply_college_list();
 			$data['apply_college_list']=$this->ref_college->apply_college_list();
 			$data['appround_list']=$this->ref_approunds->select('round_id,round_name')->get_many_by('is_active',"true");
 			$data['app_status_list']=$this->ref_application_status->select('app_status_id,app_status')->get_many_by('is_active',"true");

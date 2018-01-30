@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2018 at 02:45 PM
+-- Generation Time: Jan 30, 2018 at 03:02 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -170,8 +170,8 @@ CREATE TABLE `ref_application_status` (
 --
 
 INSERT INTO `ref_application_status` (`app_status_id`, `app_status`, `is_active`) VALUES
-(1, 'app_status1', 'true'),
-(2, 'app_status2', 'true');
+(1, 'Applied', 'true'),
+(2, 'On hold', 'true');
 
 -- --------------------------------------------------------
 
@@ -53489,7 +53489,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-29 12:58:39', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-30 17:58:17', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'Shyam', 'sundar', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', 'first', 'last', 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
@@ -53917,7 +53917,7 @@ ALTER TABLE `tbl_student_to_taken_exams`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Constraints for dumped tables
 --

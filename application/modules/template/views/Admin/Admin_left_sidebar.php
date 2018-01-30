@@ -41,7 +41,7 @@
 				<span class="site-menu-title">Follow Up updates</span>
 			</a>
 		</li>
-		<li class="site-menu-item has-sub ">
+		<li class="site-menu-item has-sub <?php if(isset($section) && $section=='masterlist'){ echo 'active'; } ?>">
 			<a href="javascript:void(0)">
 				<!-- <i class="site-menu-icon wb-plugin" aria-hidden="true"></i> -->
 				<i class="site-menu-icon icon wb-list-bulleted" aria-hidden="true"></i>
@@ -106,7 +106,7 @@
 				</li>
 			</ul>
 		</li>
-		<li class="site-menu-item has-sub">
+		<li class="site-menu-item has-sub <?php if(isset($section) && $section=='report'){ echo 'active'; } ?>">
 			<a href="javascript:void(0)">
 				<!-- <i class="site-menu-icon wb-grid-4" aria-hidden="true"></i> -->
 				<i class="site-menu-icon icon wb-clipboard" aria-hidden="true"></i>
@@ -114,17 +114,17 @@
 				<span class="site-menu-arrow"></span>
 			</a>
 			<ul class="site-menu-sub">
-				<li class="site-menu-item <?php if(isset($page) && $page=="student_details"){ echo 'active';} ?>">
+				<li class="site-menu-item <?php if(isset($page) && $page=="lead_report"){ echo 'active';} ?>">
 					<a  href="<?php echo base_url('admin/reports/lead'); ?>">
 						<span class="site-menu-title">Lead Report</span>
 					</a>
 				</li>
-				<li class="site-menu-item <?php if(isset($page) && $page=="student_details"){ echo 'active';} ?>">
+				<li class="site-menu-item <?php if(isset($page) && $page=="student_report"){ echo 'active';} ?>">
 					<a  href="<?php echo base_url('admin/reports/student'); ?>">
 						<span class="site-menu-title">Student Report</span>
 					</a>
 				</li>
-				<li class="site-menu-item <?php if(isset($page) && $page=="student_details"){ echo 'active';} ?>">
+				<li class="site-menu-item <?php if(isset($page) && $page=="success_report"){ echo 'active';} ?>">
 					<a href="<?php echo base_url('admin/reports/success'); ?>">
 						<span class="site-menu-title">Success Report</span>
 					</a>

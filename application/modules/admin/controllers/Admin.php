@@ -259,6 +259,7 @@ class Admin extends Del {
 
 	public function universities()//list
 	{
+		$data['section']='masterlist';
 		$data['page']='Universities';
 		$data['universities_list']=$this->ref_universities->get_universities();
 		$view = 'admin/masterlist/universities/universities_list_view';
@@ -301,6 +302,7 @@ class Admin extends Del {
 	
 	public function application_rounds()//list
 	{
+		$data['section']='masterlist';
 		$data['page']='application_rounds';
 		$data['appround_list']=$this->ref_approunds->get_application_rounds();
 		$view = 'admin/masterlist/application_rounds/approunds_list_view';
@@ -340,6 +342,7 @@ class Admin extends Del {
 	
 	public function programs()//list
 	{
+		$data['section']='masterlist';
 		$data['page']='Program';
 		$data['program_list']=$this->ref_program->get_programs();
 		$view = 'admin/masterlist/programs/program_list_view';
@@ -379,6 +382,7 @@ class Admin extends Del {
 	
 	public function packages()//list
 	{
+		$data['section']='masterlist';
 		$data['page']='Packages';
 		$data['packages_list']=$this->ref_packages->get_packages();
 		$view = 'admin/masterlist/packages/package_list_view';
@@ -419,6 +423,7 @@ class Admin extends Del {
 	
 	public function sources()//list
 	{
+		$data['section']='masterlist';
 		$data['page']='Sources';
 		$data['source_list']=$this->ref_source->get_sources();
 		$view = 'admin/masterlist/sources/source_list_view';
@@ -455,6 +460,7 @@ class Admin extends Del {
 
 	public function consultants()//list
 	{
+		$data['section']='masterlist';
 		$data['page']='Consultants';
 		$data['consultant_list']=$this->users->get_consultants();
 		$view = 'admin/masterlist/consultants/consultant_list_view';
@@ -466,6 +472,7 @@ class Admin extends Del {
 	/*manage college */
 	public function colleges($type)
 	{
+		$data['section']='masterlist';
 		if($type){
 			switch ($type) {
 				case 'UG':
@@ -534,6 +541,7 @@ class Admin extends Del {
 
 	public function degree($type)
 	{
+		$data['section']='masterlist';
 		if($type){
 			switch ($type) {
 				case 'UG':
@@ -594,66 +602,18 @@ class Admin extends Del {
 	}
 
 
-	/*Masterlist- ManageDegree section end*/
-
-	/*public function show_stores_list($section='')
-	{
-		switch ($section) {
-			case 'Events':
-						$data['page']='Event And Trunk Shows';
-						$data['next_action']='store_trunkshows_list';
-						break;
-			case 'Career':
-						$data['page']='Career/Jobs';
-						$data['next_action']='store_jobs_list';
-						break;
-			default:
-						$data['page']='Event And Trunk Shows';
-						$data['next_action']='store_trunkshows_list';
-						break;
-		}
-		$data['store_list']=$this->store->select('store_id,store_name')->get_many_by('is_active',true);
-		$view = 'admin/admin_show_stores_list_for_action';
-		echo Modules::run('template/admin_template', $view, $data);	
-	} */
-	/*Genral function ends*/
-
 
 	/*Store
 	/*Store Methods*/
 /*
-	public function stores_list()
-	{
-		$data['store_list']=$this->store->get_all();
-		$data['page']='Store List';
-		$view = 'admin/stores/admin_store_list_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
 
-	public function manage_store($store_id='')
-	{
-		$data['store_details']='';
-		if($store_id)
-		{
-			$data['store_details']=$this->store->get($store_id);
-		}
-		$data['page']='Store List';
-		$view = 'admin/stores/admin_manage_store_view';
-		echo Modules::run('template/admin_template', $view, $data);
-	}
 
 	public function changeStoreStatus()
 	{
 		$this->store->update($this->input->post('store_id',TRUE), array( 'is_active' => $this->input->post('is_active',TRUE) ));
 	}
 
-	public function delete_stores()
-	{
-		if(isset($_POST['store_id']) && isset($_POST['is_secure_request']) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
-		{
-			$this->store->delete($this->input->post('store_id',TRUE));
-		}
-	}
+
 
 	public function add_update_store()
 	{
@@ -667,57 +627,15 @@ class Admin extends Del {
 		}
 		redirect('admin/stores_list');
 	}*/
-	/*end of store pages*/
+	/*end of store pages
 
 
-
-
-	/*About us
-	/*About us Methods*/
-	/*public function manage_about_us()
-	{
-		$data['page']='Manage About-us';
-        $data['about_us']=$this->ref_pages->get_section_by_pageId(1);
-		$view = 'admin/admin_manage_about_us';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
-
-	public function update_about_us(){
-		$posted_data=$this->security->xss_clean($this->input->post());
-		$required_array = elements(array('About_us_Title', 'Section-1', 'Section-2','Quote'), $posted_data);
-		$data['about_us']=$this->tbl_pages->update_about_us($required_array);
-	}*/
-	/*end of store pages*/
-
-	/*Event and trunk shows
-	/*Event and trunk shows Methods*/
-
-	/*public function store_trunkshows_list($store_id)
-	{
-		$data['event_list']=$this->tbl_trunkshows->get_many_by('store_id',$store_id);
-		$data['store_details']=$this->store->select('store_name')->get($store_id);
-		$data['page']='Event And Trunk Shows';
-		$view = 'admin/trunkshows/admin_storewise_trunkshows_list';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
 
 	public function changeEventStatus()
 	{
 		$this->tbl_trunkshows->update($this->input->post('event_id',TRUE), array( 'is_active' => $this->input->post('is_active',TRUE) ));
 	}
 
-	public function manage_event($event_id='')
-	{
-		$data['event_details']='';
-		$data['store_list']=$this->store->select('store_id,store_name')->get_many_by('is_active',true);
-		if($event_id)
-		{
-			$data['event_details']=$this->tbl_trunkshows->get($event_id);
-		}
-		$data['page']='Event And Trunk Shows';
-		$view = 'admin/trunkshows/admin_manage_event_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
 
 	public function add_update_events()
 	{
@@ -742,55 +660,6 @@ class Admin extends Del {
 	/*end of event pages*/
 
 
-	/*Career Pages
-	/*Career pages*/
-	/*public function store_jobs_list($store_id)
-	{
-		$data['jobs_list']=$this->tbl_jobs->get_many_by('store_id',$store_id);
-		$data['store_details']=$this->store->select('store_name')->get($store_id);
-		$data['page']='Jobs list';
-		$view = 'admin/careers/admin_storewise_job_list';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
-
-	public function manage_job($job_id="")
-	{
-		$data['job_details']='';
-		$data['store_list']=$this->store->select('store_id,store_name')->get_many_by('is_active',true);
-		if($job_id)
-		{
-			$data['job_details']=$this->tbl_jobs->get($job_id);
-		}
-		$data['page']='Jobs list';
-		$view = 'admin/careers/admin_manage_job_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
-
-	public function add_update_job()
-	{
-		$posted_data=$this->security->xss_clean($this->input->post());
-		$required_array = elements(array('job_title','job_desc','job_responsibility', 'store_id', 'job_requirements','job_benifit'), $posted_data);
-		if(isset($posted_data['job_id']))
-		{
-			$this->tbl_jobs->update($posted_data['job_id'], $required_array);
-		}else{
-			$this->tbl_jobs->insert($required_array);
-		}
-		redirect('admin/Store_jobs_list/'.$posted_data['store_id']);
-	}
-
-	public function changeJobStatus()
-	{
-		$this->tbl_jobs->update($this->input->post('job_id',TRUE), array( 'is_active' => $this->input->post('is_active',TRUE) ));
-	}
-
-	public function delete_job()
-	{
-		if(isset($_POST['job_id']) && isset($_POST['is_secure_request']) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
-		{
-			$this->tbl_jobs->delete($this->input->post('job_id',TRUE));
-		}
-	}*/
 	/*end of career pages*/
 
 	/*
@@ -914,63 +783,10 @@ class Admin extends Del {
 	}*/
 	/*end of product page */
 
-	/*
-	/*Userlist Pages
-	/*Userlist pages*/
 
-	/*public function userlist()
-	{
-		$data['page']='Userlist';
-		$data['users_list']=$this->users->get_many_by('userlevel_id',2);
-		$view = 'admin/userlist/admin_userlist_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
-
-
-	public function delete_user()
-	{
-		if(isset($_POST['user_id']) && isset($_POST['is_secure_request']) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
-		{
-			$this->users->delete($this->input->post('user_id',TRUE));
-		}
-	}
-
-	public function profile($user_id){
-		$data['page']='Userlist';
-		$data['user_details']=$this->users->get($user_id);
-		$view = 'admin/userlist/admin_user_profile_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}*/
-
-
-	/*
-	/*story Pages
-	/*story pages*/
 
 	/*public function story_list()
-	{
-		$data['page']='Story List';
-		$data['stories_list']=$this->stories->get_all();
-		$view = 'admin/stories/admin_stories_list_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
 
-	public function manage_story($story_id)
-	{
-		$data['page']='Story Details';
-		$data['store_list']=$this->store->select('store_id,store_name')->get_many_by('is_active', 1);
-		$data['story_details']=$this->stories->get($story_id);
-		$view = 'admin/stories/admin_manage_story_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
-
-	public function delete_story()
-	{
-		if(isset($_POST['story_id']) && isset($_POST['is_secure_request']) && $this->input->post('is_secure_request',TRUE)=='uKrt)6')
-		{
-			$this->stories->delete($this->input->post('story_id',TRUE));
-		}
-	}
 
 	public function add_update_story()
 	{
@@ -1043,45 +859,12 @@ class Admin extends Del {
 
 
 
-	public function collection_list()
-	{
-		$data['collection_list']=$this->ref_coll->get_all();
-		$data['brands_list']=$this->ref_brand->get_all();
-		$data['catagory_list']=$this->ref_cat->get_all();
-		$data['season_list']=$this->ref_season->get_all();
-		$data['page']='Collection List';
-		$view = 'admin/collection/admin_collection_list_view';
-		echo Modules::run('template/admin_template', $view, $data);	
-	}
 
-	public function manage_collection($collection_id)
-	{
-		$collection=$this->ref_coll->get_list_with_images($collection_id);
-		if(!empty($collection))
-		{
-			$data['collectionDetails']=$collection;
-			$data['page']='Collection List';
-			$view = 'admin/collection/admin_manage_collection_view';
-			echo Modules::run('template/admin_template', $view, $data);
-		}else{
-			redirect('admin/');
-		}
-	}
 */
 /* manage brands
 /* manage brands*/
 	/*public function manage_brand($brand_id='')
-	{
-		$data['brand_details']='';
-		if($brand_id)
-		{
-			$data['brand_details']=$this->ref_brand->get($brand_id);
-			$data['brand_images']=$this->lnk_brands_to_docs->get_brand_images($brand_id);
-		}
-		$data['page']='Manage brand';
-		$view = 'admin/collection/brands/admin_manage_brand_view';
-		echo Modules::run('template/admin_template', $view, $data);
-	}
+
 
 	public function add_update_brands()
 	{

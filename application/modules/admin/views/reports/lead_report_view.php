@@ -14,6 +14,8 @@ label{
     <div class="page-content">
         <div class="panel">
             <div class="panel-body container-fluid">
+                <?php $arr=array('class'=>"form-horizontal","id"=>"form_lead_report");
+                            echo form_open('admin/reports/genrate_lead_report',$arr); ?>
                 <div class="row row-lg">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-right">
                         <a href="javascript:void(0)" class="btn btn-success float-right " >Export Excel</a>
@@ -43,10 +45,9 @@ label{
                     <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
                         <div class="form-group">
                             <label for="intake_year" class="form-control-label">Select Intake year</label>
-                            <select data-plugin="select2" class="form-control" name="intake_year" id="intake_year">
-                                <option  hidden="">Select Intake year</option>
-                                <?php for ($i=date("Y")-5; $i < date("Y")+5 ; $i++) {  ?>
-                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                            <select class="form-control" name="intake_year[]" id="intake_year" multiple="">
+                                <?php $c_y=date("Y"); for ($i=$c_y-5; $i < $c_y+5 ; $i++) {  ?>
+                                    <option <?php if($c_y==$i){ echo 'selected'; } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                 <?php } ?>
                             </select>
                             <span id="intake_year_error"></span>
@@ -80,7 +81,7 @@ label{
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
                         <div class="form-group">
                             <label for="source" class="form-control-label">Source</label>
-                            <select class="form-control" id="source" name="source" multiple="" data-plugin="select2">
+                            <select class="form-control" id="source" name="source[]" multiple="">
                                 <?php if(!empty($source_list)) { foreach ($source_list as $source) { ?>
                                     <option value="<?php echo $source->source_id;?>"><?php echo $source->source_name ;?></option>
                                 <?php } } ?>
@@ -91,7 +92,8 @@ label{
                     <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3 col-3">
                         <div class="form-group">
                             <label for="interested_program" class="form-control-label">Interested Program</label>
-                            <select class="form-control" name="interested_program" id="interested_program" multiple="" data-plugin="select2">
+                            <select class="form-control" name="interested_program[]" id="interested_program" multiple="">
+                                
                                 <?php if(!empty($program_list)) { foreach ($program_list as $program) { ?>
                                     <option value="<?php echo $program->program_id;?>"><?php echo $program->program_name ;?></option>
                                 <?php } } ?>
@@ -113,7 +115,7 @@ label{
                     <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3 col-3">
                         <div class="form-group">
                             <label for="ug_college" class="form-control-label">UnderGraduate College</label>
-                            <select class="form-control" id="ug_college" name="ug_college" multiple="" data-plugin="select2">
+                            <select class="form-control" id="ug_college" name="ug_college[]" multiple="">
                                 <?php if(!empty($college_list)) { foreach ($college_list as $college) { ?>
                                     <option value="<?php echo $college->college_id;?>"><?php echo $college->college_name ;?></option>
                                 <?php } } ?>
@@ -126,7 +128,8 @@ label{
                     <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
                         <div class="form-group">
                             <label for="res_city" class="form-control-label">Residing City</label>
-                            <select class="form-control" id="res_city" name="res_city" multiple="" data-plugin="select2">
+                            <select class="form-control" id="res_city" name="res_city[]" multiple="">
+                               
                                 <?php if(!empty($city_list)) { foreach ($city_list as $city) { ?>
                                     <option value="<?php echo $city->city_id;?>"><?php echo $city->city_name ;?></option>
                                 <?php } } ?>
@@ -177,30 +180,39 @@ label{
                 </div>
                 <div class="row row-lg">
                     <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
-                        <label for="from_exp_range_date" class="form-control-label" style="padding: .429rem 0;">Work Experience Range</label>
+                        <label for="from_exp_range_date" class="form-control-label" style="padding: .429rem 0;">Work Experience Range (in years)</label>
                         <div class="form-group row">
                             <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
-                                <div class="input-group">
-                                    <input type="text" id="from_exp_range_date" name="from_exp_range_date" class="form-control" placeholder="From Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
-                                    <span id="from_exp_range_date_error" class="error"></span>
-                                </div>
+                                <select class="form-control" name="from_exp_range_date" id="from_exp_range_date">
+                                    <option></option>
+                                <?php for ($i=0; $i <= 5 ; $i++) {  ?>
+                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                <?php } ?>
+                                </select>
+                                <span id="from_exp_range_date_error" class="error"></span>
                             </div>
                             <label for="to_exp_range_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" style="text-align: right;">to</label>
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
-                                <div class="input-group">
-                                    <input type="text" id="to_exp_range_date" name="to_exp_range_date" class="form-control" placeholder="To Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
-                                    <span id="to_exp_range_date_error" class="error"></span>
-                                </div>
+                                <select class="form-control" name="to_exp_range_date" id="to_exp_range_date">
+                                    <option></option>
+                                <?php for ($i=1; $i <= 6 ; $i++) {  ?>
+                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                <?php } ?>
+                                </select>
+                                <span id="to_exp_range_date_error" class="error"></span>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4 ">
+                        <a href="javascript:void(0)" id="genrate" class="btn btn-success  mt-40" >Genrate</a>
+                    </div>
                 </div>
+                <?php echo form_close(); ?>
                 <div class="row row-lg">
                     <table id="lead_report_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive">
                     <thead>
                         <tr>
+                            <th>Type</th>
                             <th>Name</th>
                             <th>Enquiry Date</th>
                             <th>Phone Number</th>
@@ -210,7 +222,7 @@ label{
                             <th>Follow Up</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="genrateLeadReport">
                     </tbody>
                     </table>
                 </div>
@@ -221,6 +233,23 @@ label{
                     
 <script type="text/javascript">
 jQuery(document).ready(function($) {
+
+    $("#intake_year").select2({
+        placeholder: "Select Intake Year"
+    });
+
+    $("#source").select2({
+        placeholder: "Select source"
+    });
+    $("#interested_program").select2({
+        placeholder: "Select Interested Program"
+    });
+    $("#ug_college").select2({
+        placeholder: "Select UnderGraduate College"
+    });
+    $("#res_city").select2({
+        placeholder: "Select City"
+    });
 
     $('#from_enquiry_date').daterangepicker({
         startDate: moment(),
@@ -282,6 +311,34 @@ jQuery(document).ready(function($) {
                   "closeButton": true
                 }
                 toastr[toastr_type](str);
+        });
+    });
+
+    $(document).on('click', '#genrate', function(event) {
+        event.preventDefault();
+        console.log("I am ");
+        var formObj = $("#form_lead_report");
+        var formData = new FormData(formObj[0]);
+        var formURL="<?php echo base_url('admin/reports/genrate_lead_report'); ?>";
+        $.ajax({
+                url: formURL,
+                type: "POST",
+                data:  formData,
+                async: false,
+                datatype : false,
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(data, textStatus, jqXHR)
+                {
+                    console.log(data);
+                    /*str="Lead report genrated successfully";
+                    toastr.options = {
+                      "closeButton": true,
+                      timeOut: 5000
+                    }
+                    toastr["success"](str);*/
+                }         
         });
     });
 });

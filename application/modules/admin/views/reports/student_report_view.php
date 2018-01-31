@@ -193,7 +193,9 @@ label{
                         <div class="form-group">
                             <label for="applied_programs" class="form-control-label">Select applied program</label>
                             <select class="form-control" id="applied_programs" name="applied_programs[]" multiple="">
-                                
+                                <?php if(!empty($program_list)) { foreach ($program_list as $program) { ?>
+                                    <option value="<?php echo $program->program_id;?>"><?php echo $program->program_name ;?></option>
+                                <?php } } ?>
                             </select>
                             <span id="applied_programs_error" class="error"></span>
                         </div>
@@ -237,7 +239,7 @@ label{
                         <div class="form-group row">
                             <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
                                 <div class="input-group">
-                                    <input type="number" id="from_score_range" name="from_score_range" class="form-control" placeholder="From Date">
+                                    <input type="number" id="from_score_range" name="from_score_range" class="form-control" placeholder="Min Score Limit">
                                     <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                     <span id="from_score_range_error" class="error"></span>
                                 </div>
@@ -245,7 +247,7 @@ label{
                             <label for="to_score_range" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" style="text-align: right;">to</label>
                             <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5">
                                 <div class="input-group">
-                                    <input type="number" readonly id="to_score_range" name="to_score_range" class="form-control" placeholder="To Date">
+                                    <input type="number" readonly id="to_score_range" name="to_score_range" class="form-control" placeholder="Max Score Limit">
                                     <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
                                     <span id="to_score_range_error" class="error"></span>
                                 </div>
@@ -262,7 +264,7 @@ label{
                 </div>
                 <?php echo form_close(); ?>
                 <div class="row row-lg">
-                    <table id="lead_report_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive">
+                    <table id="student_report_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -317,24 +319,10 @@ jQuery(document).ready(function($) {
     $("#res_states").select2({
         placeholder: "Select Residing State"
     });
-    
-    
-
-    
-    
-
-    
-
-    $("#source").select2({
-        placeholder: "Select source"
+    $("#applied_programs").select2({
+        placeholder: "Select Applied Program"
     });
-    $("#interested_program").select2({
-        placeholder: "Select Interested Program"
-    });
-    
-    $("#res_city").select2({
-        placeholder: "Select City"
-    });
+
 
     $('#from_enquiry_date').daterangepicker({
         startDate: moment(),
@@ -345,25 +333,7 @@ jQuery(document).ready(function($) {
         $('#to_enquiry_date').val(end.format('YYYY-MM-DD'));
     });  
 
-    $('#gre_tentative_from_date').daterangepicker({
-        startDate: moment(),
-        autoUpdateInput: false,
-    },
-    function(start, end, label) {
-        $('#gre_tentative_from_date').val(start.format('YYYY-MM-DD'));
-        $('#gre_tentative_to_date').val(end.format('YYYY-MM-DD'));
-    });  
-
-    $('#gmat_tentative_from_date').daterangepicker({
-        startDate: moment(),
-        autoUpdateInput: false,
-    },
-    function(start, end, label) {
-        $('#gmat_tentative_from_date').val(start.format('YYYY-MM-DD'));
-        $('#gmat_tentative_to_date').val(end.format('YYYY-MM-DD'));
-    });  
-
-    var table=$("#lead_report_table").DataTable( {
+    var table=$("#student_report_table").DataTable( {
         "order": [[ 0, "asc" ]],
         stateSave: true,
         responsive: true,
@@ -404,7 +374,7 @@ jQuery(document).ready(function($) {
         console.log("I am ");
         var formObj = $("#form_lead_report");
         var formData = new FormData(formObj[0]);
-        var formURL="<?php echo base_url('admin/reports/genrate_lead_report'); ?>";
+        var formURL="<?php echo base_url('admin/reports/genrate_student_report'); ?>";
         $.ajax({
                 url: formURL,
                 type: "POST",

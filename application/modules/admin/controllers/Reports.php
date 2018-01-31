@@ -40,9 +40,15 @@ class Reports extends Del {
 		$data['appround_list']=$this->ref_approunds->select('round_id,round_name')->get_many_by('is_active',"true");
 		$data['apply_college_list']=$this->ref_college->apply_college_list();
 		$data['app_status_list']=$this->ref_application_status->select('app_status_id,app_status')->get_many_by('is_active',"true");
+		$data['program_list']=$this->ref_program->select('program_id,program_name')->get_many_by('is_active','true');
 		$data['states_list']=$this->ref_states->select('state_id,state_name')->get_many_by('country_id',101);
 		$view = 'admin/reports/student_report_view';
 		echo Modules::run('template/admin_template', $view, $data);	
+	}
+
+	public function genrate_student_report()
+	{
+		print_r($_POST);
 	}
 
 	public function success()
@@ -51,5 +57,10 @@ class Reports extends Del {
 		$data['section']='report';
 		$view = 'admin/reports/success_report_view';
 		echo Modules::run('template/admin_template', $view, $data);	
+	}
+
+	public function genrate_success_report()
+	{
+		print_r($_POST);
 	}
 }

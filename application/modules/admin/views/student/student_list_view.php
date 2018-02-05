@@ -145,6 +145,7 @@
         $(document).on('click', '.stuConvert', function(event) {
             event.preventDefault();
             $row=$(this);
+            $target=$row.prev().attr('href');
             var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
             csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
             var student_id=$(this).data('id');
@@ -160,6 +161,9 @@
                                   "closeButton": true
                             }
                             toastr[toastr_type](str);
+                            setInterval(function() {
+                                window.location.href = $target;
+                            },1000);
                         }
                 })
         });

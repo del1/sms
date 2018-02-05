@@ -133,6 +133,15 @@ class Student extends Del {
 		}
 		/*end update personal data */
 
+		/*updatting type of lead*/
+		if(isset($posted_data['lead_type_id']) && strlen(trim($posted_data['lead_type_id'])))
+		{
+			$enquiry_details = elements(array('lead_type_id'), $posted_data);
+			$this->enquries->update_by(array('student_id'=>$posted_data['student_id']),$enquiry_details);
+		}
+		/*end of updating type of lead*/
+
+
 		//preparation about ug degree - approach delete insert
 
 		$delete_id = $this->student_to_degrees->delete_by('student_id',$posted_data['student_id']);
@@ -257,11 +266,11 @@ class Student extends Del {
 
 	public function updateCollege()
 	{
-
+		
 		$posted_data=$this->security->xss_clean($this->input->post());
 		$this->lnk_student_to_applied_colleges->delete_by('student_id',$posted_data['student_id']);
 		for ($i=0; $i < count($posted_data['college_id']) ; $i++) { 
-			$ar['student_id']=$posted_data['student_id'][$i];
+			$ar['student_id']=$posted_data['student_id'];
 			$ar['college_id']=$posted_data['college_id'][$i];
 			$ar['intake_year']=$posted_data['intake_year'][$i];
 			$ar['round_id']=$posted_data['round_id'][$i];
@@ -269,6 +278,7 @@ class Student extends Del {
 			$ar['intv_status_id']=$posted_data['intv_status_id'][$i];
 			$ar['applied_program_id']=$posted_data['applied_program_id'][$i];
 			$ar['admit_status_id']=$posted_data['admit_status_id'][$i];
+			$ar['taken_our_assistance']= (($posted_data['taken_our_assistance'][$i]=="1")? "true" : "false");
 			if(isset($posted_data['is_scholarship_awarded'][$i]))
 			{
 				$ar['is_scholarship_awarded']=$posted_data['is_scholarship_awarded'][$i];
@@ -312,6 +322,7 @@ class Student extends Del {
 			$data['admit_status_list']=$this->ref_admit_status->select('admit_status_id,admit_status')->get_many_by('is_active','true');
 			$data['employer_list']=$this->ref_employer->select('employer_id,employer_name')->get_many_by('is_active','true');
 			$data['followup_data']=$this->student_followup->get_student_followups($student_id);
+			$data['lead_types']=$this->ref_lead_types->select('lead_type_id,lead_type')->get_many_by('is_active','true');
 
 			
 			if(!empty($student_data)) //if enquiry data is avialable
@@ -327,7 +338,7 @@ class Student extends Del {
 				$data['applied_student_colleges']=$this->lnk_student_to_applied_colleges->get_many_by('student_id',$student_data->student_id);
 			}
 			$data['page']='student_details';
-			$view = 'admin/student/edit_student_view1';
+			$view = 'admin/student/edit_student_view';
 			echo Modules::run('template/admin_template', $view, $data);	
 		}
 	}

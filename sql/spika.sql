@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2018 at 03:02 PM
+-- Generation Time: Feb 05, 2018 at 01:55 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -36,6 +36,7 @@ CREATE TABLE `lnk_student_to_applied_colleges` (
   `round_id` int(11) NOT NULL,
   `app_status_id` int(11) NOT NULL,
   `intv_status_id` int(11) NOT NULL,
+  `taken_our_assistance` enum('true','false') NOT NULL DEFAULT 'false',
   `applied_program_id` int(11) NOT NULL,
   `admit_status_id` int(11) NOT NULL,
   `is_scholarship_awarded` enum('true','false') NOT NULL DEFAULT 'false',
@@ -48,8 +49,8 @@ CREATE TABLE `lnk_student_to_applied_colleges` (
 -- Dumping data for table `lnk_student_to_applied_colleges`
 --
 
-INSERT INTO `lnk_student_to_applied_colleges` (`stac_id`, `student_id`, `college_id`, `intake_year`, `round_id`, `app_status_id`, `intv_status_id`, `applied_program_id`, `admit_status_id`, `is_scholarship_awarded`, `scholarship_amount`, `is_joined`, `joining_year`) VALUES
-(1, 4, 1, 2018, 1, 1, 1, 3, 1, 'true', '7000.00', 'false', 0000);
+INSERT INTO `lnk_student_to_applied_colleges` (`stac_id`, `student_id`, `college_id`, `intake_year`, `round_id`, `app_status_id`, `intv_status_id`, `taken_our_assistance`, `applied_program_id`, `admit_status_id`, `is_scholarship_awarded`, `scholarship_amount`, `is_joined`, `joining_year`) VALUES
+(18, 4, 1, 2018, 1, 1, 1, 'false', 3, 2, 'false', '0.00', 'false', 0000);
 
 -- --------------------------------------------------------
 
@@ -70,8 +71,7 @@ CREATE TABLE `lnk_student_to_packages` (
 --
 
 INSERT INTO `lnk_student_to_packages` (`stp_id`, `package_id`, `student_id`, `signup_date`, `consultant_id`) VALUES
-(11, 1, 4, '2018-01-20', 1),
-(12, 2, 4, '2018-01-20', 1);
+(17, 1, 4, '2018-01-20', 1);
 
 -- --------------------------------------------------------
 
@@ -48923,8 +48923,17 @@ INSERT INTO `ref_employer` (`employer_id`, `employer_name`, `added_by`, `last_up
 CREATE TABLE `ref_enquiry_status` (
   `enq_status_id` int(11) NOT NULL,
   `enq_status` varchar(128) NOT NULL,
-  `is_active` enum('1','0') NOT NULL
+  `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ref_enquiry_status`
+--
+
+INSERT INTO `ref_enquiry_status` (`enq_status_id`, `enq_status`, `is_active`) VALUES
+(1, 'Closed', 'true'),
+(2, 'Unsubscribed', 'true'),
+(3, 'Closed & Unsubscribed', 'true');
 
 -- --------------------------------------------------------
 
@@ -53331,8 +53340,8 @@ CREATE TABLE `tbl_enquiries` (
 --
 
 INSERT INTO `tbl_enquiries` (`enq_id`, `enq_date`, `student_id`, `source_id`, `agent_id`, `interested_program_id`, `lead_type_id`, `followup_status_id`, `enq_status_id`, `is_converted`, `is_active`) VALUES
-(1, '2017-12-29', 4, 3, 5, 3, 2, NULL, NULL, 'true', 'true'),
-(2, '2016-12-29', 5, 3, 7, 4, 2, NULL, NULL, 'true', 'true'),
+(1, '2017-12-29', 4, 3, 5, 3, 1, NULL, NULL, 'true', 'true'),
+(2, '2016-12-29', 5, 3, 7, 4, 2, NULL, NULL, 'false', 'true'),
 (3, '2017-12-29', 7, 3, 5, 3, 2, NULL, NULL, 'true', 'true');
 
 -- --------------------------------------------------------
@@ -53380,9 +53389,9 @@ CREATE TABLE `tbl_student_professional_history` (
 --
 
 INSERT INTO `tbl_student_professional_history` (`history_id`, `student_id`, `employer_id`, `start_date`, `end_date`, `description`, `is_current`) VALUES
-(12, 4, 1, NULL, NULL, NULL, 'true'),
-(13, 4, 2, NULL, NULL, NULL, 'false'),
-(14, 4, 3, NULL, NULL, NULL, 'false');
+(21, 4, 1, NULL, NULL, NULL, 'true'),
+(22, 4, 2, NULL, NULL, NULL, 'false'),
+(23, 4, 3, NULL, NULL, NULL, 'false');
 
 -- --------------------------------------------------------
 
@@ -53433,8 +53442,8 @@ CREATE TABLE `tbl_student_to_degrees` (
 --
 
 INSERT INTO `tbl_student_to_degrees` (`sd_id`, `student_id`, `degree_id`, `college_id`, `passing_year`, `gpa_marks`) VALUES
-(61, 4, 2, 3, 2011, 6.48),
-(62, 4, 5, 1, 2014, 5.6);
+(67, 4, 2, 3, 2011, 6.48),
+(68, 4, 5, 1, 2014, 5.6);
 
 -- --------------------------------------------------------
 
@@ -53489,7 +53498,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-01-30 17:58:17', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-05 12:07:12', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'Shyam', 'sundar', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', 'first', 'last', 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
@@ -53757,12 +53766,12 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `lnk_student_to_applied_colleges`
 --
 ALTER TABLE `lnk_student_to_applied_colleges`
-  MODIFY `stac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `stac_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `lnk_student_to_packages`
 --
 ALTER TABLE `lnk_student_to_packages`
-  MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `stp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `lnk_user_to_permission`
 --
@@ -53822,7 +53831,7 @@ ALTER TABLE `ref_employer`
 -- AUTO_INCREMENT for table `ref_enquiry_status`
 --
 ALTER TABLE `ref_enquiry_status`
-  MODIFY `enq_status_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `enq_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ref_exam_types`
 --
@@ -53897,7 +53906,7 @@ ALTER TABLE `tbl_student_followups`
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
 ALTER TABLE `tbl_student_professional_history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
@@ -53907,7 +53916,7 @@ ALTER TABLE `tbl_student_profiles`
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
 ALTER TABLE `tbl_student_to_degrees`
-  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `sd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `tbl_student_to_taken_exams`
 --

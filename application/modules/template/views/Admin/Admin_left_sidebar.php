@@ -94,11 +94,11 @@
 						<span class="site-menu-title">Universities</span>
 					</a>
 				</li>
-				<li class="site-menu-item <?php if(isset($page) && $page=="student_details"){ echo 'active';} ?>">
+				<!-- <li class="site-menu-item <?php // if(isset($page) && $page=="student_details"){ echo 'active';} ?>">
 					<a href="javascript:void(0)">
 						<span class="site-menu-title">Applied programs</span>
 					</a>
-				</li>
+				</li> -->
 				<li class="site-menu-item <?php if(isset($page) && $page=="application_rounds"){ echo 'active';} ?>">
 					<a href="<?php echo base_url('admin/application_rounds'); ?>">
 						<span class="site-menu-title">Application Rounds</span>

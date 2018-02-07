@@ -489,7 +489,7 @@ textarea{
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <div class="input-group">
                                             <input type="text" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
-                                            <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                             <span id="gmat_tenative_date_error" class="error"></span>
                                         </div>
                                     </div>
@@ -516,7 +516,7 @@ textarea{
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <div class="input-group">
                                             <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> placeholder="Select Tenative Date">
-                                            <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                             <span id="gre_tenative_date_error" class="error"></span>
                                         </div>
                                     </div>
@@ -540,7 +540,7 @@ textarea{
                                         <div class="col-md-3 col-lg-2 col-sm-3  col-xl-2">
                                             <div class="input-group">
                                                 <input name="signup_date[]" value="<?php if(strlen($stu_package->signup_date)){ echo $stu_package->signup_date;} ?>" type="text" class="form-control signup_date" placeholder="Select Enquiry Date" aria-label="signup_date" aria-describedby="basic-addon1">
-                                                <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                             </div>
                                         </div>
 
@@ -574,7 +574,7 @@ textarea{
                                         <div class="col-md-2 col-lg-2 col-sm-3  col-xl-2">
                                             <div class="input-group">
                                                 <input name="signup_date[]" type="text" class="form-control signup_date" placeholder="Select Enquiry Date" aria-label="signup_date" aria-describedby="basic-addon1">
-                                                <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                             </div>
                                         </div>
 
@@ -951,7 +951,7 @@ textarea{
     <div class="col-md-2 col-lg-2 col-sm-3  col-xl-2">
         <div class="input-group">
             <input name="signup_date[]" type="text" class="form-control signup_date" placeholder="Select Enquiry Date" aria-label="signup_date" aria-describedby="basic-addon1">
-            <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
         </div>
     </div>
 

@@ -20,4 +20,13 @@ class Tbl_enquiries_model extends MY_Model
             return $this->db->get_where('tbl_enquiries',array('tbl_enquiries.student_id'=> $student_id))->result();
 		}
 	}
+
+	public function get_enquires_between_dates($enquiry_dates='')
+	{
+		if((is_array($enquiry_dates) && !empty($enquiry_dates))&& (isset($enquiry_dates['from_enquiry_date']) && isset($enquiry_dates['to_enquiry_date'])))
+		{
+        	return $this->db->select('tbl_enquiries.student_id')
+			->get_where('tbl_enquiries',array("enq_date <=" => $enquiry_dates['to_enquiry_date'],"enq_date >="=>$enquiry_dates['from_enquiry_date']))->result();
+		}
+	}
 }

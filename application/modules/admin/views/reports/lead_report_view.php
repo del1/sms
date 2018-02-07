@@ -28,7 +28,7 @@ label{
                             <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
                                 <div class="input-group">
                                     <input type="text" id="from_enquiry_date" name="from_enquiry_date" class="form-control" placeholder="From Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="from_enquiry_date_error" class="error"></span>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@ label{
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
                                 <div class="input-group">
                                     <input type="text" readonly id="to_enquiry_date" name="to_enquiry_date" class="form-control" placeholder="To Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="to_enquiry_date_error" class="error"></span>
                                 </div>
                             </div>
@@ -104,10 +104,10 @@ label{
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
                         <div class="form-group">
                             <label for="status" class="form-control-label">Select Status</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="1">Open</option>
-                                <option value="2">Closed</option>
-                                <option value="3">Unsubscribe</option>
+                            <select class="form-control" id="status" name="status[]" multiple="">
+                                <?php if(!empty($enq_status)) { foreach ($enq_status as $status) { ?>
+                                    <option value="<?php echo $status->enq_status_id;?>"><?php echo $status->enq_status ;?></option>
+                                <?php } } ?>
                             </select>
                             <span id="status_error" class="error"></span>
                         </div>
@@ -143,7 +143,7 @@ label{
                             <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
                                 <div class="input-group">
                                     <input type="text" id="gre_tentative_from_date" name="gre_tentative_from_date" class="form-control" placeholder="From Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="gre_tentative_from_date_error" class="error"></span>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ label{
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
                                 <div class="input-group">
                                     <input type="text" readonly id="gre_tentative_to_date" name="gre_tentative_to_date" class="form-control" placeholder="To Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="gre_tentative_to_date_error" class="error"></span>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@ label{
                             <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
                                 <div class="input-group">
                                     <input type="text" id="gmat_tentative_from_date" name="gmat_tentative_from_date" class="form-control" placeholder="From Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="gmat_tentative_from_date_error" class="error"></span>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ label{
                             <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
                                 <div class="input-group">
                                     <input type="text" readonly id="gmat_tentative_to_date" name="gmat_tentative_to_date" class="form-control" placeholder="To Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="gmat_tentative_to_date_error" class="error"></span>
                                 </div>
                             </div>
@@ -241,6 +241,10 @@ jQuery(document).ready(function($) {
     $("#source").select2({
         placeholder: "Select source"
     });
+    $("#status").select2({
+        placeholder: "Select enquiry status"
+    });
+    
     $("#interested_program").select2({
         placeholder: "Select Interested Program"
     });
@@ -316,7 +320,6 @@ jQuery(document).ready(function($) {
 
     $(document).on('click', '#genrate', function(event) {
         event.preventDefault();
-        console.log("I am ");
         var formObj = $("#form_lead_report");
         var formData = new FormData(formObj[0]);
         var formURL="<?php echo base_url('admin/reports/genrate_lead_report'); ?>";

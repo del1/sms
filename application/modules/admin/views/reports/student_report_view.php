@@ -371,7 +371,6 @@ jQuery(document).ready(function($) {
 
     $(document).on('click', '#genrate', function(event) {
         event.preventDefault();
-        console.log("I am ");
         var formObj = $("#form_lead_report");
         var formData = new FormData(formObj[0]);
         var formURL="<?php echo base_url('admin/reports/genrate_student_report'); ?>";

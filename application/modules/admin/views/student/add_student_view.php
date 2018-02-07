@@ -43,7 +43,7 @@
                             <h4 class="example-title">Select enquiry date</h4>
                             <div class="input-group">
                                 <input type="text" id="enq_date" name="enq_date" class="form-control" placeholder="Select Enquiry Date">
-                                <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                             </div>
                         </div>
                         <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4">
@@ -175,7 +175,7 @@
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <div class="input-group">
                                         <input type="text" disabled="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
-                                        <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +199,7 @@
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <div class="input-group">
                                         <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" disabled="" placeholder="Select Tenative Date">
-                                        <span class="input-group-addon" id="basic-addon1"><i class="icon ml-calendar" aria-hidden="true"></i></span>
+                                        <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
                             </div>

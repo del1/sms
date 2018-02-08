@@ -56,7 +56,7 @@
                         <?php $arr=array('class'=>"form-horizontal");
                             echo form_open_multipart('admin/add_update_college',$arr); ?>
                              <?php if(isset($college_type_id->college_type_id)){ ?>
-                             <div class="form-group row">
+                             <!-- <div class="form-group row">
                                  <label for="Select University " class ="form-control-label col-sm-3 col-xl-2">Select University</label>
                                  <div class="col-sm-9 col-xl-10"> 
                                     <select class="form-control" data-plugin="select2" for="University" name="university_id">
@@ -65,7 +65,7 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                                 <label for="College Name" class ="form-control-label col-sm-3 col-xl-2"><?php echo $type ?> College Name</label>
                                 <div class="col-sm-9 col-xl-10">

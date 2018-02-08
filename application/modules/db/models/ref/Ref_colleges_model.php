@@ -14,8 +14,8 @@ class Ref_colleges_model extends MY_Model
 
 	public function get_collegesOfType($typeId)
 	{
-		return $this->db->select('ref_colleges.*,ref_universities.university_name,tbl_users.user_name')
-			->join('ref_universities','ref_colleges.university_id = ref_universities.university_id')
+		return $this->db->select('ref_colleges.*,tbl_users.user_name')//ref_universities.university_name,
+			//->join('ref_universities','ref_colleges.university_id = ref_universities.university_id')
 			->join('tbl_users','ref_colleges.added_by = tbl_users.user_id')
 			->get_where('ref_colleges',array('ref_colleges.college_type_id'=>$typeId))->result();
 	}

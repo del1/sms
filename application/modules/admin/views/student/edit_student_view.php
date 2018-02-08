@@ -641,8 +641,10 @@ textarea{
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select name="college_id[]" class="form-control college_id">
                                         <option  hidden="" value="0">Select Applied college</option>
-                                        <?php if(!empty($apply_college_list)) { foreach ($apply_college_list as $key => $value) { ?>
-                                            <option <?php if($app_college->college_id==$value->college_id){ echo "Selected"; } ?> value="<?php echo $value->college_id;?>"><?php echo $value->college_name ;?></option>
+
+                                        university_list
+                                        <?php if(!empty($university_list)) { foreach ($university_list as $university) { ?>
+                                            <option <?php if($app_college->college_id==$university->university_id){ echo "Selected"; } ?> value="<?php echo $university->university_id;?>"><?php echo $university->university_name;?></option>
                                         <?php } } ?>
                                     </select>
                                     <input type="hidden" name="student_id" value="<?php echo $enquiery_data->student_id; ?>">

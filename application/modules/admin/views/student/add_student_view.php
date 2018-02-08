@@ -217,24 +217,20 @@
                     <div class="row row-lg mt-50">
                         <div class="col-sm-12 col-md-12 mt-20">
                             <h3 class="example-title ">Conversation Summary</h3>
-                            <table id="store_list_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive " ><!-- data-plugin="dataTable" -->
-                                <thead>
-                                    <tr>
-                                        <th>Followup Date</th>
-                                        <th>Agent name</th>
-                                        <th>Followup comment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if(isset($product_list)) { foreach ($product_list as $product) { ?>
-                                        <tr>
-                                            <td><?php echo $product->season; ?> </td>
-                                            <td><input type="checkbox" data-id="<?php echo $product->product_id; ?>" data-pk="product_id" data-type="tbl_product" class="switch" <?php if($product->is_active=='true'){echo 'checked';} ?>  /></td>
-                                            <td><a href="<?php echo base_url('admin/manage_product/'.$product->product_id);?>" class="btn btn-primary" role="button">Manage</a></td>
-                                        </tr>
-                                    <?php } } ?>
-                                </tbody>
-                            </table>
+                            <div class="form-group row">
+                                <label for="followup_date" class="form-control-label col-md-2 col-sm-2 col-xl-2 col-lg-2" style="text-align: left;">Followup Date</label>
+                                <div class="col-md-2 col-lg-2 col-sm-2  col-xl-2">
+                                    <input type="text" id="followup_date" placeholder="Enter student first name" name="first_name" class="form-control ">
+                                </div>
+                                <label for="agent_name" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-2" style="text-align: left;">Agent name</label>
+                                <div class="col-md-1 col-lg-1 col-sm-1  col-xl-1">
+                                    <input type="text" id="agent_name" placeholder="Enter student last name" name="last_name" class="form-control ">
+                                </div>
+                                <label for="comment" class="form-control-label col-md-2 col-sm-2 col-xl-2 col-lg-2" style="text-align: left;">Followup comment</label>
+                                <div class="col-md-2 col-lg-2 col-sm-2  col-xl-2">
+                                    <input type="text" id="comment" placeholder="Enter student last name" name="last_name" class="form-control ">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php echo form_close(); ?>

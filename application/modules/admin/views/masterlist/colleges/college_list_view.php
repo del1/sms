@@ -26,7 +26,7 @@
                 <thead>
                     <tr>
                         <th>College Name</th>
-                        <th>University Name</th>
+                        <!-- <th>University Name</th> -->
                         <th>Added/Updated By</th>
                         <th>Action</th>
                     </tr>
@@ -37,7 +37,7 @@
                 foreach ($college_list as $round) { ?>
                     <tr>
                         <td><?php echo $round->college_name; ?></td>
-                        <td><?php echo $round->university_name; ?></td>
+                        <!-- <td><?php //echo $round->university_name; ?></td> -->
                         <td><?php echo $round->user_name." (".date("jS F Y, g:i a", strtotime($round->last_updated)). ")  "; ?></td>
                         <td><a href="<?php echo base_url('admin/manage_college/'.$type.'/'.$round->college_id);?>" class="btn btn-icon btn-primary" role="button"><i class="icon wb-pencil" aria-hidden="true"></i></a>
                         <button type="button" data-id="<?php echo $round->college_id; ?>" data-pk="college_id" data-type="ref_college" class="btn btn-icon btn-danger delete"><i class="icon wb-trash" aria-hidden="true"></i></button>

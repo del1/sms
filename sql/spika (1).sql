@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2018 at 03:01 PM
+-- Generation Time: Feb 08, 2018 at 02:55 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -50,7 +50,7 @@ CREATE TABLE `lnk_student_to_applied_colleges` (
 --
 
 INSERT INTO `lnk_student_to_applied_colleges` (`stac_id`, `student_id`, `college_id`, `intake_year`, `round_id`, `app_status_id`, `intv_status_id`, `taken_our_assistance`, `applied_program_id`, `admit_status_id`, `is_scholarship_awarded`, `scholarship_amount`, `is_joined`, `joining_year`) VALUES
-(18, 4, 1, 2018, 1, 1, 1, 'false', 3, 2, 'false', '0.00', 'false', 0000);
+(18, 4, 5, 2018, 1, 1, 1, 'false', 3, 2, 'false', '0.00', 'false', 0000);
 
 -- --------------------------------------------------------
 
@@ -48537,7 +48537,7 @@ INSERT INTO `ref_cities` (`city_id`, `city_name`, `state_id`) VALUES
 CREATE TABLE `ref_colleges` (
   `college_id` int(11) NOT NULL,
   `college_name` varchar(255) NOT NULL,
-  `university_id` int(11) NOT NULL,
+  `university_id` int(11) DEFAULT NULL,
   `added_by` int(11) NOT NULL,
   `last_updated` datetime NOT NULL,
   `college_type_id` int(11) NOT NULL,
@@ -48549,11 +48549,11 @@ CREATE TABLE `ref_colleges` (
 --
 
 INSERT INTO `ref_colleges` (`college_id`, `college_name`, `university_id`, `added_by`, `last_updated`, `college_type_id`, `is_active`) VALUES
-(1, 'First PG College', 4, 1, '2018-01-12 11:06:16', 2, 'true'),
-(2, 'First UG College', 5, 1, '2018-01-12 11:05:25', 1, 'true'),
-(3, 'Second UG College', 5, 1, '2018-01-12 11:05:44', 1, 'true'),
-(4, 'Third UG College', 6, 1, '2018-01-12 11:06:00', 1, 'true'),
-(5, 'Second PG College', 6, 1, '2018-01-12 11:06:26', 2, 'true');
+(1, 'First PG College', NULL, 1, '2018-01-12 11:06:16', 2, 'true'),
+(2, 'First UG College', NULL, 1, '2018-02-08 15:02:16', 1, 'true'),
+(3, 'Second UG College', NULL, 1, '2018-01-12 11:05:44', 1, 'true'),
+(4, 'Third UG College', NULL, 1, '2018-01-12 11:06:00', 1, 'true'),
+(5, 'Second PG College', NULL, 1, '2018-01-12 11:06:26', 2, 'true');
 
 -- --------------------------------------------------------
 
@@ -53341,9 +53341,9 @@ CREATE TABLE `tbl_enquiries` (
 --
 
 INSERT INTO `tbl_enquiries` (`enq_id`, `enq_date`, `student_id`, `source_id`, `agent_id`, `interested_program_id`, `lead_type_id`, `followup_status_id`, `enq_status_id`, `is_converted`, `is_active`) VALUES
-(1, '2017-12-29', 4, 3, 5, 3, 1, NULL, 1, 'true', 'true'),
-(2, '2016-12-29', 5, 3, 7, 4, 2, NULL, 1, 'false', 'true'),
-(3, '2017-12-29', 7, 3, 5, 3, 2, NULL, 1, 'true', 'true');
+(1, '2017-12-27', 4, 3, 5, 3, 1, NULL, 1, 'false', 'true'),
+(2, '2017-12-29', 5, 3, 7, 4, 2, NULL, 1, 'false', 'true'),
+(3, '2017-12-28', 7, 3, 5, 3, 2, NULL, 1, 'false', 'true');
 
 -- --------------------------------------------------------
 
@@ -53499,7 +53499,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-07 10:58:40', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-08 10:58:52', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'Shyam', 'sundar', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', 'first', 'last', 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
@@ -53937,12 +53937,12 @@ ALTER TABLE `tbl_users`
 --
 ALTER TABLE `lnk_student_to_applied_colleges`
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`),
-  ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_2` FOREIGN KEY (`college_id`) REFERENCES `ref_colleges` (`college_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_3` FOREIGN KEY (`round_id`) REFERENCES `ref_application_rounds` (`round_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_4` FOREIGN KEY (`app_status_id`) REFERENCES `ref_application_status` (`app_status_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_5` FOREIGN KEY (`intv_status_id`) REFERENCES `ref_interview_status` (`intv_status_id`),
   ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_6` FOREIGN KEY (`applied_program_id`) REFERENCES `ref_programs` (`program_id`),
-  ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_7` FOREIGN KEY (`admit_status_id`) REFERENCES `ref_admit_status` (`admit_status_id`);
+  ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_7` FOREIGN KEY (`admit_status_id`) REFERENCES `ref_admit_status` (`admit_status_id`),
+  ADD CONSTRAINT `lnk_student_to_applied_colleges_ibfk_8` FOREIGN KEY (`college_id`) REFERENCES `ref_universities` (`university_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `lnk_student_to_packages`
@@ -53975,7 +53975,6 @@ ALTER TABLE `ref_cities`
 -- Constraints for table `ref_colleges`
 --
 ALTER TABLE `ref_colleges`
-  ADD CONSTRAINT `ref_colleges_ibfk_1` FOREIGN KEY (`university_id`) REFERENCES `ref_universities` (`university_id`),
   ADD CONSTRAINT `ref_colleges_ibfk_2` FOREIGN KEY (`added_by`) REFERENCES `tbl_users` (`user_id`),
   ADD CONSTRAINT `ref_colleges_ibfk_3` FOREIGN KEY (`college_type_id`) REFERENCES `ref_college_types` (`college_type_id`);
 

@@ -25,4 +25,24 @@ class Tbl_student_profiles_model extends MY_Model
 		return $this->db->select('tbl_student_profiles.intro,tbl_student_profiles.total_experience,tbl_student_profiles.professional_qualification, tbl_student_profiles.remarks')
         ->get_where('tbl_student_profiles',array('tbl_student_profiles.student_id'=> $student_id))->result();
 	}
+
+
+	public function get_lead_report_data($student_ids='')
+	{
+		$response=array();
+		if(is_array($student_ids) && !empty($student_ids))
+		{
+			foreach ($student_ids as $key => $value) {
+				$response[$value]=$this->db->select('tbl_enquiries.enq_date,tbl_enquiries.enq_id,tbl_enquiries.student_id,
+					ref_lead_types.lead_type, 
+					tbl_users.first_name, tbl_users.last_name,tbl_users.phonenumber,
+					tbl_student_profiles.intro')
+		        ->join('tbl_enquiries', 'tbl_student_profiles.student_id = tbl_enquiries.student_id')
+		        ->join('ref_lead_types', 'tbl_enquiries.lead_type_id = ref_lead_types.lead_type_id')
+		        ->join('tbl_users', 'tbl_student_profiles.user_id = tbl_users.user_id')
+		        ->get_where('tbl_student_profiles',array('tbl_student_profiles.student_id'=> $value,'tbl_enquiries.is_converted'=>'false'))->result();
+			}
+			return $response;
+		}
+	}
 }

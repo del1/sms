@@ -42,6 +42,7 @@ class Reports extends Del {
 		//enquiry dates filter
 		if(isset($posted_data['from_enquiry_date']) && strlen(trim($posted_data['from_enquiry_date'])))
 		{
+			$query=array();
 			$query['enq_date <=']=$posted_data['to_enquiry_date'];
 			$query['enq_date >=']=$posted_data['from_enquiry_date'];
 			$enq_date_student_ids=$this->enquries->select('student_id')->get_many_by($query);
@@ -53,7 +54,6 @@ class Reports extends Del {
 				array_push($intersect, $enq_date_stu_id_array);
 			}
 		}
-
 
 		//type of lead filter
 		if(isset($posted_data['lead_type']) && strlen(trim($posted_data['lead_type'])))
@@ -83,7 +83,6 @@ class Reports extends Del {
 				array_push($intersect, $source_stu_id_array);
 			}
 		}
-
 
 		//Interested Program
 		if(isset($posted_data['interested_program']) && !empty($posted_data['interested_program']))
@@ -164,7 +163,6 @@ class Reports extends Del {
 			}
 		}
 
-
 		//Tentative GRE date
 		if(isset($posted_data['gre_tentative_from_date']) && strlen(trim($posted_data['gre_tentative_from_date'])))
 		{
@@ -184,6 +182,7 @@ class Reports extends Del {
 		//Work Experience Range (in years)
 		if(isset($posted_data['from_exp_range_date']) && strlen(trim($posted_data['from_exp_range_date'])))
 		{
+			$query=array();
 			$query['total_experience <=']=$posted_data['to_exp_range_date'];
 			$query['total_experience >=']=$posted_data['from_exp_range_date'];
 			$exp_student_ids=$this->student_profile->select('student_id')->get_many_by($query);
@@ -195,16 +194,19 @@ class Reports extends Del {
 				array_push($intersect, $exp_stu_id_array);
 			}
 		}
-		//to remove empty initiated element
-		//$intersect=array_filter($intersect);
-		//print_r($intersect);
-		//final output
-		$intersect1=call_user_func_array('array_intersect', $intersect);
-		
-		//print_r($report_sample);
-		//print_r($intersect);
-		//print_r($posted_data);
-
+		$intersect=array_filter($intersect);
+		if(count($intersect) > 1)
+		{
+			$final_stu_list=call_user_func_array('array_intersect', $intersect);
+		}else{
+			$final_stu_list=$intersect[array_keys($intersect)[0]];
+		}
+		//final_stu_list-> final list of 
+		$data['student_details']=$this->student_profile->get_lead_report_data($final_stu_list);
+		$data['last_followup']=$this->student_followup->get_last_followup_details($final_stu_list);
+		$view = 'admin/ajax/reports/ajax_lead_report_table_view';
+		//print_r($data);
+		$this->load->view($view,$data);
 	}
 
 	public function student()

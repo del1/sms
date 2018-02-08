@@ -44,18 +44,6 @@ label{
                     </div>
                     <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
                         <div class="form-group">
-                            <label for="intake_year" class="form-control-label">Select Intake year</label>
-                            <select class="form-control" name="intake_year[]" id="intake_year" multiple="">
-                                <?php $c_y=date("Y"); for ($i=$c_y-5; $i < $c_y+5 ; $i++) {  ?>
-                                    <option <?php if($c_y==$i){ echo 'selected'; } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                <?php } ?>
-                            </select>
-                            <span id="intake_year_error"></span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
-                        <div class="form-group">
                             <label for="lead_type" class="form-control-label">Select Lead type</label>
                             <select class="form-control" name="lead_type" id="lead_type">
                                 <?php if(!empty($lead_types)) { foreach ($lead_types as $lead_id => $lead_type) { ?>
@@ -65,6 +53,19 @@ label{
                             <span id="lead_type_error"></span>
                         </div>
                     </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
+                        <!-- <div class="form-group">
+                            <label for="intake_year" class="form-control-label">Select Intake year</label>
+                            <select class="form-control" name="intake_year[]" id="intake_year" multiple="">
+                                <?php $c_y=date("Y"); for ($i=$c_y-5; $i < $c_y+5 ; $i++) {  ?>
+                                    <option <?php if($c_y==$i){ echo 'selected'; } ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                <?php } ?>
+                            </select>
+                            <span id="intake_year_error"></span>
+                        </div> -->
+                    </div>
+
+                    
                 </div>
                 <div class="row row-lg">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
@@ -212,7 +213,7 @@ label{
                     <table id="lead_report_table" class="table table-hover dataTable table-striped w-full table-bordered table-responsive">
                     <thead>
                         <tr>
-                            <th>Type</th>
+                            <th></th>
                             <th>Name</th>
                             <th>Enquiry Date</th>
                             <th>Phone Number</th>
@@ -286,6 +287,16 @@ jQuery(document).ready(function($) {
         "order": [[ 0, "asc" ]],
         stateSave: true,
         responsive: true,
+        "columns": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            { "width": "20%" },
+            { "width": "13%" },
+            null,
+          ],
         "fnDrawCallback": function(e) {
             /*var elems = Array.prototype.slice.call(document.querySelectorAll('.switch'));
             elems.forEach(function(elem) {
@@ -295,28 +306,6 @@ jQuery(document).ready(function($) {
             });*/
         }
     })
-        
-    $(".switch").change(function(event) {
-        var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
-        csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
-        var changeCheckbox = $(this)[0];//target
-        var data={is_active:changeCheckbox.checked,pk_id:$(changeCheckbox).data('id'),type:$(changeCheckbox).data('type'),[csrfName]:csrfHash};
-        $.post("<?php echo base_url('admin/changeAllStatus') ?>", data, 
-            function(data, textStatus, xhr) {
-                if(changeCheckbox.checked)
-                {
-                    toastr_type="success";
-                    str="Product Activated successfully";
-                }else{
-                    toastr_type="warning";
-                    str="Product Deactivated successfully";
-                }
-                toastr.options = {
-                  "closeButton": true
-                }
-                toastr[toastr_type](str);
-        });
-    });
 
     $(document).on('click', '#genrate', function(event) {
         event.preventDefault();
@@ -335,6 +324,7 @@ jQuery(document).ready(function($) {
                 success: function(data, textStatus, jqXHR)
                 {
                     console.log(data);
+                    $("#genrateLeadReport").html(data);
                     /*str="Lead report genrated successfully";
                     toastr.options = {
                       "closeButton": true,

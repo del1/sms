@@ -323,6 +323,7 @@ class Student extends Del {
 			$data['employer_list']=$this->ref_employer->select('employer_id,employer_name')->get_many_by('is_active','true');
 			$data['followup_data']=$this->student_followup->get_student_followups($student_id);
 			$data['lead_types']=$this->ref_lead_types->select('lead_type_id,lead_type')->get_many_by('is_active','true');
+			$data['university_list']=$this->ref_universities->select('university_id,university_name')->get_many_by('is_active','true');
 
 			
 			if(!empty($student_data)) //if enquiry data is avialable

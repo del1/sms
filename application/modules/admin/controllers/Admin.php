@@ -522,7 +522,7 @@ class Admin extends Del {
 	public function add_update_college()
 	{
 		$posted_data=$this->security->xss_clean($this->input->post());
-		$required_array = elements(array('university_id','college_name','college_type_id'), $posted_data);
+		$required_array = elements(array('college_name','college_type_id'), $posted_data);//'university_id',
 		$required_array['added_by']=$this->session->User_Id;
 		$required_array['last_updated']=date('Y-m-d H:i:s');
 		if(isset($posted_data['college_id']))

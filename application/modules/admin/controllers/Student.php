@@ -28,17 +28,20 @@ class Student extends Del {
 		$data['agent_list']=$this->users->select('user_id,user_name')->get_many_by(array('userlevel_id'=>4,'is_active'=>'true'));
 		$data['source_list']=$this->ref_source->select('source_id,source_name')->get_many_by('is_active','true');
 		$data['lead_types']=$this->ref_lead_types->select('lead_type_id,lead_type')->get_many_by('is_active','true');
-		$data['county_list']=$this->ref_country->get_all();
+		//$data['county_list']=$this->ref_country->get_all();
+		$data['state_list']=$this->ref_states->select('state_id,state_name')->get_many_by('country_id',"101");
 		$data['ug_degree_list']=$this->ref_degree->select('degree_id,degree_name')->get_many_by('is_active','true');
 		$data['program_list']=$this->ref_program->select('program_id,program_name')->get_many_by('is_active','true');
-		
+		$data['agent_name']=$this->users->select('first_name,last_name')->get($this->session->User_Id);
 		$view = 'admin/student/add_student_view';
 		echo Modules::run('template/admin_template', $view, $data);	
 	}
 
 	public function create()
 	{
+
 		$posted_data=$this->security->xss_clean($this->input->post());
+		$this->mprint($posted_data);
 		$this->form_validation->set_rules('agent_id', 'Agent', 'trim|required');
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
@@ -59,9 +62,7 @@ class Student extends Del {
 			//step1- add it to tbl_user
 		 	$user_proile = elements(array('email_id','first_name','last_name','phonenumber','signup_date','added_by','userlevel_id','last_updated','is_active'), $posted_data);
 
-
 		 	try {
-
 	 			$this->users->insert($user_proile);
 		 		$posted_data['user_id']=$this->db->insert_id();
 
@@ -106,6 +107,13 @@ class Student extends Del {
 			 	$student_enquries = elements(array('student_id','enq_date','source_id','agent_id','interested_program_id','lead_type_id','is_active'), $posted_data);
 			 	$this->enquries->insert($student_enquries);
 			 	$posted_data['enq_id']=$this->db->insert_id();
+
+			 	//adding followupdate
+			 	$followup_date = elements(array('followup_date','followup_comment','enq_id'), $posted_data);
+			 	$followup_date['agent_id'] =$this->session->User_Id;
+			 	$followup_date['is_completed'] ='false';
+			 	$this->student_followup->insert($student_enquries);
+
 
 			 	$this->session->set_flashdata('success',  'Student added Successfully');
 			 	redirect('admin/student/summary');

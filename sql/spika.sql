@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2018 at 02:55 PM
+-- Generation Time: Feb 09, 2018 at 03:34 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -53343,7 +53343,8 @@ CREATE TABLE `tbl_enquiries` (
 INSERT INTO `tbl_enquiries` (`enq_id`, `enq_date`, `student_id`, `source_id`, `agent_id`, `interested_program_id`, `lead_type_id`, `followup_status_id`, `enq_status_id`, `is_converted`, `is_active`) VALUES
 (1, '2017-12-27', 4, 3, 5, 3, 1, NULL, 1, 'false', 'true'),
 (2, '2017-12-29', 5, 3, 7, 4, 2, NULL, 1, 'false', 'true'),
-(3, '2017-12-28', 7, 3, 5, 3, 2, NULL, 1, 'false', 'true');
+(3, '2017-12-28', 7, 3, 5, 3, 2, NULL, 1, 'false', 'true'),
+(5, '2018-02-09', 9, 2, 7, 3, 1, NULL, 1, 'false', 'true');
 
 -- --------------------------------------------------------
 
@@ -53421,7 +53422,10 @@ INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_i
 (4, 13, 101, 22, 2763, 'asdasdasd', 4, 'PHP Developer', 'asdasd', 'true'),
 (5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, '', '', 'true'),
 (6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, '', '', 'true'),
-(7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', '', 'true');
+(7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', '', 'true'),
+(8, 17, 101, 22, 2763, 'H1B+', 0, '', '', 'true'),
+(9, 18, 4, 165, 6433, 'asdasd', 0, '', '', 'true'),
+(10, 19, 101, 22, 2763, 'asdasd', 1, '', '', 'true');
 
 -- --------------------------------------------------------
 
@@ -53499,14 +53503,17 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'admin_fname', 'admin_lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-08 10:58:52', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'fname', 'lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-09 11:35:55', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'Shyam', 'sundar', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
-(5, 'mahesh1', 'mahesh1', 'Sakore', 'abc@abc.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
-(7, 'firstuser', 'first', 'last', 'flname@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
-(13, NULL, 'mahesh', '0', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, 1, NULL, '2017-12-29 16:24:59', 'true'),
+(5, 'vijayk', 'vijay', 'Kapadia', 'kvijay@gmail.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
+(7, 'firstuser', 'Saurabh', 'Shevade', 'sshevade@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
+(13, NULL, 'mahesh', 'sakore', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, 1, NULL, '2017-12-29 16:24:59', 'true'),
 (14, NULL, 'saurabh', 'shelot', 'saurabh@connexistech.com', NULL, '2017-12-29 16:30:29', 1, '9090909090', 3, NULL, NULL, '2017-12-29 16:30:29', 'true'),
 (15, NULL, 'ankush', 'pawar', 'ankush.pawar@connexistech.com', NULL, '2017-12-29 16:42:58', 1, '9021654123', 3, NULL, NULL, '2017-12-29 16:42:58', 'true'),
-(16, NULL, 'shaym', 'bihari', 'shayam.bihari@connexistech.com', NULL, '2017-12-29 16:45:10', 1, '4512361245', 3, NULL, NULL, '2017-12-29 16:45:10', 'true');
+(16, NULL, 'shaym', 'bihari', 'shayam.bihari@connexistech.com', NULL, '2017-12-29 16:45:10', 1, '4512361245', 3, NULL, NULL, '2017-12-29 16:45:10', 'true'),
+(17, NULL, 'Ravi', 'Shevade', 'ravishevade@gmail.com', NULL, '2018-02-09 14:36:28', 1, '12312312312', 3, NULL, NULL, '2018-02-09 14:36:28', 'true'),
+(18, NULL, 'asdas', 'dasdasd', 'asdasd@gmai13.lcom', NULL, '2018-02-09 15:19:00', 1, '123123123123', 3, NULL, NULL, '2018-02-09 15:19:00', 'true'),
+(19, NULL, 'dreddfsds', 'asdasd', 'asda12sd@gmai.lcom', NULL, '2018-02-09 15:21:18', 1, '123123121231233', 3, NULL, NULL, '2018-02-09 15:21:18', 'true');
 
 --
 -- Indexes for dumped tables
@@ -53897,7 +53904,7 @@ ALTER TABLE `ref_userlevels`
 -- AUTO_INCREMENT for table `tbl_enquiries`
 --
 ALTER TABLE `tbl_enquiries`
-  MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `tbl_student_followups`
 --
@@ -53912,7 +53919,7 @@ ALTER TABLE `tbl_student_professional_history`
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
 ALTER TABLE `tbl_student_profiles`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
@@ -53927,7 +53934,7 @@ ALTER TABLE `tbl_student_to_taken_exams`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- Constraints for dumped tables
 --
@@ -54054,8 +54061,7 @@ ALTER TABLE `tbl_student_professional_history`
 ALTER TABLE `tbl_student_profiles`
   ADD CONSTRAINT `tbl_student_profiles_ibfk_1` FOREIGN KEY (`resident_state_id`) REFERENCES `ref_states` (`state_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_student_profiles_ibfk_2` FOREIGN KEY (`resident_city_id`) REFERENCES `ref_cities` (`city_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_student_profiles_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbl_student_profiles_ibfk_5` FOREIGN KEY (`resident_country_id`) REFERENCES `ref_countries` (`country_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbl_student_profiles_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `tbl_users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_student_to_degrees`

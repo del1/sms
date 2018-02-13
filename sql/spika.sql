@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2018 at 03:34 PM
+-- Generation Time: Feb 13, 2018 at 02:47 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -53409,8 +53409,8 @@ CREATE TABLE `tbl_student_profiles` (
   `resident_city_id` int(11) DEFAULT NULL,
   `intro` text NOT NULL,
   `total_experience` int(11) NOT NULL,
-  `professional_qualification` varchar(64) NOT NULL,
-  `remarks` text NOT NULL,
+  `professional_qualification` varchar(64) DEFAULT NULL,
+  `remarks` text,
   `is_active` enum('true','false') NOT NULL DEFAULT 'true'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -53420,12 +53420,12 @@ CREATE TABLE `tbl_student_profiles` (
 
 INSERT INTO `tbl_student_profiles` (`student_id`, `user_id`, `resident_country_id`, `resident_state_id`, `resident_city_id`, `intro`, `total_experience`, `professional_qualification`, `remarks`, `is_active`) VALUES
 (4, 13, 101, 22, 2763, 'asdasdasd', 4, 'PHP Developer', 'asdasd', 'true'),
-(5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, '', '', 'true'),
-(6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, '', '', 'true'),
-(7, 16, 101, 22, 2763, 'hey this is shyam', 0, '', '', 'true'),
-(8, 17, 101, 22, 2763, 'H1B+', 0, '', '', 'true'),
-(9, 18, 4, 165, 6433, 'asdasd', 0, '', '', 'true'),
-(10, 19, 101, 22, 2763, 'asdasd', 1, '', '', 'true');
+(5, 14, 101, 22, 2763, 'hey this is saurabh shelot', 0, NULL, NULL, 'true'),
+(6, 15, 101, 22, 2763, 'hey this is ankush, welcome to home', 1, NULL, NULL, 'true'),
+(7, 16, 101, 22, 2763, 'hey this is shyam', 0, NULL, NULL, 'true'),
+(8, 17, 101, 22, 2763, 'H1B+', 0, NULL, NULL, 'true'),
+(9, 18, 4, 165, 6433, 'asdasd', 0, NULL, NULL, 'true'),
+(10, 19, 101, 22, 2763, 'asdasd', 1, NULL, NULL, 'true');
 
 -- --------------------------------------------------------
 
@@ -53459,8 +53459,8 @@ INSERT INTO `tbl_student_to_degrees` (`sd_id`, `student_id`, `degree_id`, `colle
 CREATE TABLE `tbl_student_to_taken_exams` (
   `et_id` int(11) NOT NULL,
   `exam_type_id` int(11) NOT NULL,
-  `score` int(3) NOT NULL,
-  `tentative_date` date NOT NULL,
+  `score` int(3) DEFAULT NULL,
+  `tentative_date` date DEFAULT NULL,
   `student_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -53503,11 +53503,11 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'fname', 'lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-09 11:35:55', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'fname', 'lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-13 11:12:14', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'Shyam', 'sundar', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'vijayk', 'vijay', 'Kapadia', 'kvijay@gmail.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', 'Saurabh', 'Shevade', 'sshevade@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
-(13, NULL, 'mahesh', 'sakore', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '1245612345', 3, 1, NULL, '2017-12-29 16:24:59', 'true'),
+(13, NULL, 'mahesh', 'sakore', 'msakore@gmail.com', NULL, '2017-12-29 16:24:59', 1, '9028283854', 3, 1, NULL, '2017-12-29 16:24:59', 'true'),
 (14, NULL, 'saurabh', 'shelot', 'saurabh@connexistech.com', NULL, '2017-12-29 16:30:29', 1, '9090909090', 3, NULL, NULL, '2017-12-29 16:30:29', 'true'),
 (15, NULL, 'ankush', 'pawar', 'ankush.pawar@connexistech.com', NULL, '2017-12-29 16:42:58', 1, '9021654123', 3, NULL, NULL, '2017-12-29 16:42:58', 'true'),
 (16, NULL, 'shaym', 'bihari', 'shayam.bihari@connexistech.com', NULL, '2017-12-29 16:45:10', 1, '4512361245', 3, NULL, NULL, '2017-12-29 16:45:10', 'true'),
@@ -53904,12 +53904,12 @@ ALTER TABLE `ref_userlevels`
 -- AUTO_INCREMENT for table `tbl_enquiries`
 --
 ALTER TABLE `tbl_enquiries`
-  MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tbl_student_followups`
 --
 ALTER TABLE `tbl_student_followups`
-  MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
@@ -53919,7 +53919,7 @@ ALTER TABLE `tbl_student_professional_history`
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
 ALTER TABLE `tbl_student_profiles`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
@@ -53929,12 +53929,12 @@ ALTER TABLE `tbl_student_to_degrees`
 -- AUTO_INCREMENT for table `tbl_student_to_taken_exams`
 --
 ALTER TABLE `tbl_student_to_taken_exams`
-  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- Constraints for dumped tables
 --
@@ -54033,7 +54033,7 @@ ALTER TABLE `ref_universities`
 -- Constraints for table `tbl_enquiries`
 --
 ALTER TABLE `tbl_enquiries`
-  ADD CONSTRAINT `tbl_enquiries_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`),
+  ADD CONSTRAINT `tbl_enquiries_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_enquiries_ibfk_2` FOREIGN KEY (`source_id`) REFERENCES `ref_sources` (`source_id`),
   ADD CONSTRAINT `tbl_enquiries_ibfk_3` FOREIGN KEY (`agent_id`) REFERENCES `tbl_users` (`user_id`),
   ADD CONSTRAINT `tbl_enquiries_ibfk_4` FOREIGN KEY (`interested_program_id`) REFERENCES `ref_programs` (`program_id`),
@@ -54045,8 +54045,7 @@ ALTER TABLE `tbl_enquiries`
 -- Constraints for table `tbl_student_followups`
 --
 ALTER TABLE `tbl_student_followups`
-  ADD CONSTRAINT `tbl_student_followups_ibfk_1` FOREIGN KEY (`enq_id`) REFERENCES `tbl_enquiries` (`enq_id`),
-  ADD CONSTRAINT `tbl_student_followups_ibfk_2` FOREIGN KEY (`agent_id`) REFERENCES `tbl_users` (`user_id`);
+  ADD CONSTRAINT `tbl_student_followups_ibfk_1` FOREIGN KEY (`enq_id`) REFERENCES `tbl_enquiries` (`enq_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_student_professional_history`
@@ -54076,7 +54075,7 @@ ALTER TABLE `tbl_student_to_degrees`
 --
 ALTER TABLE `tbl_student_to_taken_exams`
   ADD CONSTRAINT `tbl_student_to_taken_exams_ibfk_1` FOREIGN KEY (`exam_type_id`) REFERENCES `ref_exam_types` (`exam_type_id`),
-  ADD CONSTRAINT `tbl_student_to_taken_exams_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`);
+  ADD CONSTRAINT `tbl_student_to_taken_exams_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `tbl_student_profiles` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_users`

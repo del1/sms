@@ -70,11 +70,12 @@ label{
                 <div class="row row-lg">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
                         <div class="form-group">
-                            <label for="test_token" class="form-control-label">Test Token</label>
-                            <select class="form-control" name="test_token" id="test_token">
+                            <label for="test_taken" class="form-control-label">Test Taken</label>
+                            <select class="form-control" name="test_taken" id="test_taken">
                                 <option value="1">GMAT</option>
                                 <option value="2">GRE</option>
-                                <option value="3">Both</option>
+                                <option value="3">Multiple</option>
+                                <option value="4">None</option>
                             </select>
                             <span id="test_token_error" class="error"></span>
                         </div>

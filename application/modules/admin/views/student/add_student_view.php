@@ -192,14 +192,14 @@
 
                                 <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <input type="number" disabled="" id="gmat_score" maxlength="2" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+                                    <input type="number" onkeypress="return isNumber(event)" disabled="" id="gmat_score" maxlength="2" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar numbercheck">
                                     <span class="error"></span>
                                 </div>
 
                                 <label for="gmat_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <div class="input-group">
-                                        <input type="text" disabled="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
+                                        <input type="text" disabled="" id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar1" placeholder="Select Tenative Date">
                                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     </div>
                                     <span class="error"></span>
@@ -219,14 +219,14 @@
 
                                 <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >Score(%)</label>
                                 <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                    <input type="number" disabled="" id="gre_score" maxlength="2" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
+                                    <input type="number" disabled="" id="gre_score" maxlength="2" step="1" max="340" onkeypress="return isNumber(event)" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar numbercheck">
                                     <span class="error"></span>
                                 </div>
 
                                 <label for="gre_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                 <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                     <div class="input-group">
-                                        <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" disabled="" placeholder="Select Tenative Date">
+                                        <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar1" disabled="" placeholder="Select Tenative Date">
                                         <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     </div>
                                     <span class="error"></span>
@@ -277,7 +277,8 @@
 <!-- End Page -->
 <script type="text/javascript" src="<?php echo base_url('assets/js/add_student.js'); ?>"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function($) {    
+    jQuery(document).ready(function($) {  
+
         $(document).on('click', '.addProfile', function(event) {
             $row=$(this);
             event.preventDefault();
@@ -326,6 +327,33 @@
                 $(this).next('span.error').empty();
             }
             //email validation -end
+            var gmat_select=$("#gmat_select").val();
+            var gre_select=$("#gre_select").val();
+
+            if(gmat_select==1)
+            {
+                var gmat_score=$("#gmat_score").val();
+                if(!gmat_score.trim().length)
+                {
+                    $("#gmat_score").parent().find('span.error').html("Please enter GMAT score");
+                    section2err=1;
+                }else{
+                    $("#gmat_score").parent().find('span.error').empty();
+                }
+            }
+
+            if(gre_select==1)
+            {
+                var gre_score=$("#gre_score").val();
+                if(!gre_score.trim().length)
+                {
+                    $("#gre_score").parent().find('span.error').html("Please enter GRE score");
+                    section2err=1;
+                }else{
+                    $("#gre_score").parent().find('span.error').empty();
+                }
+            }
+            
 
             if(section2err==1)
             {
@@ -343,4 +371,25 @@
         });
 
     });
+
+function greScoreCheck(score)
+{
+    if(parseInt(score) <=340)
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+function gmatScoreCheck(score)
+{
+    if(parseInt(score) <=800)
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
 </script>

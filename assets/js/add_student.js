@@ -51,24 +51,36 @@ jQuery(document).ready(function($) {
         }
     });
 
+    $('.numbercheck').on('input', function () {
+        var value = $(this).val();
+        if ((value !== '') && (value.indexOf('.') === -1)) {
+        	if($(this).attr('id')=='gmat_score')
+        	{
+        		max_score=800;
+        	}
+        	if($(this).attr('id')=='gre_score')
+        	{
+        		max_score=340;
+        	}
+            $(this).val(Math.max(Math.min(value, max_score), 1));
+        }
+    });
+
 
     $(document).on('change', '.trigger', function(event) {
         event.preventDefault();
+        var targetClass=this.dataset.target;
         if(this.value=="1"){
-            var targetClass=this.dataset.target;
-            var ab=document.getElementsByClassName(targetClass);
-            for (var i = 0; i < ab.length; i++) {
-                ab[i].removeAttribute('disabled');
-            }
+        	$("."+targetClass).removeAttr('disabled');
+        	$("."+targetClass+"1").attr('disabled','true');
         }else{
-             var targetClass=this.dataset.target;
-            var ab=document.getElementsByClassName(targetClass);//.removeAttribute('readonly')
-            $(ab).each(function(index, el) {
-                $(this).attr('disabled',"true");
-            });
+        	
+        	$("."+targetClass).attr('disabled','true');
+        	$("."+targetClass+"1").removeAttr('disabled');
+        	$("."+targetClass).parent().find('span.error').empty();
         }
     });
- 
+
     $(document).on('change', '#resideing_country', function(event) {
         event.preventDefault();
         Ajaxdata.country_id=$(this).val();
@@ -99,7 +111,7 @@ jQuery(document).ready(function($) {
     $(document).on('change','#agent_id,#source_id,#lead_type_id,#resideing_state, #resident_city,#total_experience, #intrested_program,#ugrad_degree', function(event) {
         $(this).parent().find('span.error').empty();
     })
-    $(document).on('blur','#fname,#lname,#intro,#comment',function(event) {
+    $(document).on('blur','#fname,#lname,#intro,#comment,#gmat_score,#gre_score',function(event) {
         if($(this).val().trim().length)
         {
             $(this).parent().find('span.error').empty();

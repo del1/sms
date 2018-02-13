@@ -41,19 +41,19 @@
                         <td><?php echo $student->email_id; ?> </td>
                         <td><?php echo $student->phonenumber; ?> </td>
                         <td data-id="<?php echo $student->student_id; ?>">
-                            <button  type="button" class="btn btn-success btn-xs requestInfo" data-level="Personal" data>
+                            <button  type="button" class="btn btn-success btn-xs requestInfo mt-5" data-level="Personal" data>
                                 <span class="glyphicon glyphicon-search"></span> Personal
                             </button>
-                            <button  type="button" class="btn btn-primary btn-xs requestInfo" data-level="Professional">
+                            <button  type="button" class="btn btn-primary btn-xs requestInfo mt-5" data-level="Professional">
                                 <span class="glyphicon glyphicon-search"></span> Professional
                             </button>
-                            <button type="button" class="btn btn-warning btn-xs requestInfo" data-level="Application">
+                            <button type="button" class="btn btn-warning btn-xs requestInfo mt-5" data-level="Application">
                                 <span class="glyphicon glyphicon-search"></span> Application
                             </button>
                         </td>
-                        <td><a href="<?php echo base_url('admin/student/manage_student/'.$student->student_id);?>" class="btn btn-primary" role="button">Manage</a>
+                        <td><a href="<?php echo base_url('admin/student/manage_student/'.$student->student_id);?>" class="btn btn-primary mt-5" role="button">Manage</a>
                             <?php if($student->is_converted=="false"){ ?>
-                                <button type="button" data-id="<?php echo $student->student_id; ?>" class="btn btn-icon btn-warning stuConvert">Convert</button>
+                                <button type="button" data-id="<?php echo $student->student_id; ?>" class="btn btn-icon btn-warning stuConvert mt-5">Convert</button>
                             <?php } ?>
                         </td>
                     </tr>
@@ -93,6 +93,14 @@
             "order": [[ 0, "asc" ]],
             stateSave: true,
             responsive: true,
+            "columns": [
+            null,
+            null,
+            null,
+            null,
+            { "width": "24%" },
+            null,
+          ],
             "fnDrawCallback": function(e) {
                 var elems = Array.prototype.slice.call(document.querySelectorAll('.switch'));
                 elems.forEach(function(elem) {

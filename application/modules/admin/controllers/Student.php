@@ -40,7 +40,7 @@ class Student extends Del {
 	public function create()
 	{
 		$posted_data=$this->security->xss_clean($this->input->post());
-		$this->mprint($posted_data);
+		
 		$this->form_validation->set_rules('agent_id', 'Agent', 'trim|required');
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
@@ -60,14 +60,13 @@ class Student extends Del {
 
 			//step1- add it to tbl_user
 		 	$user_proile = elements(array('email_id','first_name','last_name','phonenumber','signup_date','added_by','userlevel_id','last_updated','is_active'), $posted_data);
-
 		 	try {
 	 			$this->users->insert($user_proile);
 		 		$posted_data['user_id']=$this->db->insert_id();
-
 		 	}catch(Exception $e) {
 		 		$this->mprint('Message: ' .$e->getMessage());
 		 	}
+		 	
 		 	//end of adding user_details
 
 		 	if(strlen(trim($posted_data['user_id'])))
@@ -77,22 +76,34 @@ class Student extends Del {
 			 	$this->student_profile->insert($strudent_proile);
 			 	$posted_data['student_id']=$this->db->insert_id();
 
-
+			 	
 			 	//adding exams data
 			 	$exams_data=array();
 			 	if($posted_data['gmat']==1)
 			 	{
 			 		$row['exam_type_id']=1;
-			 		$row['score']=$posted_data['gmat_score'];
-			 		$row['tentative_date']=$posted_data['gmat_tentative_date'];
+			 		if(isset($posted_data['gmat_score']))
+			 		{
+			 			$row['score']=$posted_data['gmat_score'];
+			 		}
+			 		if(isset($posted_data['gmat_tentative_date']))
+			 		{
+			 			$row['tentative_date']=$posted_data['gmat_tentative_date'];
+			 		}
 			 		$row['student_id']=$posted_data['student_id'];
 			 		$exams_data[]=$row;
 			 	}
 			 	if($posted_data['gre']==1)
 			 	{
 			 		$row['exam_type_id']=2;
-			 		$row['score']=$posted_data['gre_score'];
-			 		$row['tentative_date']=$posted_data['gre_tentative_date'];
+			 		if(isset($posted_data['gre_score']))
+			 		{
+			 			$row['score']=$posted_data['gre_score'];
+			 		}
+			 		if(isset($posted_data['gre_tentative_date']))
+			 		{
+			 			$row['tentative_date']=$posted_data['gre_tentative_date'];
+			 		}
 			 		$row['student_id']=$posted_data['student_id'];
 			 		$exams_data[]=$row;
 			 	}
@@ -100,19 +111,17 @@ class Student extends Del {
 			 	{
 			 		$this->student_to_exams->insert_many($exams_data);
 			 	}
-
-
 			 	//adding student enquiries
 			 	$student_enquries = elements(array('student_id','enq_date','source_id','agent_id','interested_program_id','lead_type_id','is_active'), $posted_data);
 			 	$this->enquries->insert($student_enquries);
 			 	$posted_data['enq_id']=$this->db->insert_id();
 
+
 			 	//adding followupdate
 			 	$followup_date = elements(array('followup_date','followup_comment','enq_id'), $posted_data);
 			 	$followup_date['agent_id'] =$this->session->User_Id;
 			 	$followup_date['is_completed'] ='false';
-			 	$this->student_followup->insert($student_enquries);
-
+			 	$this->student_followup->insert($followup_date);
 
 			 	$this->session->set_flashdata('success',  'Student added Successfully');
 			 	redirect('admin/student/summary');
@@ -120,7 +129,6 @@ class Student extends Del {
 			}else{
 				$this->mprint('there was error in adding the form');
 			}
-
 		}else{
 			$this->session->set_flashdata('error',  validation_errors('<p class="alert alert-danger">', '</p>'));
 			$this->session->set_flashdata('setData', $posted_data);

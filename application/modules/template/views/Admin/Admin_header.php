@@ -25,7 +25,12 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/toastr/toastr.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/bootstrap-datepicker/bootstrap-datepicker.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/admin/plugins/select2/select2.css');?>">
-
+  <script type="text/javascript"> var base_url="<?php echo base_url(); ?>";</script>
+  <script type="text/javascript">
+    var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
+        csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
+    var Ajaxdata = {[csrfName]: csrfHash};
+  </script>
   <script src="<?php echo base_url('assets/admin/plugins/jquery/jquery.js');?>"></script>
   <script src="<?php echo base_url('assets/js/angular.js');?>"></script>
 

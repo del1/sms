@@ -23,6 +23,7 @@
         display: none;
     }
 </style>
+<script type="text/javascript" src="<?php echo base_url('assets/js/cvalidation.js'); ?>"></script>
 <div class="page">
     <div class="page-header">
         <h1 class="page-title">Add student details</h1>
@@ -105,9 +106,9 @@
                                     <input type="email" placeholder="Enter Email Id of student" id="email_id" name="email_id" class="form-control ">
                                     <span class="error"></span>
                                 </div>
-                                <label for="phonenumber" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Phone number</label>
+                                <label for="phonenumber"  class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Phone number</label>
                                 <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                    <input type="number" placeholder="Enter Phone Number of student" id="phonenumber" min="0" minlength="10" name="phonenumber" class="form-control ">
+                                    <input type="number" onkeypress="return isNumber(event)"  placeholder="Enter Phone Number of student" id="phonenumber" min="0" minlength="10" name="phonenumber" class="form-control ">
                                     <span class="error"></span>
                                 </div>
                             </div>
@@ -137,7 +138,7 @@
                             <div class="form-group row">
                                 <label for="intro" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Intro</label>
                                 <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
-                                    <textarea name="intro" required="" id="intro" class="form-control" name="intro"></textarea>
+                                    <input type="text" class="form-control" id="intro" name="intro">
                                     <span class="error"></span>
                                 </div>
                                 <label for="total_experience" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Total Experience</label>
@@ -274,114 +275,9 @@
     </div>
 </div>
 <!-- End Page -->
+<script type="text/javascript" src="<?php echo base_url('assets/js/add_student.js'); ?>"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {    
-        $("#resideing_state").select2({
-            placeholder: "Select State"
-        });
-        $("#total_experience").select2({
-            placeholder: "Select Experience"
-        });
-        $("#ugrad_degree").select2({
-            placeholder: "Select Undergraduate Degree"
-        });
-        $("#intrested_program").select2({
-            placeholder: "Select Interested Program"
-        });
-        
-        $("#enq_date").daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minDate: moment(),
-            locale: {
-                format: 'YYYY-MM-DD'
-          } ,
-        }, function (startDate, endDate, period) {
-            //$(this).val(startDate.format('L') + ' – ' + endDate.format('L'))
-        });
-
-        $("#gmat_tenative_date").daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minDate: moment(),
-            locale: {
-                format: 'YYYY-MM-DD'
-            } ,
-        });
-
-        $("#gre_tenative_date").daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minDate: moment(),
-            locale: {
-                format: 'YYYY-MM-DD'
-            }
-        });
-
-        $("#followup_date").daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            minDate: moment(),
-            drops: 'up',
-            locale: {
-                format: 'YYYY-MM-DD'
-            }
-        });
-
-        $(document).on('change', '.trigger', function(event) {
-            event.preventDefault();
-            if(this.value=="1"){
-
-                var targetClass=this.dataset.target;
-                var ab=document.getElementsByClassName(targetClass);
-                for (var i = 0; i < ab.length; i++) {
-                    ab[i].removeAttribute('disabled');
-                }
-
-            }else{
-                 var targetClass=this.dataset.target;
-                var ab=document.getElementsByClassName(targetClass);//.removeAttribute('readonly')
-                $(ab).each(function(index, el) {
-                    $(this).attr('disabled',"true");
-                });
-            }
-        });
-
-        $(document).on('change', '#resideing_country', function(event) {
-            event.preventDefault();
-            ;
-            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
-                csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
-            var data={country_id:$(this).val(),[csrfName]:csrfHash};
-            $.post("<?php echo base_url('admin/getStatesForCountry') ?>", data,
-                function(data, textStatus, xhr) {
-                    
-                    $('#resideing_state').empty();
-                    $('#resident_city').empty();
-                    $('#resideing_state').select2({
-                        dataType: 'json',
-                        data: JSON.parse(data)
-                    });
-                });
-        });
-
-        $(document).on('change', '#resideing_state', function(event) {
-            event.preventDefault();
-            ;
-            var csrfName = "<?php echo $this->security->get_csrf_token_name(); ?>",
-                csrfHash = "<?php echo $this->security->get_csrf_hash(); ?>";
-            var data={state_id:$(this).val(),[csrfName]:csrfHash};
-            $.post("<?php echo base_url('admin/getCitiesOfStates') ?>", data,
-                function(data, textStatus, xhr) {
-                    $('#resident_city').empty();
-                    $('#resident_city').select2({
-                        dataType: 'json',
-                        data: JSON.parse(data)
-                    });
-                });
-        });
-
-
         $(document).on('click', '.addProfile', function(event) {
             $row=$(this);
             event.preventDefault();
@@ -394,7 +290,6 @@
                 if(!parseInt($('#'+element).val()))
                 {
                     $('#'+element).parent().find('span.error').html(error_array[index1]);
-                    console.log(element);
                     section2err=1;
                 }else{
                     $('#'+element).parent().find('span.error').empty();
@@ -402,17 +297,35 @@
             });
 
             var single_array=["enq_date","fname","lname","email_id","phonenumber","intro","comment"];
-            var single_error=["Please add Enquiry Date","Plase add First Name","Please add Last Name","Please add valid email id","Please add valid phone number","Please add Intro","Please add follow up comment"];
+            var single_error=["Please add Enquiry Date","Plase add First Name","Please add Last Name","Please Enter the valid email address","Please add valid phone number","Please add Intro","Please add follow up comment"];
             single_array.forEach(function(element,index1) {
                 if(!parseInt($('#'+element).val().trim().length))
                 {
                     $('#'+element).parent().find('span.error').html(single_error[index1]);
-                    console.log(element);
                     section2err=1;
                 }else{
                     $('#'+element).parent().find('span.error').empty();
                 }
             });
+
+            //phonenumber validation -begin
+            if (validatePhone('phonenumber')) {
+                $(this).next('span.error').empty();
+            }
+            else {
+                $(this).next('span.error').html('Invalid');
+                section2err=1;
+            }
+            //phonenumber validation -end
+
+            //email validation -begin
+            if(!IsEmail($('#email_id').val())) {
+                $(this).next('span.error').html("Please Enter the valid email address");
+                section2err=1;
+            }else{
+                $(this).next('span.error').empty();
+            }
+            //email validation -end
 
             if(section2err==1)
             {

@@ -165,7 +165,7 @@ class Auth extends Del
     	}
     }
 
-    public function check_email()
+    public function check_email()//against specific user
     {//called by ajax from manage_subadmin_view.php and normal process from admin
     	$posted_data=$this->security->xss_clean($this->input->post());
 		$required_array = elements(array('user_id', 'email_id'), $posted_data);
@@ -189,6 +189,30 @@ class Auth extends Del
     		}else{
     			echo "not_found";
     		}  
+    	}
+    }
+
+
+    public function check_phone()//against specific user
+    {//called by ajax from manage_subadmin_view.php and normal process from admin
+    	$posted_data=$this->security->xss_clean($this->input->post());
+    	if(isset($posted_data['phonenumber']) && strlen(trim($posted_data['phonenumber'])))
+    	{
+			$data=$this->users->get_by('phonenumber',$posted_data['phonenumber']);
+			if(!empty($data))
+	    	{
+	    		if (!$this->input->is_ajax_request()) {
+	    			return $data;
+	    		}else{
+	    			echo json_encode($data);
+	    		}
+	    	}else{    		
+	    		if (!$this->input->is_ajax_request()) {
+	    			return false;
+	    		}else{
+	    			echo "not_found";
+	    		}  
+	    	}
     	}
     }
 

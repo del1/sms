@@ -39,7 +39,6 @@ class Student extends Del {
 
 	public function create()
 	{
-
 		$posted_data=$this->security->xss_clean($this->input->post());
 		$this->mprint($posted_data);
 		$this->form_validation->set_rules('agent_id', 'Agent', 'trim|required');

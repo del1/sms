@@ -2,6 +2,18 @@
 label{
     font-weight: 500;
 }
+.no-pad{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.select2{
+        width: auto !important;
+}
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
 </style>
 <div class="page">
     <div class="page-header">
@@ -22,18 +34,18 @@ label{
                     </div>
                 </div>
                 <div class="row row-lg mt-20">
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
+                    <div class="col-md-8 col-lg-8 col-sm-8 col-xl-6 col-12">
                         <label for="from_enquiry_date" class="form-control-label" style="padding: .429rem 0;">Select enquiry date</label>
                         <div class="form-group row">
-                            <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
+                            <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-12">
                                 <div class="input-group">
                                     <input type="text" id="from_enquiry_date" name="from_enquiry_date" class="form-control" placeholder="From Date">
                                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                     <span id="from_enquiry_date_error" class="error"></span>
                                 </div>
                             </div>
-                            <label for="to_enquiry_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" style="text-align: right;">to</label>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
+                            <label for="to_enquiry_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1  hidden-xs-down" style="text-align: right;">to</label>
+                            <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-12">
                                 <div class="input-group">
                                     <input type="text" readonly id="to_enquiry_date" name="to_enquiry_date" class="form-control" placeholder="To Date">
                                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
@@ -42,7 +54,7 @@ label{
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-12">
                         <div class="form-group">
                             <label for="lead_type" class="form-control-label">Select Lead type</label>
                             <select class="form-control" name="lead_type" id="lead_type">
@@ -53,8 +65,8 @@ label{
                             <span id="lead_type_error"></span>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
-                        <!-- <div class="form-group">
+                    <!-- <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
+                        <div class="form-group">
                             <label for="intake_year" class="form-control-label">Select Intake year</label>
                             <select class="form-control" name="intake_year[]" id="intake_year" multiple="">
                                 <?php $c_y=date("Y"); for ($i=$c_y-5; $i < $c_y+5 ; $i++) {  ?>
@@ -62,25 +74,13 @@ label{
                                 <?php } ?>
                             </select>
                             <span id="intake_year_error"></span>
-                        </div> -->
-                    </div>
+                        </div> 
+                    </div>-->
 
                     
                 </div>
                 <div class="row row-lg">
-                    <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
-                        <div class="form-group">
-                            <label for="test_taken" class="form-control-label">Test Taken</label>
-                            <select class="form-control" name="test_taken" id="test_taken">
-                                <option value="1">GMAT</option>
-                                <option value="2">GRE</option>
-                                <option value="3">Multiple</option>
-                                <option value="4">None</option>
-                            </select>
-                            <span id="test_token_error" class="error"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xl-3 col-12">
                         <div class="form-group">
                             <label for="source" class="form-control-label">Source</label>
                             <select class="form-control" id="source" name="source[]" multiple="">
@@ -91,7 +91,7 @@ label{
                             <span id="source_error" class="error"></span>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3 col-3">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xl-3 col-12">
                         <div class="form-group">
                             <label for="interested_program" class="form-control-label">Interested Program</label>
                             <select class="form-control" name="interested_program[]" id="interested_program" multiple="">
@@ -103,7 +103,7 @@ label{
                             <span id="interested_program_error" class="error"></span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2 col-2">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xl-3 col-12">
                         <div class="form-group">
                             <label for="status" class="form-control-label">Select Status</label>
                             <select class="form-control" id="status" name="status[]" multiple="">
@@ -114,7 +114,7 @@ label{
                             <span id="status_error" class="error"></span>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-sm-3 col-xl-3 col-3">
+                    <div class="col-md-4 col-lg-4 col-sm-6 col-xl-3 col-12">
                         <div class="form-group">
                             <label for="ug_college" class="form-control-label">UnderGraduate College</label>
                             <select class="form-control" id="ug_college" name="ug_college[]" multiple="">
@@ -127,11 +127,27 @@ label{
                     </div>
                 </div>
                 <div class="row row-lg">
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-3 col-12">
+                        <div class="form-group">
+                            <label for="test_taken" class="form-control-label">Test Taken</label>
+                            <select class="form-control" name="test_taken" id="test_taken">
+                                <option value="1">GMAT</option>
+                                <option value="2">GRE</option>
+                                <option value="3">Multiple</option>
+                                <option value="4">None</option>
+                            </select>
+                            <span id="test_taken_error" class="error"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-lg-8 col-sm-8 col-xl-9 col-8  row col-12" id="test_target">
+                        
+                    </div>
+                </div>
+                <div class="row row-lg">
+                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-3 col-12">
                         <div class="form-group">
                             <label for="res_city" class="form-control-label">Residing City</label>
                             <select class="form-control" id="res_city" name="res_city[]" multiple="">
-                               
                                 <?php if(!empty($city_list)) { foreach ($city_list as $city) { ?>
                                     <option value="<?php echo $city->city_id;?>"><?php echo $city->city_name ;?></option>
                                 <?php } } ?>
@@ -139,52 +155,11 @@ label{
                             <span id="res_city_error" class="error"></span>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
-                        <label for="gre_tentative_from_date" class="form-control-label" style="padding: .429rem 0;">Tentative GRE date</label>
-                        <div class="form-group row">
-                            <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
-                                <div class="input-group">
-                                    <input type="text" id="gre_tentative_from_date" name="gre_tentative_from_date" class="form-control" placeholder="From Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
-                                    <span id="gre_tentative_from_date_error" class="error"></span>
-                                </div>
-                            </div>
-                            <label for="gre_tentative_to_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" style="text-align: right;">to</label>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
-                                <div class="input-group">
-                                    <input type="text" readonly id="gre_tentative_to_date" name="gre_tentative_to_date" class="form-control" placeholder="To Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
-                                    <span id="gre_tentative_to_date_error" class="error"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
-                        <label for="gmat_tentative_from_date" class="form-control-label" style="padding: .429rem 0;">Tentative GMAT date</label>
-                        <div class="form-group row">
-                            <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
-                                <div class="input-group">
-                                    <input type="text" id="gmat_tentative_from_date" name="gmat_tentative_from_date" class="form-control" placeholder="From Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
-                                    <span id="gmat_tentative_from_date_error" class="error"></span>
-                                </div>
-                            </div>
-                            <label for="gmat_tentative_to_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" style="text-align: right;">to</label>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
-                                <div class="input-group">
-                                    <input type="text" readonly id="gmat_tentative_to_date" name="gmat_tentative_to_date" class="form-control" placeholder="To Date">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
-                                    <span id="gmat_tentative_to_date_error" class="error"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-lg">
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4">
+                    <div class="col-md-6 col-lg-6 col-sm-8 col-xl-6 col-12">
                         <label for="from_exp_range_date" class="form-control-label" style="padding: .429rem 0;">Work Experience Range (in years)</label>
                         <div class="form-group row">
-                            <div class="col-md-5 col-lg-5 col-sm-5 col-xl-5 col-5 ">
+                            <label for="to_exp_range_date" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-1 col-2" style="text-align: right;">From</label>
+                            <div class="col-md-10 col-lg-5 col-sm-10 col-xl-5 col-9 ">
                                 <select class="form-control" name="from_exp_range_date" id="from_exp_range_date">
                                     <option></option>
                                 <?php for ($i=0; $i <= 5 ; $i++) {  ?>
@@ -193,8 +168,8 @@ label{
                                 </select>
                                 <span id="from_exp_range_date_error" class="error"></span>
                             </div>
-                            <label for="to_exp_range_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" style="text-align: right;">to</label>
-                            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-6">
+                            <label for="to_exp_range_date" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-1 col-2" style="text-align: right;">To</label>
+                            <div class="col-md-10 col-lg-5 col-sm-10 col-xl-5 col-9">
                                 <select class="form-control" name="to_exp_range_date" id="to_exp_range_date">
                                     <option></option>
                                 <?php for ($i=1; $i <= 6 ; $i++) {  ?>
@@ -205,8 +180,8 @@ label{
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-lg-4 col-sm-4 col-xl-4 col-4 ">
-                        <a href="javascript:void(0)" id="genrate" class="btn btn-success  mt-40" >Genrate</a>
+                    <div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 col-12">
+                        <a href="javascript:void(0)" id="genrate" class="btn btn-success " >Genrate</a>
                     </div>
                 </div>
                 <?php echo form_close(); ?>
@@ -227,6 +202,49 @@ label{
                     <tbody id="genrateLeadReport">
                     </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="test_4" style="display: none">
+    <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-12">
+        <label for="gre_tentative_from_date" class="form-control-label" style="padding: .429rem 0;">Tentative GRE date</label>
+        <div class="form-group row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-5 col-12 ">
+                <div class="input-group">
+                    <input type="text" id="gre_tentative_from_date" name="gre_tentative_from_date" class="form-control" placeholder="From Date">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                    <span id="gre_tentative_from_date_error" class="error"></span>
+                </div>
+            </div>
+            <label for="gre_tentative_to_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 hidden-lg-down hidden-md-down hidden-sm-down hidden-xs-down" style="text-align: right;">to</label>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-5 col-12">
+                <div class="input-group">
+                    <input type="text" readonly id="gre_tentative_to_date" name="gre_tentative_to_date" class="form-control" placeholder="To Date">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                    <span id="gre_tentative_to_date_error" class="error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-12">
+        <label for="gmat_tentative_from_date" class="form-control-label" style="padding: .429rem 0;">Tentative GMAT date</label>
+        <div class="form-group row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-5 col-12 ">
+                <div class="input-group">
+                    <input type="text" id="gmat_tentative_from_date" name="gmat_tentative_from_date" class="form-control" placeholder="From Date">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                    <span id="gmat_tentative_from_date_error" class="error"></span>
+                </div>
+            </div>
+            <label for="gmat_tentative_to_date" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1 hidden-lg-down hidden-md-down hidden-sm-down hidden-xs-down" style="text-align: right;">to</label>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-5 col-12">
+                <div class="input-group">
+                    <input type="text" readonly id="gmat_tentative_to_date" name="gmat_tentative_to_date" class="form-control" placeholder="To Date">
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                    <span id="gmat_tentative_to_date_error" class="error"></span>
                 </div>
             </div>
         </div>
@@ -306,6 +324,10 @@ jQuery(document).ready(function($) {
                 }
             });*/
         }
+    })
+
+    $(document).on('click', '#test_taken', function(event) {
+        alert($(this).val());
     })
 
     $(document).on('click', '#genrate', function(event) {

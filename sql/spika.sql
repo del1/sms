@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2018 at 02:47 PM
+-- Generation Time: Feb 14, 2018 at 12:26 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -53503,7 +53503,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`user_id`, `user_name`, `first_name`, `last_name`, `email_id`, `password`, `signup_date`, `added_by`, `phonenumber`, `userlevel_id`, `gender_id`, `last_login`, `last_updated`, `is_active`) VALUES
-(1, 'admin1', 'fname', 'lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-13 11:12:14', '2017-10-08 06:22:24', 'true'),
+(1, 'admin1', 'fname', 'lanem', 'admin@gmail.com', 'admin', '2017-10-09 09:18:23', NULL, '123123123', 1, 2, '2018-02-14 11:29:34', '2017-10-08 06:22:24', 'true'),
 (2, 'shyam1', 'Shyam', 'sundar', 'shyam@gmail.com', 'asdasd', '2017-10-08 08:19:10', 1, '123534123', 2, 1, '2017-10-09 07:12:11', '2017-10-06 06:18:23', 'true'),
 (5, 'vijayk', 'vijay', 'Kapadia', 'kvijay@gmail.com', 'asdasd', '2017-11-13 12:29:15', 1, NULL, 4, NULL, NULL, '2017-11-13 12:29:15', 'true'),
 (7, 'firstuser', 'Saurabh', 'Shevade', 'sshevade@gmail.com', 'asdasd', '2017-12-26 20:01:59', 1, '12345216453', 4, 1, '2018-01-09 08:21:00', '2018-01-19 15:31:49', 'true'),
@@ -53904,12 +53904,12 @@ ALTER TABLE `ref_userlevels`
 -- AUTO_INCREMENT for table `tbl_enquiries`
 --
 ALTER TABLE `tbl_enquiries`
-  MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `enq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_student_followups`
 --
 ALTER TABLE `tbl_student_followups`
-  MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `followup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_student_professional_history`
 --
@@ -53919,7 +53919,7 @@ ALTER TABLE `tbl_student_professional_history`
 -- AUTO_INCREMENT for table `tbl_student_profiles`
 --
 ALTER TABLE `tbl_student_profiles`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_student_to_degrees`
 --
@@ -53929,12 +53929,12 @@ ALTER TABLE `tbl_student_to_degrees`
 -- AUTO_INCREMENT for table `tbl_student_to_taken_exams`
 --
 ALTER TABLE `tbl_student_to_taken_exams`
-  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- Constraints for dumped tables
 --

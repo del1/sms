@@ -12,7 +12,7 @@ class Tbl_users_model extends MY_Model
 
 	public function get_consultants()
 	{
-		$this->db->select('a.*, b.user_id,b.user_name as add_by');
+		$this->db->select('a.*,b.user_name as add_by');
             $this->db->from('tbl_users as a');
             $this->db->join('tbl_users as b', 'a.added_by = b.user_id');
             $this->db->where('a.userlevel_id', 2);

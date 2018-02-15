@@ -34,7 +34,7 @@
                 <tbody>
                 <?php foreach ($consultant_list as $round) { ?>
                     <tr>
-                        <td><?php echo $round->user_name; ?></td>
+                        <td><?php echo $round->first_name." ".$round->last_name; ?></td>
                         <td><?php echo $round->email_id; ?></td>
                         <td><?php echo $round->add_by." (".date("jS F Y, g:i a", strtotime($round->last_updated)). ")  "; ?></td>
                         <td><a href="<?php echo base_url('admin/manage_consultant/'.$round->user_id);?>" class="btn btn-icon btn-primary" role="button"><i class="icon wb-pencil" aria-hidden="true"></i></a>

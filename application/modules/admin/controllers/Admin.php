@@ -467,6 +467,37 @@ class Admin extends Del {
 		echo Modules::run('template/admin_template', $view, $data);	
 	}
 
+	public function manage_consultant($consultant_id='')
+	{
+		$data['section']='masterlist';
+		$data['page']='consultants';
+		$data['details']='';
+		if($consultant_id)
+		{
+			$data['details']=$this->users->get($consultant_id);
+		}
+		$view = 'admin/masterlist/consultants/manage_consultant_view';
+		echo Modules::run('template/admin_template', $view, $data);
+	}
+
+	public function add_update_consultant()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$required_array = elements(array('first_name','last_name','email_id','phonenumber'), $posted_data);
+		$required_array['added_by']=$this->session->User_Id;
+		$required_array['last_updated']=$required_array['signup_date']=date('Y-m-d H:i:s');
+		$required_array['userlevel_id']=2;
+		$required_array['is_active']='true';
+		if(isset($posted_data['user_id']))
+		{
+			$this->users->update($posted_data['user_id'], $required_array);
+		}else{
+			$this->users->insert($required_array);
+		}
+		redirect('admin/consultants');
+	}
+	/*end of consultant*/
+
 
 	/*masterlist-*/
 	/*manage college */

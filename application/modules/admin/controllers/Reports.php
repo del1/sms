@@ -33,6 +33,26 @@ class Reports extends Del {
 		$this->mprint($intersect);
 	}
 
+	public function test_taken()
+	{
+		$posted_data=$this->security->xss_clean($this->input->post());
+		$data='';
+		if(isset($posted_data['test']))
+		switch ($posted_data['test']) {
+			case 1: $view = 'admin/ajax/reports/test_taken/ajax_lead_report_test_1_view';
+				break;
+			case 2: $view = 'admin/ajax/reports/test_taken/ajax_lead_report_test_2_view';
+				break;
+			case 3: $view = 'admin/ajax/reports/test_taken/ajax_lead_report_test_3_view';
+				break;
+			case 4: $view = 'admin/ajax/reports/test_taken/ajax_lead_report_test_4_view';
+				break;
+			default:
+				echo $view = 'admin/ajax/reports/test_taken/ajax_lead_report_test_1_view';
+		}
+		$this->load->view($view,$data);
+	}
+
 	public function genrate_lead_report()
 	{
 		//taking all the critereas and taking intersections of all the report

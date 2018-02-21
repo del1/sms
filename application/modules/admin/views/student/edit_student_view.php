@@ -481,14 +481,14 @@ textarea{
 
                                     <label for="gmat_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >GMAT Score</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                        <input type="number" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+                                        <input type="number" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar numbercheck">
                                         <span id="gmat_score_error" class="error"></span>
                                     </div>
 
                                     <label for="gmat_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <div class="input-group">
-                                            <input type="text" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar" placeholder="Select Tenative Date">
+                                            <input type="text" <?php if(isset($student_gmat)){ ?> value="<?php echo $student_gmat->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> id="gmat_tenative_date" name="gmat_tentative_date" class="form-control gmat_tar1" placeholder="Select Tenative Date">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                             <span id="gmat_tenative_date_error" class="error"></span>
                                         </div>
@@ -508,14 +508,14 @@ textarea{
 
                                     <label for="gre_score" class="form-control-label col-md-1 col-sm-1 col-xl-1 col-lg-1" >GRE Score</label>
                                     <div class="col-md-3 col-lg-2 col-sm-5  col-xl-3">
-                                        <input type="number" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gre_score" maxlength="3" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar">
+                                        <input type="number" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->score; ?>" <?php }else{ echo 'disabled'; } ?> id="gre_score" maxlength="3" step="1" max="340" min="1" name="gre_score" id="gre_score" placeholder="if (yes)" class="form-control gre_tar numbercheck">
                                         <span id="gre_score_error" class="error"></span>
                                     </div>
 
                                     <label for="gre_tenative_date" class="form-control-label col-md-1 col-sm-3 col-xl-2 col-lg-2">Tenative date</label>
                                     <div class="col-md-3 col-lg-2 col-sm-9  col-xl-2">
                                         <div class="input-group">
-                                            <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> placeholder="Select Tenative Date">
+                                            <input type="text" id="gre_tenative_date" name="gre_tentative_date" class="form-control gre_tar1" <?php if(isset($student_gre)){ ?> value="<?php echo $student_gre->tentative_date; ?>" <?php }else{ echo 'disabled'; } ?> placeholder="Select Tenative Date">
                                             <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                             <span id="gre_tenative_date_error" class="error"></span>
                                         </div>
@@ -1124,6 +1124,7 @@ textarea{
 </div>
 
 <!-- End Page -->
+<script type="text/javascript" src="<?php echo base_url('assets/js/add_student.js'); ?>"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $( "#accordion" ).accordion({ 
@@ -1197,27 +1198,6 @@ textarea{
         });
         
         
-    
-
-
-        $(document).on('change', '.trigger', function(event) {
-                event.preventDefault();
-                if(this.value=="1"){
-
-                    var targetClass=this.dataset.target;
-                    var ab=document.getElementsByClassName(targetClass);
-                    for (var i = 0; i < ab.length; i++) {
-                        ab[i].removeAttribute('disabled');
-                    }
-
-                }else{
-                     var targetClass=this.dataset.target;
-                    var ab=document.getElementsByClassName(targetClass);//.removeAttribute('readonly')
-                    $(ab).each(function(index, el) {
-                        $(this).attr('disabled',"true");
-                    });
-                }
-        });
 
         $(document).on('change', '.admit_status_id', function(event) {
                 event.preventDefault();

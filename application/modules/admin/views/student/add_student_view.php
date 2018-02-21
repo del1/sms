@@ -372,24 +372,5 @@
 
     });
 
-function greScoreCheck(score)
-{
-    if(parseInt(score) <=340)
-    {
-        return true;
-    }else{
-        return false;
-    }
-}
 
-
-function gmatScoreCheck(score)
-{
-    if(parseInt(score) <=800)
-    {
-        return true;
-    }else{
-        return false;
-    }
-}
 </script>

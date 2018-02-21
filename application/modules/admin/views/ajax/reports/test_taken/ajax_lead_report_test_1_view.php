@@ -8,7 +8,7 @@
 </div>
 <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-12" id="gmat_yes" style="display: none">
     <label for="gmat_score" class="form-control-label">GMAT Score</label>
-    <input type="number" id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar">
+    <input type="number" id="gmat_score" maxlength="3" step="1" max="800" min="1" name="gmat_score" placeholder="if (yes)" class="form-control gmat_tar numbercheck">
     <span id="gmat_score_error" class="error"></span>
 </div>
 <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6 col-12" id="gmat_no" style="display: none">

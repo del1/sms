@@ -50,8 +50,7 @@ jQuery(document).ready(function($) {
             format: 'YYYY-MM-DD'
         }
     });
-
-    $('.numbercheck').on('input', function () {
+    $(document).on('input', '.numbercheck', function(event) {
         var value = $(this).val();
         if ((value !== '') && (value.indexOf('.') === -1)) {
         	if($(this).attr('id')=='gmat_score')
@@ -118,3 +117,24 @@ jQuery(document).ready(function($) {
         }
     })
 });
+
+function greScoreCheck(score)
+{
+    if(parseInt(score) <=340)
+    {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+function gmatScoreCheck(score)
+{
+    if(parseInt(score) <=800)
+    {
+        return true;
+    }else{
+        return false;
+    }
+}

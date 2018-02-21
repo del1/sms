@@ -210,7 +210,7 @@ label{
 </div>
 
 
-                    
+<script type="text/javascript" src="<?php echo base_url('assets/js/add_student.js'); ?>"></script>    
 <script type="text/javascript">
 jQuery(document).ready(function($) {
     $("#intake_year").select2({
@@ -242,24 +242,10 @@ jQuery(document).ready(function($) {
         $('#from_enquiry_date').val(start.format('YYYY-MM-DD'));
         $('#to_enquiry_date').val(end.format('YYYY-MM-DD'));
     });  
+    //add_gmat_date();
+    //add_gre_date();
 
-    $('#gre_tentative_from_date').daterangepicker({
-        startDate: moment(),
-        autoUpdateInput: false,
-    },
-    function(start, end, label) {
-        $('#gre_tentative_from_date').val(start.format('YYYY-MM-DD'));
-        $('#gre_tentative_to_date').val(end.format('YYYY-MM-DD'));
-    });  
 
-    $('#gmat_tentative_from_date').daterangepicker({
-        startDate: moment(),
-        autoUpdateInput: false,
-    },
-    function(start, end, label) {
-        $('#gmat_tentative_from_date').val(start.format('YYYY-MM-DD'));
-        $('#gmat_tentative_to_date').val(end.format('YYYY-MM-DD'));
-    });  
 
     var table=$("#lead_report_table").DataTable( {
         "order": [[ 0, "asc" ]],
@@ -290,6 +276,21 @@ jQuery(document).ready(function($) {
         $.post(base_url+'admin/reports/test_taken', Ajaxdata, 
             function(data, textStatus, xhr) {
                 $("#test_target").html(data);
+                switch(parseInt(Ajaxdata.test)) {
+                    case 1:
+                        add_gmat_date();
+                        break;
+                    case 2:
+                        add_gre_date();
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        add_gmat_date();
+                        add_gre_date();
+                        break;
+                }
+                
         });
     })
 
@@ -321,4 +322,30 @@ jQuery(document).ready(function($) {
         });
     });
 });
+
+
+function add_gmat_date()
+{
+    $('#gmat_tentative_from_date').daterangepicker({
+                            startDate: moment(),
+                            autoUpdateInput: false,
+    },
+    function(start, end, label) {
+        $('#gmat_tentative_from_date').val(start.format('YYYY-MM-DD'));
+        $('#gmat_tentative_to_date').val(end.format('YYYY-MM-DD'));
+    }); 
+}
+
+function add_gre_date()
+{
+    $('#gre_tentative_from_date').daterangepicker({
+        startDate: moment(),
+        autoUpdateInput: false,
+        opens:'center'
+    },
+    function(start, end, label) {
+        $('#gre_tentative_from_date').val(start.format('YYYY-MM-DD'));
+        $('#gre_tentative_to_date').val(end.format('YYYY-MM-DD'));
+    }); 
+}
 </script>

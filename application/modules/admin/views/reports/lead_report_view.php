@@ -14,6 +14,11 @@ label{
     width: 50%;
     padding: 10px;
 }
+#header-buttons {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
 </style>
 <div class="page">
     <div class="page-header">
@@ -181,7 +186,7 @@ label{
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 col-12">
+                    <div class="col-md-2 col-lg-2 col-sm-12 col-xl-2 col-12" id="header-buttons">
                         <a href="javascript:void(0)" id="genrate" class="btn btn-success " >Genrate</a>
                     </div>
                 </div>
@@ -327,12 +332,12 @@ jQuery(document).ready(function($) {
 function add_gmat_date()
 {
     $('#gmat_tentative_from_date').daterangepicker({
-                            startDate: moment(),
-                            autoUpdateInput: false,
-    },
-    function(start, end, label) {
-        $('#gmat_tentative_from_date').val(start.format('YYYY-MM-DD'));
-        $('#gmat_tentative_to_date').val(end.format('YYYY-MM-DD'));
+        startDate: moment(),
+        singleDatePicker: true,
+        minDate: moment(),
+        locale: {
+                format: 'YYYY-MM-DD'
+        } ,
     }); 
 }
 
@@ -340,12 +345,12 @@ function add_gre_date()
 {
     $('#gre_tentative_from_date').daterangepicker({
         startDate: moment(),
-        autoUpdateInput: false,
+        singleDatePicker: true,
+        minDate: moment(),
+        locale: {
+                format: 'YYYY-MM-DD'
+        } ,
         opens:'center'
-    },
-    function(start, end, label) {
-        $('#gre_tentative_from_date').val(start.format('YYYY-MM-DD'));
-        $('#gre_tentative_to_date').val(end.format('YYYY-MM-DD'));
     }); 
 }
 </script>

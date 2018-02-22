@@ -136,6 +136,17 @@
 
                             <h3 class="example-title mt-50">Professional Details</h3>
                             <div class="form-group row">
+                                <label for="interested_service" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Interested Service</label>
+                                <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
+                                    <select id="interested_service" name="interested_service" class="form-control ">
+                                        <option hidden="">Select Option</option>
+                                        <option value="1">ISB Mantra</option>
+                                        <option value="2">SA Sunday</option>
+                                    </select>
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="intro" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2" style="text-align: left;">Intro</label>
                                 <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5">
                                     <input type="text" class="form-control" id="intro" name="intro">
@@ -154,8 +165,8 @@
                             </div>
 
                             <div class="form-group row mt-20">
-                                <label for="ugrad_degree" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Undergraduate degree</label>
-                                <div class="col-md-10 col-lg-10 col-sm-10  col-xl-11">
+                                <label for="ugrad_degree" class="form-control-label col-md-2 col-lg-2 col-sm-2 col-xl-1 col-12" style="text-align: left;">Undergraduate degree</label>
+                                <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5 col-12">
                                     <select id="ugrad_degree" name="" class="form-control" style="width: 44%">
                                         <option hidden></option>
                                         <?php foreach ($ug_degree_list as $key => $value) { ?>
@@ -164,11 +175,9 @@
                                     </select>
                                     <span class="error"></span>
                                 </div>
-                            </div>
 
-                            <div class="form-group row mt-20">
-                                <label for="intrested_program" class="form-control-label col-sm-2 col-xl-1" style="text-align: left;">Interested Program</label>
-                                <div class="col-md-10 col-lg-10 col-sm-10  col-xl-11">
+                                <label for="intrested_program" class="form-control-label col-md-2 col-lg-2 col-sm-2 col-xl-1 col-12" style="text-align: left;">Interested Program</label>
+                                <div class="col-md-4 col-lg-4 col-sm-4  col-xl-5 col-12">
                                     <select id="intrested_program" name="interested_program_id" class="form-control" style="width: 44%">
                                         <option hidden></option>
                                         <?php foreach ($program_list as $key => $value) { ?>
@@ -179,7 +188,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mt-50" id="exam-section">
+                            <div class="form-group row " id="exam-section">
                                 <label for="gmat_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2 "  style="text-align: left;">GMAT taken?</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select id="gmat_select" class="form-control trigger" name="gmat" data-target="gmat_tar">
@@ -206,7 +215,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mt-50" id="exam-section">
+                            <div class="form-group row " id="exam-section">
                                 <label for="gre_select" class="form-control-label col-md-2 col-sm-2 col-xl-1 col-lg-2"  style="text-align: left;">GRE taken?</label>
                                 <div class="col-md-2 col-lg-3 col-sm-4  col-xl-3">
                                     <select id="gre_select" name="gre" class="form-control trigger" data-target="gre_tar">
